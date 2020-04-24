@@ -1,7 +1,9 @@
 import React from 'react'
 
+import './Event.css'
+
 const event = (props) => (
-    <div>
+    <div className="Background">
         <p>EVENT</p>
     </div>
 )
