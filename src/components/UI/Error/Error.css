@@ -1,0 +1,12 @@
+.error-box {
+    margin-left:35%;
+    width: 30%;
+    height: auto;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px 10px;
+    border: 2px dashed red;
+    color: black;
+    text-align: center;
+    opacity: 0.8;
+}

@@ -7,8 +7,9 @@ import { render } from '@testing-library/react';
 import LoginForm from './components/LoginForm'
 import Layout from './hoc/Layout/Layout'
 import Aux from './hoc/Auxiliary/Auxiliary'
-import Event from './components/Event/Event'
+
 import Auth from './containers/Auth/Auth'
+import Ads from './containers/Ads/Ads'
 
 
 
@@ -16,7 +17,7 @@ class App extends Component {
   render() {
     let routes = (
       <Switch>
-        <Route path="/event" component={Event}/>
+        <Route path="/ads" component={Ads}/>
         <Route path="/auth" component={Auth}/>
       </Switch>
     )

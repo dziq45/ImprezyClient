@@ -6,7 +6,7 @@ import NavigationItem from './NavigationItem/NavigationItem'
 const navigationItems = (props) => {
     return (
         <ul className="NavigationItems">
-            <NavigationItem link="/event">Wydarzenia</NavigationItem>
+            <NavigationItem link="/ads">Wydarzenia</NavigationItem>
             <NavigationItem link="/auth">Logowanie</NavigationItem>
         </ul>
     )

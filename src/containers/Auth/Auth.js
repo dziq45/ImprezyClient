@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import classes from './Auth.css'
+import './Auth.css'
 import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Button/Button'
 import Aux from '../../hoc/Auxiliary/Auxiliary'
-import axios from 'axios'
+import Error from '../../components/UI/Error/Error'
 import * as actions from '../../store/actions/index'
-import store from '../../store/reducers/auth'
 
 class Auth extends Component {
     state = {
@@ -86,8 +85,7 @@ class Auth extends Component {
             },
         },
         isSignup: true,
-        customer: true,
-        error: null
+        customer: true
     }
 
     switchAuthModeHandler = () => {
@@ -218,17 +216,27 @@ class Auth extends Component {
         ))
 
         return (
-            <div className='form-style'>
-                <form onSubmit={this.submitHandler}> 
-                        {this.state.isSignup ? formLogin: formRegister}
-                        <Button>ZALOGUJ</Button>
-                </form>
-                <Button
-                    clicked={this.switchAuthModeHandler}
-                    >{this.state.isSignup ? 'Zarejestruj się' : 'Zaloguj się'}</Button>
-                <p>{this.state.error}</p>
-            </div>
+            <Aux>
+                {this.props.error ? <Error message={this.props.message}/> : null}
+                <div className='form-style'>
+                    <form onSubmit={this.submitHandler}> 
+                            {this.state.isSignup ? formLogin: formRegister}
+                            <Button>ZALOGUJ</Button>
+                    </form>
+                    <Button
+                        clicked={this.switchAuthModeHandler}
+                        >{this.state.isSignup ? 'Zarejestruj się' : 'Zaloguj się'}</Button>
+                    {this.props.message ? 'Invalid password' : ''}
+                </div>
+            </Aux>
         )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+      error: state.auth.error,
+      message: state.auth.message
     }
 }
 
@@ -241,4 +249,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Auth)
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)

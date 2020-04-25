@@ -33,7 +33,7 @@ export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(() => {
             dispatch(logout())
-        }, expirationTime)
+        }, 100000)
     } 
 }
 
@@ -44,7 +44,7 @@ export const authLogin = (email, password) => {
             email: email,
             password: password
         }
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAamJ7kgZqfufsMZgWQhtb0ZtfETT6gZ0U'
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAamJ7kgZqfufsMZgWQhtb0ZtfETT6gZ0U'
         //let url = 'http://localhost:8001/api/auth/signin'
         // if(!isSignup) {
         //     url = ''

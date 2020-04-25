@@ -5,7 +5,8 @@ const initialState = {
     token: null,
     userId: null,
     userType: null,
-    error: null,
+    error: false,
+    message: null,
     loading: false
 }
 
@@ -26,6 +27,7 @@ const authSuccess = (state, action) => {
 const authFail = (state, action) => {
     return updateObject( state, {
         error: action.error,
+        message: action.message,
         loading: false
     })
 }
