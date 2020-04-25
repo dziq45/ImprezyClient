@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
-import LoginForm from './components/LoginForm'
+import {connect} from 'react-redux'
+
 import { render } from '@testing-library/react';
+
+import LoginForm from './components/LoginForm'
 import Layout from './hoc/Layout/Layout'
 import Aux from './hoc/Auxiliary/Auxiliary'
 import Event from './components/Event/Event'
-import {connect} from 'react-redux'
+import Auth from './containers/Auth/Auth'
+
+
+
 class App extends Component {
   render() {
     let routes = (
       <Switch>
         <Route path="/event" component={Event}/>
+        <Route path="/auth" component={Auth}/>
       </Switch>
     )
     return (

@@ -8,6 +8,8 @@ import App from './App';
 import authReducer from './store/reducers/auth'
 import { BrowserRouter } from 'react-router-dom';
 
+import './index.css'
+
 const rootReducer = combineReducers({
   auth: authReducer
 })
@@ -28,7 +30,7 @@ const store = createStore(rootReducer, applyMiddleware(logger, thunk))
 const app = (
   <Provider store = {store}>
       <BrowserRouter>
-          <App />
+          <App/>
       </BrowserRouter>
   </Provider>
 )

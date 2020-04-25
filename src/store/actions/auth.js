@@ -44,8 +44,8 @@ export const authLogin = (email, password) => {
             email: email,
             password: password
         }
-        //let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCwErEdHkTEGc1TM9KmlwqTMmdovQB70TU'
-        let url = 'http://localhost:8001/api/auth/signin'
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAamJ7kgZqfufsMZgWQhtb0ZtfETT6gZ0U'
+        //let url = 'http://localhost:8001/api/auth/signin'
         // if(!isSignup) {
         //     url = ''
         // }
@@ -61,22 +61,13 @@ export const authLogin = (email, password) => {
     }
 }
 
-export const authRegister = (email, firstName, surname, city, street, homeNumber, flatNumber, zipCode, password, telephoneNumber, creditCardNumber, role) => {
+export const authRegister = (email, password, telephoneNumber) => {
     return dispatch => {
         dispatch(authStart())
         const authData = {
             email: email,
             password: password,
-            firstName: firstName,
-            surname: surname,
-            city: city,
-            street: street,
-            homeNumber: homeNumber,
-            flatNumber: flatNumber,
-            zipCode: zipCode,
             phoneNumber: telephoneNumber,
-            creditCardNumber: creditCardNumber,
-            role: role
         }
         console.log(authData)
         //let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCwErEdHkTEGc1TM9KmlwqTMmdovQB70TU'

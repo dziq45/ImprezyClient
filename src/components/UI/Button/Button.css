@@ -1,0 +1,22 @@
+.Button {
+    background-color: #eca13e;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid #c7770f;
+    color: rgb(49, 49, 49);
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.Button:hover {
+    background-color: #c7770f;
+}
+
+.Button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
