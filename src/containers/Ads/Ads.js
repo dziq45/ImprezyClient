@@ -12,9 +12,7 @@ class Ads extends Component {
     componentDidMount() {
         axios.get('https://event-app-d5b97.firebaseio.com/event.json')
             .then(response => {
-                console.log(response)
-                const ads = response.data
-                this.setState({ ads: Array.from(ads) })
+                this.setState({ ads: response.data })
             })
     }
     
@@ -35,12 +33,16 @@ class Ads extends Component {
                 eventType={ad.eventType}
                 />
         ))
-        */
-        return (
-            <div className="ads">
+                        
                 { this.state.ads.map(ad => 
                     <p>ZIEMNIAKI</p>
                 )}
+        */
+        return (
+            <div className="ads">
+                <Ad eventType="koncert" address="Warszawa" eventId="/event/1"></Ad>
+                <Ad eventType="koncert" address="Kraków"></Ad>
+                <Ad eventType="turniej" address="Wrocław"></Ad>
             </div>
         )
     }

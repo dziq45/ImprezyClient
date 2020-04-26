@@ -1,6 +1,8 @@
 .ad-box {
-    width: 70%;
-    margin-left: 15%;
-    background-color: coral;
+    width: 60%;
+    padding: 10px;
+    margin-left: 20%;
+    background-color: rgb(245, 233, 229);
     border-radius: 10px 10px;
+    opacity: 0.8;
 }

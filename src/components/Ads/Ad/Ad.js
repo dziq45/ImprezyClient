@@ -1,11 +1,15 @@
 import React from 'react'
 
+import './Ad.css'
+
 const ad = (props) => {
     return (
-        <div className="ad-box">
-            <p>{props.eventType}</p>
-            <p>{props.address}</p>
-        </div>
+        <a href={props.eventId}>
+            <div className="ad-box">
+                <p>{props.eventType}</p>
+                <p>{props.address}</p>
+            </div>
+        </a>
     )
 }
 
