@@ -6,12 +6,14 @@ import thunk from 'redux-thunk'
 import './assets/main.css'
 import App from './App';
 import authReducer from './store/reducers/auth'
+import eventReducer from './store/reducers/event'
 import { BrowserRouter } from 'react-router-dom';
 
 import './index.css'
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  event:eventReducer
 })
 
 const logger = store => {

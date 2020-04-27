@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import axios from 'axios'   
 
     
-const Event = (props) => {
+const EventForm = (props) => {
     const [descriptionText, setdescriptionText] = useState('')
     const [typeText, settypeText] = useState('')
     const [cityText, setcityText] = useState('')
@@ -77,4 +77,4 @@ const Event = (props) => {
     )
 }
 
-export default Event
+export default EventForm

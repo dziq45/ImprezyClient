@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
-
 import { render } from '@testing-library/react';
 import EventBoard from './components/Event/EventBoard'
 import LoginForm from './components/LoginForm'

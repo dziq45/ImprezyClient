@@ -1,15 +1,29 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import * as actions from '../../store/actions/index'
 
 
-const Event = (props) => {
+const MyEvent = (props) => {
     return (
-        <a href={props.eventId}>
-            <div className="ad-box">
+        <div className="ad-box">
+            <Link onClick={()=>props.setActiveEventId(props.id)} to ={"/Event/" + props.id}>
                 <p>{props.description}</p>
                 <p>{props.id}</p>
-            </div>
-        </a>
+            </Link>
+        </div>
     )
 }
 
-export default Event
+const mapStateToProps = (state, ownProps) => {
+    return {
+        ...ownProps
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setActiveEventId: (eventId) => dispatch(actions.setActiveEventId(eventId))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(MyEvent)
