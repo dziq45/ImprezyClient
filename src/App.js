@@ -3,14 +3,14 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
 
 import { render } from '@testing-library/react';
-
+import EventBoard from './components/Event/EventBoard'
 import LoginForm from './components/LoginForm'
 import Layout from './hoc/Layout/Layout'
 import Aux from './hoc/Auxiliary/Auxiliary'
-
+import Logout from './containers/Auth/Logout/Logout'
 import Auth from './containers/Auth/Auth'
 import Ads from './containers/Ads/Ads'
-
+import MyEvents from './components/Event/MyEvents'
 
 
 class App extends Component {
@@ -19,12 +19,14 @@ class App extends Component {
       <Switch>
         <Route path="/ads" component={Ads}/>
         <Route path="/auth" component={Auth}/>
+        <Route path="/logout" component={Logout}/>
+        <Route path="/myEvents" component={MyEvents}></Route>
+        <Route path="/Event/:id" component={EventBoard}></Route>
       </Switch>
     )
     return (
       
       <div>
-        {this.props.isAuthenticated? "siema" : "nie siema"}
         <Layout>
           {routes}
         </Layout>
