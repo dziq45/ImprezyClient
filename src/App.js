@@ -22,7 +22,9 @@ class App extends Component {
       </Switch>
     )
     return (
+      
       <div>
+        {this.props.isAuthenticated? "siema" : "nie siema"}
         <Layout>
           {routes}
         </Layout>
