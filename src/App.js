@@ -3,7 +3,6 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
 import { render } from '@testing-library/react';
 import EventBoard from './components/Event/EventBoard'
-import LoginForm from './components/LoginForm'
 import Layout from './hoc/Layout/Layout'
 import Aux from './hoc/Auxiliary/Auxiliary'
 import Logout from './containers/Auth/Logout/Logout'
