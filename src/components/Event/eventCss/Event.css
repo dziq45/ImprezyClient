@@ -1,0 +1,8 @@
+.boardOptionItem{
+    padding: 3px;
+}
+.boardOptionItem:hover,
+.boardOptionItem:active{
+    background-color: pink;
+    cursor: pointer;;
+}
