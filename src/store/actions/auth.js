@@ -40,19 +40,12 @@ export const checkAuthTimeout = (expirationTime) => {
 export const authLogin = (email, password) => {
     return dispatch => {
         dispatch(authStart())
-        const authData = {
-            email: email,
-            password: password
-        }
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAamJ7kgZqfufsMZgWQhtb0ZtfETT6gZ0U'
-        //let url = 'http://localhost:8001/api/auth/signin'
-        // if(!isSignup) {
-        //     url = ''
-        // }
-        axios.post(url, authData)
+        let url = '/person/get/' + email + '/' + password;
+        console.log(url)
+        axios.get(url)
             .then(response => {
-                console.log(response.data.userType)
-                dispatch(authSuccess(response.data.accessToken, response.data.id, response.data.userType))
+                console.log(response.data)
+                dispatch(authSuccess(response.data.personid, response.data.personid, response.data.userType))
                 dispatch(checkAuthTimeout(response.data.expiresIn))
             })
             .catch(err => {

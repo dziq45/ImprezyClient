@@ -7,11 +7,10 @@ import axios from 'axios'
 class MyEvents extends Component {
     state = {
         events: [],
-        userId : 1 // userID from store is undefined -.-
     }
     
     componentDidMount() {
-        axios.get('event/getbycreator/' + this.state.userId)
+        axios.get('event/getbycreator/' + this.props.userId)
             .then(response => {
                 console.log(`Response: ${response.data}`)
                 this.setState({ events: response.data })
@@ -21,22 +20,39 @@ class MyEvents extends Component {
             })
             console.log(this.state)
     }
-    
+    addEvent(){
+        axios.post("/event/add",{
+            description:'Brak opisu',
+            eventtype: null,
+            address: null,
+            creator:{
+                personid:this.props.userId
+            }
+        })
+        .then(response=>{
+            console.log(response)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
     render() {
-    const events = this.state.events.map(event => 
-    <MyEvent id={event.eventid} description={event.description} addressid={event.address}></MyEvent>)
-        return (
-            <div className="ads">
-                {events}
-            </div>
-        )
+        const events = this.state.events.map(event => 
+        <MyEvent id={event.eventid} description={event.description} addressid={event.address}></MyEvent>)
+            return (
+                <div className="ads">
+                    <div className="border border-black" onClick={()=>this.addEvent()}>Utwórz wydarzenie</div>
+                    {events}
+                </div>
+            )
     }
 }
 const mapStateToProps = state => {
+    console.log(state.auth)
     return {
       isAuthenticated: state.auth.token !== null,
       userType: state.auth.userType,
-      userId: state.userId
+      userId: state.auth.userId
     }
   }
 export default connect(mapStateToProps)(MyEvents);

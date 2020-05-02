@@ -18,7 +18,7 @@ class EventBoard extends Component{
     renderProperItem(){
         switch(this.state.activeItem){
             case 0:
-                //return(<EventForm eventId={this.props.eventId}></EventForm>)
+                return(<EventForm eventId={this.props.eventId}></EventForm>)
             case 1:
                 return(<Schedule eventId={this.props.eventId}></Schedule>)
             case 2:
