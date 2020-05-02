@@ -31,6 +31,7 @@ class MyEvents extends Component {
         })
         .then(response=>{
             console.log(response)
+            this.componentDidMount()
         })
         .catch(err=>{
             console.log(err)
