@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import ScheduleItem from './ScheduleItem'
 import './eventCss/Event.css'
 import plusSign from '../../images/plus.png'
 import minusSign from '../../images/minus.png'
+import arrowDownSign from '../../images/arrowDown.png'
 class Schedule extends Component{
     state={
         eachDay:[],
@@ -49,6 +49,34 @@ class Schedule extends Component{
             }
         })
         this.setState({eachDay:newEachDay, newHour:12, newMinute:30, newDescription:""})
+    }
+    onPushItemDown = (dayIndex, upperItemIndex)=>{
+        const newEachDay = this.state.eachDay.map((thisDay, index)=>{
+            if(index ===dayIndex){
+                let newItem = {
+                    hour:12,
+                    minute:30,
+                    description:""
+                }
+                thisDay.items.splice(upperItemIndex+1, 0, newItem)
+                return thisDay
+            }
+            else{
+                return thisDay
+            }
+        })
+        this.setState({eachDay:newEachDay})
+    }
+    onAddNextDay=()=>{
+        let stateCopy = {...this.state}
+        let newDate = new Date(stateCopy.eachDay[stateCopy.eachDay.length-1].date)
+        newDate.setDate(newDate.getDate() + 1)
+        const newDay = {
+            date: newDate,
+            items:[]
+        }
+        stateCopy.eachDay.push(newDay)
+        this.setState(stateCopy)
     }
     onHover=(dayIndex, itemIndex, flag)=>{
         const newEachDay = this.state.eachDay.map((thisDay, thisDayIndex)=>{
@@ -128,10 +156,20 @@ class Schedule extends Component{
         })
         this.setState({eachDay:newEachDay})
     }
+    onSetDate=(e, dayIndex)=>{
+        const newEachDay = this.state.eachDay.map((thisDay, thisDayIndex)=>{
+            if(thisDayIndex === dayIndex){
+                thisDay.date = e.target.value
+            }
+            else{
+                return thisDay
+            }
+        })
+    }
     render(){
         const days = this.state.eachDay.map((day,index)=>(
             <div>
-                <p>{day.date.getFullYear() + '.' + day.date.getMonth() + '.' + day.date.getDate()}</p>
+                <input type="date" value={day.date} onChange={(e)=>{this.onSetDate(e,index)}}></input>
                 {day.items.map((item, indexItem)=>(
                 <div onPointerOver={()=>{this.onHover(index, indexItem, true)}} onPointerOut={()=>{this.onHover(index, indexItem, false)}}>
                     <input type="number" min="0" max="23" className="numberInput" value={item.hour} onChange={(e)=>this.onEditValue(e,index,indexItem,0)}></input>: 
@@ -140,8 +178,9 @@ class Schedule extends Component{
                     <span className="pl-4"></span>
                     <input className="bg-transparent" value={item.description} onChange={(e)=>this.onEditValue(e,index,indexItem,2)}></input>
                     
-                        <div className="inline-block" onClick={()=>{this.onDeleteItem(index,indexItem)}}>
-                            <img className={item.hovered? "": "hidden"} src={minusSign} width="18"></img>
+                        <div className="inline-block">
+                            <img className={item.hovered? "inline-block": "inline-block hidden"} src={minusSign} width="18"  onClick={()=>{this.onDeleteItem(index,indexItem)}}></img>
+                            <img className={item.hovered? "inline-block": " inline-block hidden"} src={arrowDownSign} width="18" onClick={()=>{this.onPushItemDown(index,indexItem)}}></img>
                         </div>
                  </div>))}
                  <form onSubmit={(e)=>this.onAddItem(e,index)}>
@@ -155,6 +194,9 @@ class Schedule extends Component{
             <div>
                 <p>Harmonogram</p>
                 {days}
+                <div onClick={()=>{this.onAddNextDay()}}>
+                    <p>Następny dzień</p>
+                </div>
             </div>
         )
     }
