@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import DatePicker from "react-datepicker"
 import './eventCss/Event.css'
 import plusSign from '../../images/plus.png'
 import minusSign from '../../images/minus.png'
 import arrowDownSign from '../../images/arrowDown.png'
+import "react-datepicker/dist/react-datepicker.css";
 class Schedule extends Component{
     state={
         eachDay:[],
@@ -157,19 +159,25 @@ class Schedule extends Component{
         this.setState({eachDay:newEachDay})
     }
     onSetDate=(e, dayIndex)=>{
+        console.log(e)
         const newEachDay = this.state.eachDay.map((thisDay, thisDayIndex)=>{
             if(thisDayIndex === dayIndex){
-                thisDay.date = e.target.value
+                thisDay.date = new Date(e)
+                return thisDay
             }
             else{
                 return thisDay
             }
         })
+        this.setState({eachDay:newEachDay})
     }
     render(){
         const days = this.state.eachDay.map((day,index)=>(
             <div>
-                <input type="date" value={day.date} onChange={(e)=>{this.onSetDate(e,index)}}></input>
+                <DatePicker
+                    selected={day.date}
+                    onChange={(e)=>this.onSetDate(e, index)}
+                />
                 {day.items.map((item, indexItem)=>(
                 <div onPointerOver={()=>{this.onHover(index, indexItem, true)}} onPointerOut={()=>{this.onHover(index, indexItem, false)}}>
                     <input type="number" min="0" max="23" className="numberInput" value={item.hour} onChange={(e)=>this.onEditValue(e,index,indexItem,0)}></input>: 
