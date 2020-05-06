@@ -179,6 +179,8 @@ class Schedule extends Component{
                 <DatePicker
                     selected={day.date}
                     onChange={(e)=>this.onSetDate(e, index)}
+                    dateFormat="dd MMM yyyy"
+                    locale="pl-PL"
                 />
                 </div>
                 <div className="flexCardBoard">
@@ -190,7 +192,7 @@ class Schedule extends Component{
                     <input type="number" min="0" max="59" className="numberInput" value={item.minute} onChange={(e)=>this.onEditValue(e,index,indexItem,1)}></input>
                     </p>
                     
-                    <textarea className="textAreaInput" rows = "2" columns = "14"  maxLength="28" placeholder="Zadanie..." value={item.description} onChange={(e)=>this.onEditValue(e,index,indexItem,2)}></textarea>
+                    <textarea className="textAreaInput" rows = "2" columns = "14"  maxLength="28" placeholder="Wpisz nazwę zadania..." value={item.description} onChange={(e)=>this.onEditValue(e,index,indexItem,2)}></textarea>
                     
                         <div className="actionButtons">
                             <img className={item.hovered? "inline-block": "inline-block hidden"} src={minusSign} width="18"  onClick={()=>{this.onDeleteItem(index,indexItem)}}></img>
@@ -210,10 +212,10 @@ class Schedule extends Component{
             </div>))
         return(
             <div>
-                <p>Harmonogram</p>
+                <p className="optionTitle">Harmonogram wydarzenia</p>
                 {days}
-                <div onClick={()=>{this.onAddNextDay()}}>
-                    <p>Następny dzień</p>
+                <div className="font-bold" onClick={()=>{this.onAddNextDay()}}>
+                    <p>> Dodaj kolejny dzień</p>
                 </div>
             </div>
         )

@@ -27,13 +27,8 @@
 .dateLine {
     margin-bottom: 3px;
     border-bottom: 1px solid black;
+    background:transparent;
 }
-
-
-.descriptionWrap {
-    word-wrap: break-word;
-}
-
 
 .card {
     background-color:orange;
@@ -63,4 +58,26 @@
 .actionButtons {
     float:right;
     display:block;
+}
+
+.actionButtons:hover {
+    cursor:pointer
+}
+
+.optionTitle{
+    font-weight: bolder;
+    font-size: xx-large;
+
+}
+
+.react-datepicker-ignore-onclickoutside{
+    background:transparent;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+.react-datepicker__input-container input{
+    background:transparent;
+    font-weight: bolder;
+    font-size: x-large;
 }
