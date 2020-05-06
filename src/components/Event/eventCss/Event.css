@@ -81,3 +81,10 @@
     font-weight: bolder;
     font-size: x-large;
 }
+
+.stickyOptionBar{
+    position:sticky;
+    top:56px;
+    background-color: #edf2f76b;
+    margin-right: 5px;
+}

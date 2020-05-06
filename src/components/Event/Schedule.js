@@ -214,7 +214,7 @@ class Schedule extends Component{
             <div>
                 <p className="optionTitle">Harmonogram wydarzenia</p>
                 {days}
-                <div className="font-bold" onClick={()=>{this.onAddNextDay()}}>
+                <div className="font-bold cursor-pointer" onClick={()=>{this.onAddNextDay()}}>
                     <p>> Dodaj kolejny dzień</p>
                 </div>
             </div>
