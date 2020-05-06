@@ -51,6 +51,7 @@ class Schedule extends Component{
             }
         })
         this.setState({eachDay:newEachDay, newHour:12, newMinute:30, newDescription:""})
+        console.log(newEachDay);
     }
     onPushItemDown = (dayIndex, upperItemIndex)=>{
         const newEachDay = this.state.eachDay.map((thisDay, index)=>{
@@ -174,29 +175,38 @@ class Schedule extends Component{
     render(){
         const days = this.state.eachDay.map((day,index)=>(
             <div>
+                <div className="dateLine">
                 <DatePicker
                     selected={day.date}
                     onChange={(e)=>this.onSetDate(e, index)}
                 />
+                </div>
+                <div className="flexCardBoard">
                 {day.items.map((item, indexItem)=>(
-                <div onPointerOver={()=>{this.onHover(index, indexItem, true)}} onPointerOut={()=>{this.onHover(index, indexItem, false)}}>
-                    <input type="number" min="0" max="23" className="numberInput" value={item.hour} onChange={(e)=>this.onEditValue(e,index,indexItem,0)}></input>: 
-
-                    <input type="number" min="0" max="59" className="numberInput" value={item.minute} onChange={(e)=>this.onEditValue(e,index,indexItem,1)}></input>
-                    <span className="pl-4"></span>
-                    <input className="bg-transparent" value={item.description} onChange={(e)=>this.onEditValue(e,index,indexItem,2)}></input>
+                <div className="card" onPointerOver={()=>{this.onHover(index, indexItem, true)}} onPointerOut={()=>{this.onHover(index, indexItem, false)}}>
                     
-                        <div className="inline-block">
+                    <p>
+                    <input type="number" min="0" max="23" className="numberInput" value={item.hour} onChange={(e)=>this.onEditValue(e,index,indexItem,0)}></input>: 
+                    <input type="number" min="0" max="59" className="numberInput" value={item.minute} onChange={(e)=>this.onEditValue(e,index,indexItem,1)}></input>
+                    </p>
+                    
+                    <textarea className="textAreaInput" rows = "2" columns = "14"  maxLength="28" placeholder="Zadanie..." value={item.description} onChange={(e)=>this.onEditValue(e,index,indexItem,2)}></textarea>
+                    
+                        <div className="actionButtons">
                             <img className={item.hovered? "inline-block": "inline-block hidden"} src={minusSign} width="18"  onClick={()=>{this.onDeleteItem(index,indexItem)}}></img>
                             <img className={item.hovered? "inline-block": " inline-block hidden"} src={arrowDownSign} width="18" onClick={()=>{this.onPushItemDown(index,indexItem)}}></img>
                         </div>
                  </div>))}
+
                  <form onSubmit={(e)=>this.onAddItem(e,index)}>
-                    <input type="number" min="0" max="23" className="numberInput" value={this.state.newHour} onChange={(e)=>{this.setState({newHour:e.target.value})}}></input>: 
-                    <input type="number" min="0" max="59" className="numberInput" value={this.state.newMinute} onChange={(e)=>{this.setState({newMinute:e.target.value})}}></input><span className="pl-4"></span>
-                    <input className="bg-transparent" value={this.state.newDescription} onChange={(e)=>{this.setState({newDescription:e.target.value})}}></input>
+                    <input type="hidden" min="0" max="23" className="numberInput" value={this.state.newHour} onChange={(e)=>{this.setState({newHour:e.target.value})}}></input> 
+                    <input type="hidden" min="0" max="59" className="numberInput" value={this.state.newMinute} onChange={(e)=>{this.setState({newMinute:e.target.value})}}></input><span className="pl-4"></span>
+                    <input type ="hidden" className="bg-transparent" value={this.state.newDescription} onChange={(e)=>{this.setState({newDescription:e.target.value})}}></input>
                     <input src={plusSign} type="image" alt="Submit" width="18"></input>
-                 </form>   
+                 </form> 
+
+                 </div>
+                   
             </div>))
         return(
             <div>
