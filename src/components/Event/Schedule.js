@@ -3,14 +3,80 @@ import DatePicker from "react-datepicker"
 import './eventCss/Event.css'
 import plusSign from '../../images/plus.png'
 import minusSign from '../../images/minus.png'
+import axios from 'axios'
 import arrowDownSign from '../../images/arrowDown.png'
 import "react-datepicker/dist/react-datepicker.css";
+
+const isTheSameDay = (date1, date2)=>{
+    return date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate();
+}
 class Schedule extends Component{
     state={
         eachDay:[],
         newHour:12,
         newMinute:30,
         newDescription:"",
+        scheduleId:null
+    }
+    fetchItemsAndParseToState = async(scheduleID)=>{
+        axios.get('/scheduledetail/getbyscheduleid/' + scheduleID)
+        .then(res=>{
+            console.log(res.data)
+            let items = res.data
+            items.sort((a,b)=>{
+                let dateA = new Date(a.timestart)
+                console.log(`dataA: ${dateA}`)
+                let dateB = new Date(b.timestart)
+                return dateA - dateB
+            })
+            let newEachDay=[]
+            let lastDate = new Date(items[0].timestart)
+            let lastDay=0
+            newEachDay.push({
+                date:lastDate,
+                items:[
+                    {
+                        hour: lastDate.getHours(),
+                        minute: lastDate.getMinutes(),
+                        description: items[0].description,
+                        hovered:false
+                    }
+                ]
+            })
+            for(let i = 1; i <items.length; i++){
+                let newDate = new Date(items[i].timestart)
+                if(isTheSameDay(lastDate, newDate)){
+                    newEachDay[lastDay].items.push({
+                        hour: newDate.getHours(),
+                        minute: newDate.getMinutes(),
+                        description: items[i].description,
+                        hovered:false
+                    })
+                }
+                else{
+                    lastDay++
+                    lastDate = newDate
+                    newEachDay.push({
+                        date: newDate,
+                        items:[{
+                            hour: newDate.getHours(),
+                            minute: newDate.getMinutes(),
+                            description: items[i].description,
+                            hovered:false
+                        }]
+                    })
+                }
+            }
+            console.log('Pobrane wszystkie itemy i sparsowane')
+            console.log(newEachDay)
+            this.setState({eachDay:newEachDay})
+        })
+        .catch(err=>{
+            //No items
+            console.log('Nie ma żadnego itema')
+        })
     }
     componentDidMount(){
         const date = new Date()
@@ -33,6 +99,35 @@ class Schedule extends Component{
             }
             ]}
         this.setState(newState)
+        let scheduleID = null
+        axios.get('/schedule/getbyeventid/' + this.props.eventId)
+        .then(res=>{
+            console.log('Był już harmonogram:')
+            console.log(res.data)
+            scheduleID = res.data[0].scheduleid
+            this.fetchItemsAndParseToState(scheduleID)
+            this.setState({scheduleId: res.data[0].scheduleid})
+        })
+        .catch(err=>{
+            console.log('Zaczynam dodawanie domyślnego Harmonogramu')
+            axios.post('/schedule/add', {
+                event:{
+                    eventid: this.props.eventId
+                },
+                title:"Harmonogram imprezy"
+            })
+            .then(res=>{
+                console.log('Dodałem harmonogram:')
+                console.log(res.data)
+                scheduleID = res.data.scheduleid
+                this.fetchItemsAndParseToState(scheduleID)
+                this.setState({scheduleId: res.data.scheduleid})
+            })
+            .catch(err=>{
+                console.log('Nie udało sie dodać harmonogramu')
+            })
+            console.log(err)
+        })
     }
     onAddItem=(e, dayIndex)=>{
         e.preventDefault()
@@ -159,6 +254,54 @@ class Schedule extends Component{
         })
         this.setState({eachDay:newEachDay})
     }
+
+    saveItems=()=>{
+        this.state.eachDay.forEach((day, dayIndex)=>{
+            day.items.forEach((item, itemIndex)=>{
+                let newDate = new Date(day.date)
+                newDate.setHours(item.hour)
+                newDate.setMinutes(item.minute)
+                console.log(newDate)
+
+                let body={
+                    schedule:{
+                        scheduleid: this.state.scheduleId
+                    },
+                    timestart:newDate,
+                    timeend:newDate,
+                    description:item.description
+                }
+                console.log(newDate.getFullYear()+'-'+newDate.getMonth()+'-'+newDate.getDate()+'T'+newDate.getHours()+':'+newDate.getMinutes())
+                axios.post('/scheduledetail/add', {
+                    schedule:{
+                        scheduleid: this.state.scheduleId
+                    },
+                    timestart:newDate,
+                    timeend:newDate,
+                    description:item.description
+                })
+                .then(res=>{
+                    console.log(res)
+                })
+                .catch(err=>{
+                    console.log(err)
+                    console.log("error")
+                })
+            })
+        })
+    }
+    handleSaveSchedule=(e)=>{
+        e.preventDefault()
+        axios.put('/schedule/removescheduleitems/' + this.state.scheduleId)
+        .then(res=>{
+            console.log(res)
+           this.saveItems()
+        })
+        .catch(err=>{
+            console.log(err)
+            this.saveItems()
+        })
+    }
     onSetDate=(e, dayIndex)=>{
         console.log(e)
         const newEachDay = this.state.eachDay.map((thisDay, thisDayIndex)=>{
@@ -212,13 +355,16 @@ class Schedule extends Component{
             </div>))
         return(
             <div>
-                <p className="optionTitle">Harmonogram wydarzenia</p>
+                <p className="optionTitle">Harmonogram wydarzenia {this.state.scheduleId}</p>
                 {days}
                 <div className="font-bold cursor-pointer" onClick={()=>{this.onAddNextDay()}}>
                     <p>> Dodaj kolejny dzień</p>
                 </div>
+                <div onClick={(e)=>{this.handleSaveSchedule(e)}}>Jazda z zapisem</div>
             </div>
         )
     }
 }
+
+
 export default Schedule
