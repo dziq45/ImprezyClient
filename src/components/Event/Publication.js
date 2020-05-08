@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import Aux from '../../hoc/Auxiliary/Auxiliary'
 
-class Publication extends Component{
+class Publication extends Component {
     state={
 
     }
@@ -9,8 +10,15 @@ class Publication extends Component{
     }
     render(){
         return(
-            <div>Publication</div>
+            <Aux>
+                <div>Publication</div>
+                <label className="switch-wrap">
+                    <input type="checkbox" />
+                    <div className="switch"></div>
+                </label>
+            </Aux>
         )
     }
 }
+
 export default Publication

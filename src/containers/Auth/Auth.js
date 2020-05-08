@@ -226,7 +226,6 @@ class Auth extends Component {
                     <Button
                         clicked={this.switchAuthModeHandler}
                         >{this.state.isSignup ? 'Zarejestruj się' : 'Zaloguj się'}</Button>
-                    {this.props.message ? 'Invalid password' : ''}
                 </div>
             </Aux>
         )

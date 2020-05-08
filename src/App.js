@@ -17,11 +17,21 @@ class App extends Component {
       <Switch>
         <Route path="/ads" component={Ads}/>
         <Route path="/auth" component={Auth}/>
-        <Route path="/logout" component={Logout}/>
-        <Route path="/myEvents" component={MyEvents}></Route>
-        <Route path="/Event/:id" component={EventBoard}></Route>
+        <Redirect to="/ads" />
       </Switch>
     )
+    {if(this.props.isAuthenticated) {
+      routes = (
+        <Switch>
+          <Route path="/ads" component={Ads}/>
+          <Route path="/logout" component={Logout}/>
+          <Route path="/myEvents" component={MyEvents}></Route>
+          <Route path="/Event/:id" component={EventBoard}></Route>
+          <Redirect to="/ads" />
+        </Switch>
+      )
+    }}
+    console.log('uzytkownik: ' + this.props.isAuthenticated)
     return (
       
       <div>
