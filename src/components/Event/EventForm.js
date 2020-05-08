@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
-import axios from 'axios'   
+import axios from 'axios'
+import './eventCss/Event.css'
 
     
 const EventForm = (props) => {
@@ -83,15 +84,21 @@ const EventForm = (props) => {
     return (
         <div className='formContainer'>
     <div className='formName'>
-        <p><b>New Event</b></p>
+        <p className="optionTitle">Ogólne informacje o wydarzeniu</p>
     </div>
         <form noValidate onSubmit={handleSubmit}>
-            <input className = "appearance-none border-gray-300" type="text" onChange={(e)=>{setdescriptionText(e.target.value)}} placeholder="Description" value={descriptionText}></input><br></br>
-            <input type="text" onChange={(e)=>{settypeText(e.target.value)}} placeholder="Event type" value={typeText}></input><br></br>
-            <input type="text" onChange={(e)=>{setcityText(e.target.value)}} placeholder="City" value={cityText}></input><br></br>
-            <input type="text" onChange={(e)=>{setstreetText(e.target.value)}} placeholder="Street" value={streetText}></input><br></br>
-            <input type="text" onChange={(e)=>{setnumberText(e.target.value)}} placeholder="Number" value={numberText}></input><br></br>
-            <input type="text" onChange={(e)=>{setsubNumberText(e.target.value)}} placeholder="SubNumber" value={subNumberText}></input><br></br>
+            <p><label className="ml-4 my-4 font-bold text-base">Rodzaj wydarzenia</label></p>
+            <input className="ml-4 px-4 text-2xl rounded-lg border border-blue-600" type="text" onChange={(e)=>{settypeText(e.target.value)}} placeholder="Wpisz rodzaj wydarzenia" value={typeText}></input><br></br>
+            <p><label className="ml-4 font-bold text-base">Miasto</label></p>
+            <input className="ml-4 px-4 text-2xl rounded-lg border border-blue-600" type="text" onChange={(e)=>{setcityText(e.target.value)}} placeholder="Wpisz miasto" value={cityText}></input><br></br>
+            <p><label className="ml-4 font-bold text-base">Ulica</label></p>
+            <input className="ml-4 px-4 text-2xl rounded-lg border border-blue-600" type="text" onChange={(e)=>{setstreetText(e.target.value)}} placeholder="Wpisz ulicę" value={streetText}></input><br></br>
+            <p><label className="ml-4 font-bold text-base">Numer</label></p>
+            <input className="ml-4 px-4 text-2xl rounded-lg border border-blue-600" type="text" onChange={(e)=>{setnumberText(e.target.value)}} placeholder="Wpisz numer ulicy" value={numberText}></input><br></br>
+            <p><label className="ml-4 font-bold text-base">Drugi numer</label></p>
+            <input className="ml-4 px-4 text-2xl rounded-lg border border-blue-600" type="text" onChange={(e)=>{setsubNumberText(e.target.value)}} placeholder="Wpisz drugi numer ulicy" value={subNumberText}></input><br></br>
+            <p><label className="ml-4 font-bold text-base">Opis</label></p>
+            <textarea className="ml-4 px-4 text-2xl rounded-lg border border-blue-600 w-auto" type="text" cols="40" rows="5" onChange={(e)=>{setdescriptionText(e.target.value)}} placeholder="Opis wydarzenia..." value={descriptionText}></textarea><br></br>
             <input className='submitBtn' type="submit" value="Zapisz"></input><br></br>
         </form>
      <div>{errorText}</div>

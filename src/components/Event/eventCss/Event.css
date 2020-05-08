@@ -88,3 +88,25 @@
     background-color: #edf2f76b;
     margin-right: 5px;
 }
+
+
+.submitBtn{
+    font-size: larger;
+    margin:1rem;
+    padding:3px 6px;
+    border-radius:0.5rem;
+    border: solid 1px white;
+    background-color:#3182ce;
+    color:white;
+}
+
+.submitBtn:hover{
+    border: solid 1px #3182ce;
+    background-color:white;
+    color:black;
+    cursor:pointer;
+
+
+
+
+}

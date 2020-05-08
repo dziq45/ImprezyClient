@@ -360,7 +360,7 @@ class Schedule extends Component{
                 <div className="font-bold cursor-pointer" onClick={()=>{this.onAddNextDay()}}>
                     <p>> Dodaj kolejny dzień</p>
                 </div>
-                <div onClick={(e)=>{this.handleSaveSchedule(e)}}>Zapis</div>
+                <div onClick={(e)=>{this.handleSaveSchedule(e)}}>Zapisz</div>
             </div>
         )
     }
