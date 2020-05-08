@@ -221,7 +221,7 @@ class Auth extends Component {
                 <div className='form-style'>
                     <form onSubmit={this.submitHandler}> 
                             {this.state.isSignup ? formLogin: formRegister}
-                            <Button>ZALOGUJ</Button>
+                    <Button>{this.state.isSignup? 'ZALOGUJ' : 'ZAREJESTRUJ'}</Button>
                     </form>
                     <Button
                         clicked={this.switchAuthModeHandler}

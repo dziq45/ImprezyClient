@@ -64,11 +64,10 @@ export const authRegister = (email, password, telephoneNumber) => {
         }
         console.log(authData)
         //let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCwErEdHkTEGc1TM9KmlwqTMmdovQB70TU'
-        let url = 'http://localhost:8001/api/auth/signup'
         // if(!isSignup) {
         //     url = ''
         // }
-        axios.post(url, authData)
+        axios.post('/person/add', authData)
             .then(response => {
                 console.log(response)
                 //dispatch(authSuccess(response.data.idToken, response.data.localId))
