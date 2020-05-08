@@ -5,5 +5,6 @@ export {
 } from './auth'
 
 export {
-    setActiveEventId
+    setActiveEventId,
+    setMyEvents
 } from './event'

@@ -2,14 +2,25 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as actions from '../../store/actions/index'
+import './eventCss/Event.css'
+
 
 
 const MyEvent = (props) => {
     return (
-        <div className="ad-box">
+        <div className="eventBox">
+            {console.log(`Eventy: ${props.myEvents}`)}
             <Link onClick={()=>props.setActiveEventId(props.id)} to ={"/Event/" + props.id}>
-                <p>{props.description}</p>
-                <p>{props.id}</p>
+                <div className="inline-block mx-12">
+                    <p><b>{props.eventType}</b></p>
+                    <p>{props.description}</p>
+                </div>
+                <div className="inline-block mx-12">
+                    {props.address !== null ? <div>
+                        <p>{props.address.city}</p>
+                        <p>{props.address.street} {props.address.number}</p>
+                        </div>: null}
+                </div>
             </Link>
         </div>
     )
@@ -17,6 +28,7 @@ const MyEvent = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        myEvents:state.event.myEvents,
         ...ownProps
     }
 }

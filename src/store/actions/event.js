@@ -10,3 +10,14 @@ export const setActiveEventId = (eventId)=>{
         })
     }
 }
+
+export const setMyEvents = (events)=>{
+    console.log('Przejęte eventy: ')
+    console.log(events)
+    return dispatch=>{
+        dispatch({
+            type:actionTypes.SET_MY_EVENTS,
+            myEvents:events
+        })
+    }
+}
