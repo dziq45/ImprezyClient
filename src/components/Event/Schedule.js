@@ -167,7 +167,13 @@ class Schedule extends Component{
     }
     onAddNextDay=()=>{
         let stateCopy = {...this.state}
-        let newDate = new Date(stateCopy.eachDay[stateCopy.eachDay.length-1].date)
+        let newDate
+        if(stateCopy.eachDay.length >=1){
+            newDate = new Date(stateCopy.eachDay[stateCopy.eachDay.length-1].date)
+        }
+        else{
+            newDate = new Date()
+        }
         newDate.setDate(newDate.getDate() + 1)
         const newDay = {
             date: newDate,
@@ -302,6 +308,11 @@ class Schedule extends Component{
             this.saveItems()
         })
     }
+    onDeleteDay=(dayIndex)=>{
+        let newEachDay = this.state.eachDay.filter((day, index)=> index!==dayIndex)
+        console.log(newEachDay)
+        this.setState({eachDay:newEachDay})
+    }
     onSetDate=(e, dayIndex)=>{
         console.log(e)
         const newEachDay = this.state.eachDay.map((thisDay, thisDayIndex)=>{
@@ -325,6 +336,9 @@ class Schedule extends Component{
                     dateFormat="dd MMM yyyy"
                     locale="pl-PL"
                 />
+                <div className="inline-block" onClick={()=>{this.onDeleteDay(index)}}>
+                    <img src={minusSign} width="18"></img>
+                </div>
                 </div>
                 <div className="flexCardBoard">
                 {day.items.map((item, indexItem)=>(
@@ -360,7 +374,7 @@ class Schedule extends Component{
                 <div className="font-bold cursor-pointer" onClick={()=>{this.onAddNextDay()}}>
                     <p>> Dodaj kolejny dzień</p>
                 </div>
-                <div onClick={(e)=>{this.handleSaveSchedule(e)}}>Zapisz</div>
+                <div className="submitBtn w-3/12" onClick={(e)=>{this.handleSaveSchedule(e)}}>Zapisz harmonogram</div>
             </div>
         )
     }
