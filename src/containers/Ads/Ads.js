@@ -6,18 +6,35 @@ import axios from 'axios'
 
 class Ads extends Component {
     state = {
-        ads: []
+        ads: [],
     }
     
     componentDidMount() {
-        axios.get('https://event-app-d5b97.firebaseio.com/event.json')
-            .then(response => {
-                this.setState({ ads: response.data })
+        axios.get('eventdetail/all')
+        .then(res => {
+            let publicIDs =[]
+            for(let i = 0; i < res.data.length; i++){
+                if(res.data[i].type == "public" && res.data[i].value == "true"){
+                    publicIDs.push(res.data[i].event.eventid)
+                }
+            }
+            console.log(`ID: ${publicIDs}`)
+            publicIDs.forEach((item)=>{
+                axios.get('/event/get/' + item)
+                .then(res=>{
+                    console.log(res.data)
+                    const newAds = [...this.state.ads, res.data]
+                    this.setState({ads:newAds})
+                })
+            })
+            }).catch(err=>{
+                console.log(err)
             })
     }
     
     render() {
-        console.log(this.state.ads)
+        let ads = this.state.ads.map((ad, adIndex)=>
+        <Ad eventType={ad.eventtype} address={ad.address} description={ad.description}></Ad>)
         /*
         const ads = []
         for(let key in this.state.ads) {
@@ -40,9 +57,7 @@ class Ads extends Component {
         */
         return (
             <div className="ads">
-                <Ad eventType="koncert" address="Warszawa" eventId="/event/1"></Ad>
-                <Ad eventType="koncert" address="Kraków"></Ad>
-                <Ad eventType="turniej" address="Wrocław"></Ad>
+                {ads}
             </div>
         )
     }

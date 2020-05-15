@@ -9,6 +9,7 @@ import Logout from './containers/Auth/Logout/Logout'
 import Auth from './containers/Auth/Auth'
 import Ads from './containers/Ads/Ads'
 import MyEvents from './components/Event/MyEvents'
+import PublicEvent from './components/PublicEvent/PublicEvent'
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
         <Route path="/logout" component={Logout}/>
         <Route path="/myEvents" component={MyEvents}></Route>
         <Route path="/Event/:id" component={EventBoard}></Route>
+        <Route path="/PublicEvent/:eventId" component={PublicEvent}/>
       </Switch>
     )
     return (
