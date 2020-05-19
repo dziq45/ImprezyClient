@@ -5,13 +5,18 @@ import Dropzone from 'react-dropzone'
 import image from './images/image.jpg'
 import image2 from './images/icon_new.png'
 import imagePlaceholder from './images/imagePlaceholder.png'
+import ExternalLink from './ExternalLink'
+import minus from '../../images/minus.png'
+import okicon from './images/okicon.png'
 class PublicEvent extends Component{
     state={
         publicSchedule:true,
         schedule:[],
         creatorMode:false,
         name:"Lorem ipsum",
-        description:"Krótki opis jak narazie"
+        description:"Krótki opis jak narazie",
+        externalLinks:[{link: 'twitter.com', hovered:false}, {link:'https://www.youtube.com/watch?v=AFSMXLLOTg8', hovered: false}],
+        newLink:''
     }
     componentDidMount(){
         let eventId = this.props.match.params.eventId
@@ -37,7 +42,35 @@ class PublicEvent extends Component{
             ]}
         this.setState({schedule:newState.eachDay})
     }
+    onExternalLinkHover=(externalLinkIndex, flag)=>{
+        let newLinks = this.state.externalLinks.map((item, index) => {
+            if(index == externalLinkIndex){
+                item.hovered = flag
+                return item
+            }
+            else{
+                return item
+            }
+        })
+        this.setState({externalLinks:newLinks})
+    }
+    onAddLink(){
+        let newLinks = [...this.state.externalLinks, {
+            link:this.state.newLink,
+            hovered:false
+        }]
+        this.setState({externalLinks:newLinks})
+        console.log(newLinks)
+    }
+    deleteLink(externalLinkIndex){
+        let newLinks = this.state.externalLinks.filter((item, index)=>index!==externalLinkIndex)
+        console.log(newLinks)
+        console.log(`LinkIndex = ${externalLinkIndex}`)
+        this.setState({externalLinks:newLinks})
+    }
     render(){
+        console.log(`state:`)
+        console.log(this.state.externalLinks)
         const schedule = this.state.schedule.map((scheduleDay, dayIndex)=>(
             <div className="ml-12">
                 {scheduleDay.items.map((scheduleItem, itemIndex)=>(
@@ -46,7 +79,12 @@ class PublicEvent extends Component{
                     </div>)
                 )}
             </div>))
-        
+        const externalLinks = this.state.externalLinks.map((externalLink, linkIndex)=>(
+            <div className="float-left flex relative" onPointerEnter={()=>this.onExternalLinkHover(linkIndex, true)} onPointerLeave={()=>{this.onExternalLinkHover(linkIndex, false)}}>
+                <ExternalLink link={externalLink.link}></ExternalLink>
+                {this.state.creatorMode && externalLink.hovered? <img src={minus} className="absolute right-0" width="32" height="32" onClick={()=>this.deleteLink(linkIndex)}></img>:null}
+            </div>
+        ))
         return(
             <div>
                 <div className="float-right" onClick={()=>{this.setState({creatorMode:!this.state.creatorMode})}}>Change mode</div>
@@ -64,13 +102,12 @@ class PublicEvent extends Component{
                 </Dropzone> : <img src={image} className="float-right" width="420"/>}
                     
                     <div id="title_head">    
-                    <textarea className="eventName1" value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
-                    <textarea className="eventDescription1" value={this.state.description} onChange={(e)=>this.setState({description: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
-                    <p className="text-indigo-500">
-                        <br />
-                        <a href="#">Lorem ipsum</a>
-                        <a href="#" class="margin1">Lorem ipsum</a>
-                    </p>
+                        <textarea className="eventName1" value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
+                        <textarea className="eventDescription1" value={this.state.description} onChange={(e)=>this.setState({description: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
+                            {externalLinks} 
+                        <p className="text-indigo-500">
+                            
+                        </p>
                     </div>    
                 </div>
                 {this.state.publicSchedule?  
@@ -81,9 +118,14 @@ class PublicEvent extends Component{
                     </div> : null}
                 {this.state.creatorMode?
                     <div className="optionsContainer">
+                        <div className="optionElement" > Zmień szablon </div>
                         <div className="optionElement" onClick={()=>this.setState({publicSchedule:!this.state.publicSchedule})}> Harmonogram </div>
                         <div className="optionElement"> Sponsorzy </div>
-                        <div className="optionElement"> Dodaj link </div>
+                        <div className="optionElement"> 
+                            <p>Dodaj link</p>
+                            <input className="inline-block" value={this.state.newLink} onChange={(e)=>{this.setState({newLink:e.target.value})}}></input>
+                            <img className="inline-block" src={okicon} width="22" onClick={()=>this.onAddLink()}></img>
+                        </div>
 
                     </div> : null}
             </div>
