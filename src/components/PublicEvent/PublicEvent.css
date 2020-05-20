@@ -102,9 +102,10 @@
 	width:200px;
 }
 .optionElement{
-	background-color: grey;
-	height:30px;
-	text-justify: auto;
+	background-color: #f7fafc;
+	padding: 7px;
+	border:#e2e8f0 solid 1px;
+	cursor: context-menu;
 }
 #title_head a {
 	color: #fff;
