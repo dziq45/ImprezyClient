@@ -19,7 +19,8 @@ class PublicEvent extends Component{
         name:"XXIII Dzień Papryki w Potworowie",
         description:"Tylko teraz występy takich zespołów jak: Republika, ABBA, Ich Troje. Nie zabraknie też naszych ulubionych kabareciarzy.\n Zajrzyj na nase media społecznościowe:",
         externalLinks:[{link: 'twitter.com', hovered:false}, {link:'https://www.youtube.com/watch?v=AFSMXLLOTg8', hovered: false}],
-        newLink:''
+        newLink:'',
+        imageSrc:null
     }
     componentDidMount(){
         let eventId = this.props.match.params.eventId
@@ -75,12 +76,13 @@ class PublicEvent extends Component{
         })
         this.setState({externalLinks:newLinks})
     }
-    onAddLink(){
+    onAddLink(e){
+        e.preventDefault()
         let newLinks = [...this.state.externalLinks, {
             link:this.state.newLink,
             hovered:false
         }]
-        this.setState({externalLinks:newLinks})
+        this.setState({externalLinks:newLinks, newLink:''})
         console.log(newLinks)
     }
     deleteLink(externalLinkIndex){
@@ -112,7 +114,18 @@ class PublicEvent extends Component{
                 <div className="w-9/12 mx-auto">
                 <div id="header">
                     {this.state.creatorMode? 
-                    <Dropzone  onDrop={acceptedFiles=>console.log(acceptedFiles)}>
+                    <Dropzone  onDrop={acceptedFiles=>{
+                        console.log(acceptedFiles[0])
+                        let form = new FormData()
+                        form.append("file", acceptedFiles[0],  acceptedFiles[0].path)
+                        axios.post('/file/upload',form
+                        )
+                        .then(res=> {
+                            console.log(res)
+                            this.setState({imageSrc:res.data})
+                        })
+                        .catch(err=>console.log(err))
+                    }}>
                         {({getRootProps, getInputProps}) => (
                         <section className="dropzone1">
                             <div {...getRootProps()}>
@@ -121,7 +134,7 @@ class PublicEvent extends Component{
                             </div>
                         </section>
                     )}
-                </Dropzone> : <img src={image} className="float-right rounded-sm shadow-sm" width="420"/>}
+                </Dropzone> : <img src={this.state.imageSrc!== null? require(this.state.imageSrc): image} className="float-right rounded-sm shadow-sm" width="420"/>}
                     
                     <div id="title_head">    
                         <textarea className={this.state.creatorMode? "eventName1 hover:shadow-md" : "eventName1"} value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
@@ -135,7 +148,7 @@ class PublicEvent extends Component{
                 {this.state.publicSchedule?  
                     <div className="scheduleContainer">
                         <img src={image2} className="inline-block" />
-                        <h1 className="inline-block font-bold text-2xl ml-2">Harmonogram</h1>
+                        <h1 className="inline-block font-bold text-2xl ml-2">Harmonogram wydarzenia</h1>
                         {schedule}
                     </div> : null}
                     <div className="counterContainer">
@@ -148,8 +161,10 @@ class PublicEvent extends Component{
                         <div className="optionElement hover:border-gray-500"> Sponsorzy </div>
                         <div className="optionElement"> 
                             <p>Dodaj link</p>
-                            <input className="inline-block w-32 border-gray-500"  value={this.state.newLink} onChange={(e)=>{this.setState({newLink:e.target.value})}}></input>
-                            <img className="inline-block ml-2 hover:shadow-md" src={plus} width="22" onClick={()=>this.onAddLink()}></img>
+                            <form onSubmit={(e)=>this.onAddLink(e)}>
+                                <input className="inline-block w-32 border-gray-500"  value={this.state.newLink} onChange={(e)=>{this.setState({newLink:e.target.value})}}></input>
+                                <input type="image" className="inline-block ml-2 hover:shadow-md" src={plus} width="22"></input>
+                            </form>
                         </div>
 
                     </div> : null}

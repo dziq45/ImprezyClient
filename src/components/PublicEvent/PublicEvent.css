@@ -136,6 +136,8 @@
 	width: 950px;
 	border: 3px solid #FFF;
 	margin-left: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	font-family: Arial, Helvetica, sans-serif;
 	background: #FFF url(./images/bg.png) repeat-x top;
 }
@@ -223,12 +225,11 @@
 .dateElementContainer{
 	display: flex;
 	flex-direction: column;
-	border: #e2e8f0 solid 1px;
+	border: #e2e8f0 solid 2px;
 	width: 100px;
 	height: 100px;
 	vertical-align: middle;
 	margin:10px;
-	background-color: #cbd5e0;
 
 }
 .dateElementContainer p{
@@ -239,4 +240,6 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	background-color: #cbd5e0;
+
 }

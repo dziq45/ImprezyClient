@@ -22,19 +22,19 @@ class Counter extends Component{
         return(
             <div className="dateElementsContainer">
                 <div className="dateElementContainer">
-                    <p>{this.state.days < 10? '0' + this.state.days : this.state.days}</p>
+                    <p className="text-2xl">{this.state.days < 10? '0' + this.state.days : this.state.days}</p>
                     <p>Days</p>
                 </div>
                 <div className="dateElementContainer">
-                    <p>{this.state.hours < 10? '0' + this.state.hours : this.state.hours}</p>
+                    <p className="text-2xl">{this.state.hours < 10? '0' + this.state.hours : this.state.hours}</p>
                     <p>Hours</p>
                 </div>
                 <div className="dateElementContainer">
-                    <p>{this.state.minutes < 10? '0' + this.state.minutes : this.state.minutes}</p>
+                    <p className="text-2xl">{this.state.minutes < 10? '0' + this.state.minutes : this.state.minutes}</p>
                     <p>Minutes</p>
                 </div>
                 <div className="dateElementContainer">
-                    <p>{this.state.seconds <  10? '0' + this.state.seconds : this.state.seconds}</p>
+                    <p className="text-2xl">{this.state.seconds <  10? '0' + this.state.seconds : this.state.seconds}</p>
                     <p>Seconds</p>
                 </div>
             </div>
