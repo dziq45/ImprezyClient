@@ -9397,6 +9397,198 @@ video {
   width: 100vw;
 }
 
+.hover\:w-0:hover {
+  width: 0;
+}
+
+.hover\:w-1:hover {
+  width: 0.25rem;
+}
+
+.hover\:w-2:hover {
+  width: 0.5rem;
+}
+
+.hover\:w-3:hover {
+  width: 0.75rem;
+}
+
+.hover\:w-4:hover {
+  width: 1rem;
+}
+
+.hover\:w-5:hover {
+  width: 1.25rem;
+}
+
+.hover\:w-6:hover {
+  width: 1.5rem;
+}
+
+.hover\:w-8:hover {
+  width: 2rem;
+}
+
+.hover\:w-10:hover {
+  width: 2.5rem;
+}
+
+.hover\:w-12:hover {
+  width: 3rem;
+}
+
+.hover\:w-16:hover {
+  width: 4rem;
+}
+
+.hover\:w-20:hover {
+  width: 5rem;
+}
+
+.hover\:w-24:hover {
+  width: 6rem;
+}
+
+.hover\:w-32:hover {
+  width: 8rem;
+}
+
+.hover\:w-40:hover {
+  width: 10rem;
+}
+
+.hover\:w-48:hover {
+  width: 12rem;
+}
+
+.hover\:w-56:hover {
+  width: 14rem;
+}
+
+.hover\:w-64:hover {
+  width: 16rem;
+}
+
+.hover\:w-auto:hover {
+  width: auto;
+}
+
+.hover\:w-px:hover {
+  width: 1px;
+}
+
+.hover\:w-1\/2:hover {
+  width: 50%;
+}
+
+.hover\:w-1\/3:hover {
+  width: 33.333333%;
+}
+
+.hover\:w-2\/3:hover {
+  width: 66.666667%;
+}
+
+.hover\:w-1\/4:hover {
+  width: 25%;
+}
+
+.hover\:w-2\/4:hover {
+  width: 50%;
+}
+
+.hover\:w-3\/4:hover {
+  width: 75%;
+}
+
+.hover\:w-1\/5:hover {
+  width: 20%;
+}
+
+.hover\:w-2\/5:hover {
+  width: 40%;
+}
+
+.hover\:w-3\/5:hover {
+  width: 60%;
+}
+
+.hover\:w-4\/5:hover {
+  width: 80%;
+}
+
+.hover\:w-1\/6:hover {
+  width: 16.666667%;
+}
+
+.hover\:w-2\/6:hover {
+  width: 33.333333%;
+}
+
+.hover\:w-3\/6:hover {
+  width: 50%;
+}
+
+.hover\:w-4\/6:hover {
+  width: 66.666667%;
+}
+
+.hover\:w-5\/6:hover {
+  width: 83.333333%;
+}
+
+.hover\:w-1\/12:hover {
+  width: 8.333333%;
+}
+
+.hover\:w-2\/12:hover {
+  width: 16.666667%;
+}
+
+.hover\:w-3\/12:hover {
+  width: 25%;
+}
+
+.hover\:w-4\/12:hover {
+  width: 33.333333%;
+}
+
+.hover\:w-5\/12:hover {
+  width: 41.666667%;
+}
+
+.hover\:w-6\/12:hover {
+  width: 50%;
+}
+
+.hover\:w-7\/12:hover {
+  width: 58.333333%;
+}
+
+.hover\:w-8\/12:hover {
+  width: 66.666667%;
+}
+
+.hover\:w-9\/12:hover {
+  width: 75%;
+}
+
+.hover\:w-10\/12:hover {
+  width: 83.333333%;
+}
+
+.hover\:w-11\/12:hover {
+  width: 91.666667%;
+}
+
+.hover\:w-full:hover {
+  width: 100%;
+}
+
+.hover\:w-screen:hover {
+  width: 100vw;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -20636,6 +20828,198 @@ video {
   }
 
   .sm\:w-screen {
+    width: 100vw;
+  }
+
+  .sm\:hover\:w-0:hover {
+    width: 0;
+  }
+
+  .sm\:hover\:w-1:hover {
+    width: 0.25rem;
+  }
+
+  .sm\:hover\:w-2:hover {
+    width: 0.5rem;
+  }
+
+  .sm\:hover\:w-3:hover {
+    width: 0.75rem;
+  }
+
+  .sm\:hover\:w-4:hover {
+    width: 1rem;
+  }
+
+  .sm\:hover\:w-5:hover {
+    width: 1.25rem;
+  }
+
+  .sm\:hover\:w-6:hover {
+    width: 1.5rem;
+  }
+
+  .sm\:hover\:w-8:hover {
+    width: 2rem;
+  }
+
+  .sm\:hover\:w-10:hover {
+    width: 2.5rem;
+  }
+
+  .sm\:hover\:w-12:hover {
+    width: 3rem;
+  }
+
+  .sm\:hover\:w-16:hover {
+    width: 4rem;
+  }
+
+  .sm\:hover\:w-20:hover {
+    width: 5rem;
+  }
+
+  .sm\:hover\:w-24:hover {
+    width: 6rem;
+  }
+
+  .sm\:hover\:w-32:hover {
+    width: 8rem;
+  }
+
+  .sm\:hover\:w-40:hover {
+    width: 10rem;
+  }
+
+  .sm\:hover\:w-48:hover {
+    width: 12rem;
+  }
+
+  .sm\:hover\:w-56:hover {
+    width: 14rem;
+  }
+
+  .sm\:hover\:w-64:hover {
+    width: 16rem;
+  }
+
+  .sm\:hover\:w-auto:hover {
+    width: auto;
+  }
+
+  .sm\:hover\:w-px:hover {
+    width: 1px;
+  }
+
+  .sm\:hover\:w-1\/2:hover {
+    width: 50%;
+  }
+
+  .sm\:hover\:w-1\/3:hover {
+    width: 33.333333%;
+  }
+
+  .sm\:hover\:w-2\/3:hover {
+    width: 66.666667%;
+  }
+
+  .sm\:hover\:w-1\/4:hover {
+    width: 25%;
+  }
+
+  .sm\:hover\:w-2\/4:hover {
+    width: 50%;
+  }
+
+  .sm\:hover\:w-3\/4:hover {
+    width: 75%;
+  }
+
+  .sm\:hover\:w-1\/5:hover {
+    width: 20%;
+  }
+
+  .sm\:hover\:w-2\/5:hover {
+    width: 40%;
+  }
+
+  .sm\:hover\:w-3\/5:hover {
+    width: 60%;
+  }
+
+  .sm\:hover\:w-4\/5:hover {
+    width: 80%;
+  }
+
+  .sm\:hover\:w-1\/6:hover {
+    width: 16.666667%;
+  }
+
+  .sm\:hover\:w-2\/6:hover {
+    width: 33.333333%;
+  }
+
+  .sm\:hover\:w-3\/6:hover {
+    width: 50%;
+  }
+
+  .sm\:hover\:w-4\/6:hover {
+    width: 66.666667%;
+  }
+
+  .sm\:hover\:w-5\/6:hover {
+    width: 83.333333%;
+  }
+
+  .sm\:hover\:w-1\/12:hover {
+    width: 8.333333%;
+  }
+
+  .sm\:hover\:w-2\/12:hover {
+    width: 16.666667%;
+  }
+
+  .sm\:hover\:w-3\/12:hover {
+    width: 25%;
+  }
+
+  .sm\:hover\:w-4\/12:hover {
+    width: 33.333333%;
+  }
+
+  .sm\:hover\:w-5\/12:hover {
+    width: 41.666667%;
+  }
+
+  .sm\:hover\:w-6\/12:hover {
+    width: 50%;
+  }
+
+  .sm\:hover\:w-7\/12:hover {
+    width: 58.333333%;
+  }
+
+  .sm\:hover\:w-8\/12:hover {
+    width: 66.666667%;
+  }
+
+  .sm\:hover\:w-9\/12:hover {
+    width: 75%;
+  }
+
+  .sm\:hover\:w-10\/12:hover {
+    width: 83.333333%;
+  }
+
+  .sm\:hover\:w-11\/12:hover {
+    width: 91.666667%;
+  }
+
+  .sm\:hover\:w-full:hover {
+    width: 100%;
+  }
+
+  .sm\:hover\:w-screen:hover {
     width: 100vw;
   }
 
@@ -31882,6 +32266,198 @@ video {
     width: 100vw;
   }
 
+  .md\:hover\:w-0:hover {
+    width: 0;
+  }
+
+  .md\:hover\:w-1:hover {
+    width: 0.25rem;
+  }
+
+  .md\:hover\:w-2:hover {
+    width: 0.5rem;
+  }
+
+  .md\:hover\:w-3:hover {
+    width: 0.75rem;
+  }
+
+  .md\:hover\:w-4:hover {
+    width: 1rem;
+  }
+
+  .md\:hover\:w-5:hover {
+    width: 1.25rem;
+  }
+
+  .md\:hover\:w-6:hover {
+    width: 1.5rem;
+  }
+
+  .md\:hover\:w-8:hover {
+    width: 2rem;
+  }
+
+  .md\:hover\:w-10:hover {
+    width: 2.5rem;
+  }
+
+  .md\:hover\:w-12:hover {
+    width: 3rem;
+  }
+
+  .md\:hover\:w-16:hover {
+    width: 4rem;
+  }
+
+  .md\:hover\:w-20:hover {
+    width: 5rem;
+  }
+
+  .md\:hover\:w-24:hover {
+    width: 6rem;
+  }
+
+  .md\:hover\:w-32:hover {
+    width: 8rem;
+  }
+
+  .md\:hover\:w-40:hover {
+    width: 10rem;
+  }
+
+  .md\:hover\:w-48:hover {
+    width: 12rem;
+  }
+
+  .md\:hover\:w-56:hover {
+    width: 14rem;
+  }
+
+  .md\:hover\:w-64:hover {
+    width: 16rem;
+  }
+
+  .md\:hover\:w-auto:hover {
+    width: auto;
+  }
+
+  .md\:hover\:w-px:hover {
+    width: 1px;
+  }
+
+  .md\:hover\:w-1\/2:hover {
+    width: 50%;
+  }
+
+  .md\:hover\:w-1\/3:hover {
+    width: 33.333333%;
+  }
+
+  .md\:hover\:w-2\/3:hover {
+    width: 66.666667%;
+  }
+
+  .md\:hover\:w-1\/4:hover {
+    width: 25%;
+  }
+
+  .md\:hover\:w-2\/4:hover {
+    width: 50%;
+  }
+
+  .md\:hover\:w-3\/4:hover {
+    width: 75%;
+  }
+
+  .md\:hover\:w-1\/5:hover {
+    width: 20%;
+  }
+
+  .md\:hover\:w-2\/5:hover {
+    width: 40%;
+  }
+
+  .md\:hover\:w-3\/5:hover {
+    width: 60%;
+  }
+
+  .md\:hover\:w-4\/5:hover {
+    width: 80%;
+  }
+
+  .md\:hover\:w-1\/6:hover {
+    width: 16.666667%;
+  }
+
+  .md\:hover\:w-2\/6:hover {
+    width: 33.333333%;
+  }
+
+  .md\:hover\:w-3\/6:hover {
+    width: 50%;
+  }
+
+  .md\:hover\:w-4\/6:hover {
+    width: 66.666667%;
+  }
+
+  .md\:hover\:w-5\/6:hover {
+    width: 83.333333%;
+  }
+
+  .md\:hover\:w-1\/12:hover {
+    width: 8.333333%;
+  }
+
+  .md\:hover\:w-2\/12:hover {
+    width: 16.666667%;
+  }
+
+  .md\:hover\:w-3\/12:hover {
+    width: 25%;
+  }
+
+  .md\:hover\:w-4\/12:hover {
+    width: 33.333333%;
+  }
+
+  .md\:hover\:w-5\/12:hover {
+    width: 41.666667%;
+  }
+
+  .md\:hover\:w-6\/12:hover {
+    width: 50%;
+  }
+
+  .md\:hover\:w-7\/12:hover {
+    width: 58.333333%;
+  }
+
+  .md\:hover\:w-8\/12:hover {
+    width: 66.666667%;
+  }
+
+  .md\:hover\:w-9\/12:hover {
+    width: 75%;
+  }
+
+  .md\:hover\:w-10\/12:hover {
+    width: 83.333333%;
+  }
+
+  .md\:hover\:w-11\/12:hover {
+    width: 91.666667%;
+  }
+
+  .md\:hover\:w-full:hover {
+    width: 100%;
+  }
+
+  .md\:hover\:w-screen:hover {
+    width: 100vw;
+  }
+
   .md\:z-0 {
     z-index: 0;
   }
@@ -43125,6 +43701,198 @@ video {
     width: 100vw;
   }
 
+  .lg\:hover\:w-0:hover {
+    width: 0;
+  }
+
+  .lg\:hover\:w-1:hover {
+    width: 0.25rem;
+  }
+
+  .lg\:hover\:w-2:hover {
+    width: 0.5rem;
+  }
+
+  .lg\:hover\:w-3:hover {
+    width: 0.75rem;
+  }
+
+  .lg\:hover\:w-4:hover {
+    width: 1rem;
+  }
+
+  .lg\:hover\:w-5:hover {
+    width: 1.25rem;
+  }
+
+  .lg\:hover\:w-6:hover {
+    width: 1.5rem;
+  }
+
+  .lg\:hover\:w-8:hover {
+    width: 2rem;
+  }
+
+  .lg\:hover\:w-10:hover {
+    width: 2.5rem;
+  }
+
+  .lg\:hover\:w-12:hover {
+    width: 3rem;
+  }
+
+  .lg\:hover\:w-16:hover {
+    width: 4rem;
+  }
+
+  .lg\:hover\:w-20:hover {
+    width: 5rem;
+  }
+
+  .lg\:hover\:w-24:hover {
+    width: 6rem;
+  }
+
+  .lg\:hover\:w-32:hover {
+    width: 8rem;
+  }
+
+  .lg\:hover\:w-40:hover {
+    width: 10rem;
+  }
+
+  .lg\:hover\:w-48:hover {
+    width: 12rem;
+  }
+
+  .lg\:hover\:w-56:hover {
+    width: 14rem;
+  }
+
+  .lg\:hover\:w-64:hover {
+    width: 16rem;
+  }
+
+  .lg\:hover\:w-auto:hover {
+    width: auto;
+  }
+
+  .lg\:hover\:w-px:hover {
+    width: 1px;
+  }
+
+  .lg\:hover\:w-1\/2:hover {
+    width: 50%;
+  }
+
+  .lg\:hover\:w-1\/3:hover {
+    width: 33.333333%;
+  }
+
+  .lg\:hover\:w-2\/3:hover {
+    width: 66.666667%;
+  }
+
+  .lg\:hover\:w-1\/4:hover {
+    width: 25%;
+  }
+
+  .lg\:hover\:w-2\/4:hover {
+    width: 50%;
+  }
+
+  .lg\:hover\:w-3\/4:hover {
+    width: 75%;
+  }
+
+  .lg\:hover\:w-1\/5:hover {
+    width: 20%;
+  }
+
+  .lg\:hover\:w-2\/5:hover {
+    width: 40%;
+  }
+
+  .lg\:hover\:w-3\/5:hover {
+    width: 60%;
+  }
+
+  .lg\:hover\:w-4\/5:hover {
+    width: 80%;
+  }
+
+  .lg\:hover\:w-1\/6:hover {
+    width: 16.666667%;
+  }
+
+  .lg\:hover\:w-2\/6:hover {
+    width: 33.333333%;
+  }
+
+  .lg\:hover\:w-3\/6:hover {
+    width: 50%;
+  }
+
+  .lg\:hover\:w-4\/6:hover {
+    width: 66.666667%;
+  }
+
+  .lg\:hover\:w-5\/6:hover {
+    width: 83.333333%;
+  }
+
+  .lg\:hover\:w-1\/12:hover {
+    width: 8.333333%;
+  }
+
+  .lg\:hover\:w-2\/12:hover {
+    width: 16.666667%;
+  }
+
+  .lg\:hover\:w-3\/12:hover {
+    width: 25%;
+  }
+
+  .lg\:hover\:w-4\/12:hover {
+    width: 33.333333%;
+  }
+
+  .lg\:hover\:w-5\/12:hover {
+    width: 41.666667%;
+  }
+
+  .lg\:hover\:w-6\/12:hover {
+    width: 50%;
+  }
+
+  .lg\:hover\:w-7\/12:hover {
+    width: 58.333333%;
+  }
+
+  .lg\:hover\:w-8\/12:hover {
+    width: 66.666667%;
+  }
+
+  .lg\:hover\:w-9\/12:hover {
+    width: 75%;
+  }
+
+  .lg\:hover\:w-10\/12:hover {
+    width: 83.333333%;
+  }
+
+  .lg\:hover\:w-11\/12:hover {
+    width: 91.666667%;
+  }
+
+  .lg\:hover\:w-full:hover {
+    width: 100%;
+  }
+
+  .lg\:hover\:w-screen:hover {
+    width: 100vw;
+  }
+
   .lg\:z-0 {
     z-index: 0;
   }
@@ -54365,6 +55133,198 @@ video {
   }
 
   .xl\:w-screen {
+    width: 100vw;
+  }
+
+  .xl\:hover\:w-0:hover {
+    width: 0;
+  }
+
+  .xl\:hover\:w-1:hover {
+    width: 0.25rem;
+  }
+
+  .xl\:hover\:w-2:hover {
+    width: 0.5rem;
+  }
+
+  .xl\:hover\:w-3:hover {
+    width: 0.75rem;
+  }
+
+  .xl\:hover\:w-4:hover {
+    width: 1rem;
+  }
+
+  .xl\:hover\:w-5:hover {
+    width: 1.25rem;
+  }
+
+  .xl\:hover\:w-6:hover {
+    width: 1.5rem;
+  }
+
+  .xl\:hover\:w-8:hover {
+    width: 2rem;
+  }
+
+  .xl\:hover\:w-10:hover {
+    width: 2.5rem;
+  }
+
+  .xl\:hover\:w-12:hover {
+    width: 3rem;
+  }
+
+  .xl\:hover\:w-16:hover {
+    width: 4rem;
+  }
+
+  .xl\:hover\:w-20:hover {
+    width: 5rem;
+  }
+
+  .xl\:hover\:w-24:hover {
+    width: 6rem;
+  }
+
+  .xl\:hover\:w-32:hover {
+    width: 8rem;
+  }
+
+  .xl\:hover\:w-40:hover {
+    width: 10rem;
+  }
+
+  .xl\:hover\:w-48:hover {
+    width: 12rem;
+  }
+
+  .xl\:hover\:w-56:hover {
+    width: 14rem;
+  }
+
+  .xl\:hover\:w-64:hover {
+    width: 16rem;
+  }
+
+  .xl\:hover\:w-auto:hover {
+    width: auto;
+  }
+
+  .xl\:hover\:w-px:hover {
+    width: 1px;
+  }
+
+  .xl\:hover\:w-1\/2:hover {
+    width: 50%;
+  }
+
+  .xl\:hover\:w-1\/3:hover {
+    width: 33.333333%;
+  }
+
+  .xl\:hover\:w-2\/3:hover {
+    width: 66.666667%;
+  }
+
+  .xl\:hover\:w-1\/4:hover {
+    width: 25%;
+  }
+
+  .xl\:hover\:w-2\/4:hover {
+    width: 50%;
+  }
+
+  .xl\:hover\:w-3\/4:hover {
+    width: 75%;
+  }
+
+  .xl\:hover\:w-1\/5:hover {
+    width: 20%;
+  }
+
+  .xl\:hover\:w-2\/5:hover {
+    width: 40%;
+  }
+
+  .xl\:hover\:w-3\/5:hover {
+    width: 60%;
+  }
+
+  .xl\:hover\:w-4\/5:hover {
+    width: 80%;
+  }
+
+  .xl\:hover\:w-1\/6:hover {
+    width: 16.666667%;
+  }
+
+  .xl\:hover\:w-2\/6:hover {
+    width: 33.333333%;
+  }
+
+  .xl\:hover\:w-3\/6:hover {
+    width: 50%;
+  }
+
+  .xl\:hover\:w-4\/6:hover {
+    width: 66.666667%;
+  }
+
+  .xl\:hover\:w-5\/6:hover {
+    width: 83.333333%;
+  }
+
+  .xl\:hover\:w-1\/12:hover {
+    width: 8.333333%;
+  }
+
+  .xl\:hover\:w-2\/12:hover {
+    width: 16.666667%;
+  }
+
+  .xl\:hover\:w-3\/12:hover {
+    width: 25%;
+  }
+
+  .xl\:hover\:w-4\/12:hover {
+    width: 33.333333%;
+  }
+
+  .xl\:hover\:w-5\/12:hover {
+    width: 41.666667%;
+  }
+
+  .xl\:hover\:w-6\/12:hover {
+    width: 50%;
+  }
+
+  .xl\:hover\:w-7\/12:hover {
+    width: 58.333333%;
+  }
+
+  .xl\:hover\:w-8\/12:hover {
+    width: 66.666667%;
+  }
+
+  .xl\:hover\:w-9\/12:hover {
+    width: 75%;
+  }
+
+  .xl\:hover\:w-10\/12:hover {
+    width: 83.333333%;
+  }
+
+  .xl\:hover\:w-11\/12:hover {
+    width: 91.666667%;
+  }
+
+  .xl\:hover\:w-full:hover {
+    width: 100%;
+  }
+
+  .xl\:hover\:w-screen:hover {
     width: 100vw;
   }
 

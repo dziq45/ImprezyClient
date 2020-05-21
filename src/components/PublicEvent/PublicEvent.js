@@ -10,6 +10,7 @@ import minus from '../../images/minus.png'
 import plus from '../../images/plus.png'
 import okicon from './images/okicon.png'
 import optionsIcon from './images/optionsicon.png'
+import Counter from './Counter'
 class PublicEvent extends Component{
     state={
         publicSchedule:true,
@@ -107,7 +108,7 @@ class PublicEvent extends Component{
         ))
         return(
             <div>
-                <img src={optionsIcon} className="float-right w-10 mr-2" onClick={()=>{this.setState({creatorMode:!this.state.creatorMode})}}></img>
+                <img src={optionsIcon} className="float-right w-10 mr-2 transition duration-500 ease-in-out transform hover:scale-125" onClick={()=>{this.setState({creatorMode:!this.state.creatorMode})}}></img>
                 <div className="w-9/12 mx-auto">
                 <div id="header">
                     {this.state.creatorMode? 
@@ -137,6 +138,9 @@ class PublicEvent extends Component{
                         <h1 className="inline-block font-bold text-2xl ml-2">Harmonogram</h1>
                         {schedule}
                     </div> : null}
+                    <div className="counterContainer">
+                        <Counter eventDate={new Date(2020, 5, 6)}></Counter>
+                    </div>
                 {this.state.creatorMode?
                     <div className="optionsContainer">
                         <div className="optionElement hover:border-gray-500" > Zmień szablon </div>
