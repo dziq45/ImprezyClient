@@ -7,16 +7,20 @@ import image2 from './images/icon_new.png'
 import imagePlaceholder from './images/imagePlaceholder.png'
 import ExternalLink from './ExternalLink'
 import minus from '../../images/minus.png'
+import plus from '../../images/plus.png'
 import okicon from './images/okicon.png'
+import optionsIcon from './images/optionsicon.png'
+import Counter from './Counter'
 class PublicEvent extends Component{
     state={
         publicSchedule:true,
         schedule:[],
         creatorMode:false,
-        name:"Lorem ipsum",
-        description:"Krótki opis jak narazie",
+        name:"XXIII Dzień Papryki w Potworowie",
+        description:"Tylko teraz występy takich zespołów jak: Republika, ABBA, Ich Troje. Nie zabraknie też naszych ulubionych kabareciarzy.\n Zajrzyj na nase media społecznościowe:",
         externalLinks:[{link: 'twitter.com', hovered:false}, {link:'https://www.youtube.com/watch?v=AFSMXLLOTg8', hovered: false}],
-        newLink:''
+        newLink:'',
+        imageSrc:'D:/ZPI/Files/arrowDown.png'
     }
     componentDidMount(){
         let eventId = this.props.match.params.eventId
@@ -28,13 +32,31 @@ class PublicEvent extends Component{
                     items:[{
                         hour: 12,
                         minute:45,
-                        description: "Występ jakiegoś zespołu",
+                        description: "Występ zespołu Ich Troje",
                         hovered:false
                     },
                     {
                         hour: 14,
                         minute:20,
-                        description: "Koniec występu",
+                        description: "Stand-up Lotka",
+                        hovered:false
+                    },
+                    {
+                        hour: 15,
+                        minute:30,
+                        description: "Występ zespołu Disco-Banjo",
+                        hovered:false
+                    },
+                    {
+                        hour: 17,
+                        minute:30,
+                        description: "Występ kabaretu Limo",
+                        hovered:false
+                    },
+                    {
+                        hour: 20,
+                        minute:'00',
+                        description: "Występ zespołu ABBA",
                         hovered:false
                     }
                 ]
@@ -54,12 +76,13 @@ class PublicEvent extends Component{
         })
         this.setState({externalLinks:newLinks})
     }
-    onAddLink(){
+    onAddLink(e){
+        e.preventDefault()
         let newLinks = [...this.state.externalLinks, {
             link:this.state.newLink,
             hovered:false
         }]
-        this.setState({externalLinks:newLinks})
+        this.setState({externalLinks:newLinks, newLink:''})
         console.log(newLinks)
     }
     deleteLink(externalLinkIndex){
@@ -87,23 +110,38 @@ class PublicEvent extends Component{
         ))
         return(
             <div>
-                <div className="float-right" onClick={()=>{this.setState({creatorMode:!this.state.creatorMode})}}>Change mode</div>
+                <img src={optionsIcon} className="float-right w-10 mr-2 transition duration-500 ease-in-out transform hover:scale-125" onClick={()=>{this.setState({creatorMode:!this.state.creatorMode})}}></img>
+                <div className="w-9/12 mx-auto">
                 <div id="header">
                     {this.state.creatorMode? 
-                    <Dropzone  onDrop={acceptedFiles=>console.log(acceptedFiles)}>
+                    <Dropzone  onDrop={acceptedFiles=>{
+                        console.log(acceptedFiles[0])
+                        let form = new FormData()
+                        form.append("file", acceptedFiles[0],  acceptedFiles[0].path)
+                        axios.post('/file/upload',form
+                        )
+                        .then(res=> {
+                            let siema = res.data.path.lastIndexOf('/') + 1
+                            let fileName = res.data.path.substring(siema)
+                            import('../../images/' + fileName)
+                            .then(src=> this.setState({imageSrc:src.default})
+                            )
+                        })
+                        .catch(err=>console.log(err))
+                    }}>
                         {({getRootProps, getInputProps}) => (
                         <section className="dropzone1">
                             <div {...getRootProps()}>
                                 <input {...getInputProps()}/>
-                                <img src={imagePlaceholder}></img>
+                                <img src={imagePlaceholder} className="hover:shadow-md rounded-lg"></img>
                             </div>
                         </section>
                     )}
-                </Dropzone> : <img src={image} className="float-right" width="420"/>}
+                </Dropzone> : <img src={this.state.imageSrc!==null ? this.state.imageSrc : image} className="float-right rounded-sm shadow-sm" width="420"/>}
                     
                     <div id="title_head">    
-                        <textarea className="eventName1" value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
-                        <textarea className="eventDescription1" value={this.state.description} onChange={(e)=>this.setState({description: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
+                        <textarea className={this.state.creatorMode? "eventName1 hover:shadow-md" : "eventName1"} value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
+                        <textarea className={this.state.creatorMode?"eventDescription1 hover:shadow-md" : "eventDescription1"} value={this.state.description} onChange={(e)=>this.setState({description: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
                             {externalLinks} 
                         <p className="text-indigo-500">
                             
@@ -113,22 +151,29 @@ class PublicEvent extends Component{
                 {this.state.publicSchedule?  
                     <div className="scheduleContainer">
                         <img src={image2} className="inline-block" />
-                        <h1 className="inline-block font-bold text-2xl ml-2">Harmonogram</h1>
+                        <h1 className="inline-block font-bold text-2xl ml-2">Harmonogram wydarzenia</h1>
                         {schedule}
                     </div> : null}
+                    <div className="counterContainer">
+                        <Counter eventDate={new Date(2020, 5, 6)}></Counter>
+                    </div>
                 {this.state.creatorMode?
                     <div className="optionsContainer">
-                        <div className="optionElement" > Zmień szablon </div>
-                        <div className="optionElement" onClick={()=>this.setState({publicSchedule:!this.state.publicSchedule})}> Harmonogram </div>
-                        <div className="optionElement"> Sponsorzy </div>
+                        <div className="optionElement hover:border-gray-500" > Zmień szablon </div>
+                        <div className="optionElement hover:border-gray-500" onClick={()=>this.setState({publicSchedule:!this.state.publicSchedule})}> Harmonogram </div>
+                        <div className="optionElement hover:border-gray-500"> Sponsorzy </div>
                         <div className="optionElement"> 
                             <p>Dodaj link</p>
-                            <input className="inline-block" value={this.state.newLink} onChange={(e)=>{this.setState({newLink:e.target.value})}}></input>
-                            <img className="inline-block" src={okicon} width="22" onClick={()=>this.onAddLink()}></img>
+                            <form onSubmit={(e)=>this.onAddLink(e)}>
+                                <input className="inline-block w-32 border-gray-500"  value={this.state.newLink} onChange={(e)=>{this.setState({newLink:e.target.value})}}></input>
+                                <input type="image" className="inline-block ml-2 hover:shadow-md" src={plus} width="22"></input>
+                            </form>
                         </div>
 
                     </div> : null}
             </div>
+            </div>
+            
         )
     }
 }

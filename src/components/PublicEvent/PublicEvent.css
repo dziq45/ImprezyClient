@@ -98,13 +98,14 @@
 .optionsContainer{
 	position: absolute;
 	right:0px;
-	top:140px;
+	top:145px;
 	width:200px;
 }
 .optionElement{
-	background-color: grey;
-	height:30px;
-	text-justify: auto;
+	background-color: #f7fafc;
+	padding: 7px;
+	border:#e2e8f0 solid 1px;
+	cursor: context-menu;
 }
 #title_head a {
 	color: #fff;
@@ -133,10 +134,17 @@
 
 .scheduleContainer {
 	width: 950px;
-	float: left;
 	border: 3px solid #FFF;
 	margin-left: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	font-family: Arial, Helvetica, sans-serif;
+	background: #FFF url(./images/bg.png) repeat-x top;
+}
+.counterContainer{
+	margin-left: 5px;
+	border: 3px solid #FFF;
+	width: 950px;
 	background: #FFF url(./images/bg.png) repeat-x top;
 }
 
@@ -213,4 +221,25 @@
 
 #footer a {
 	color: #777;
+}
+.dateElementContainer{
+	display: flex;
+	flex-direction: column;
+	border: #e2e8f0 solid 2px;
+	width: 100px;
+	height: 100px;
+	vertical-align: middle;
+	margin:10px;
+
+}
+.dateElementContainer p{
+	margin: auto;
+	text-align: center;
+}
+.dateElementsContainer{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	background-color: #cbd5e0;
+
 }
