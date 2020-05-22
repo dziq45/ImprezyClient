@@ -9,28 +9,17 @@ import Aux from '../../../hoc/Auxiliary/Auxiliary'
 
 class ScheduleTask extends Component {
     state = {
+        progressPercentage: '0%',
         showDetails: false,
         disabledTaskNameInput: 'disabled',
-        toDoList: [
-            {
-                content: 'pierwsze zadanie',
-                isDone: false,
-                description: 'fbvwu basfubw dfyuweo fivweifb wejkfbwuyf gvwyoufbwioef bvwyefvyow efvbwuy efvby uwefbi euwbfweiuf bweiuwfb weiufvw eifbweui fvweifvw eifvweiufvwe ifvwief',
-                person: 'Michał Kowalski'
-            },
-            {
-                content: 'drugie zadanie',
-                isDone: false,
-                description: 'fbvwu basfubwdfy uweofivwei fbwejkfbw uyfgvwyoufbwi oefbvwyef vyowe fvbwuye fvbyuwef bieuwbfw eiufbwei uwfbweiufv weifbw euifvw eifvweifvweiu fvweifvwief',
-                person: 'Andrzej Duda'
-            },
-            {
-                content: 'trzecie zadanie',
-                isDone: false,
-                description: 'fbvwubasfub wdfyuweofivweifb wejkfbwuyf gvwyoufbwioe fbvwyefvyowefvbwu yefvbyuwefbie uwbfweiufbw eiuwfbweiuf vweifbweuifv weifvweifvw eiufvwe ifvwief',
-                person: 'Robert Lewandowski'
-            }
-        ]
+        taskName: this.props.taskName,
+        taskStartDate: this.props.taskStartDate,
+        taskEndDate: this.props.taskEndDate,
+        toDoList: this.props.toDoList
+    }
+
+    componentDidMount() {
+        this.calculatePercentage()
     }
 
     changeModeHandler = () => {
@@ -41,19 +30,46 @@ class ScheduleTask extends Component {
         }
     }
 
-
+    calculatePercentage = () => {
+        let counter = 0
+        for(let i = 0; i < this.state.toDoList.length; i++) {
+            if(this.state.toDoList[i].isDone) {
+                counter++
+            }
+        }
+        this.setState({ progressPercentage: (counter / this.state.toDoList.length) * 100 + '%' })
+        
+    }
 
     render() {
         return(
             <div className="task-box">
                 <AiOutlineEdit id="task-box-modify-mode" onClick={this.changeModeHandler}/>
-                <input type="text" id="task-box-task-name" placeholder="Nazwa zadania" disabled={this.state.disabledTaskNameInput}/>
+                <input type="text" 
+                    id="task-box-task-name" 
+                    placeholder="Nazwa zadania" 
+                    value={this.state.taskName} 
+                    disabled={this.state.disabledTaskNameInput} 
+                    onChange={e => this.setState({ taskName: e.target.value})} 
+                />
                 <div className="task-box-time">
-                    <p style={{ float: 'left' }}><b>Początek:</b></p><input id="task-box-start-date" type="date" disabled={this.state.disabledTaskNameInput}/>
-                    <p style={{ marginLeft: '20px', float: 'left' }}><b>Koniec:</b></p><input type="date" id="task-box-end-date" disabled={this.state.disabledTaskNameInput}/>
+                    <p style={{ float: 'left' }}><b>Początek:</b></p>
+                    <input id="task-box-start-date" 
+                        type="date"
+                        value={this.state.taskStartDate} 
+                        disabled={this.state.disabledTaskNameInput} 
+                        onChange={e => this.setState({taskStartDate: e.target.value})} 
+                    />
+                    <p style={{ marginLeft: '20px', float: 'left' }}><b>Koniec:</b></p>
+                    <input type="date" 
+                        id="task-box-end-date"
+                        value={this.state.taskEndDate} 
+                        disabled={this.state.disabledTaskNameInput} 
+                        onChange={e => this.setState({taskEndDate: e.target.value})} 
+                    />
                 </div>
                 <p><b>Stopień wykonania:</b></p>
-                <ProgressBar percentage='40%' background="red"/>
+                <ProgressBar percentage={this.state.progressPercentage} background="red"/>
                 <AiOutlineDown style={{ margin: 'auto', fontSize: '300%', marginTop: '1%' }} onClick={e => this.setState({ showDetails: !this.state.showDetails })}/>
                 {
                     this.state.showDetails
@@ -72,8 +88,7 @@ class ScheduleTask extends Component {
                             }
                         </Aux>
                     : null
-                }
-                
+                } 
             </div>
         )
     }

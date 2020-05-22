@@ -1,0 +1,24 @@
+#new-task-button-box {
+    width: 80%;
+    height: 100px;
+    margin-bottom: 2%;
+    margin-left: 10%;
+    margin-top: 1%;
+    background-color: rgba(81, 204, 204, 0.411);
+    border-radius: 20px;
+    padding-top: 2%;
+}
+
+#new-task-button-box:hover {
+    background-color: rgba(168, 223, 223, 0.411);
+    color: green; 
+}
+
+#new-task-button {
+    font-size: 300%;
+    margin: auto;
+}
+
+#new-task-button:hover {
+    color: green;
+}
