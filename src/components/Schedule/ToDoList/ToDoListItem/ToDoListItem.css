@@ -1,0 +1,45 @@
+.item-checkbox {
+    border: 2px solid grey;
+}
+
+.to-do-list-item-box {
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 1%;
+    background-color: #73dad4;
+    border-radius: 50px;
+    padding: 1% 4%;
+}
+
+.to-do-list-item-content {
+    margin-left: 2%;
+    width: 60%;
+    background-color: rgba(124, 209, 209, 0);
+    border-bottom: 2px solid grey;
+    border-radius: 10px;
+    margin-bottom: 1%;
+}
+
+.to-do-list-item-person {
+    margin-left: 2%;
+    width: 30%;
+    background-color: rgba(124, 209, 209, 0);
+    border-bottom: 2px solid grey;
+    border-radius: 10px;
+    margin-bottom: 1%;
+}
+
+.to-do-list-item-description {
+    width: 90%;
+    margin-left: 4%;
+    font-size: 80%;
+    background-color: rgba(124, 209, 209, 0);
+}
+
+.to-do-list-item-description:disabled,
+.to-do-list-item-person:disabled,
+.to-do-list-item-content:disabled {
+    background-color: rgba(143, 207, 207, 0);
+    border-bottom: 2px solid rgba(81, 204, 204, 0);
+}
+
