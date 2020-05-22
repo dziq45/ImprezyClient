@@ -75,10 +75,14 @@ const EventForm = (props) => {
         }
         if(isOK){
             const response = await axios.put('/event/update/' + props.eventId,bodyWithAddress)
+            console.log(response);
         }
         else{
             const response = await axios.put('/event/update/' + props.eventId,bodyWithoutAddress)
+            console.log(response);
         }
+        
+        console.log(bodyWithAddress);
 
     }
     return (

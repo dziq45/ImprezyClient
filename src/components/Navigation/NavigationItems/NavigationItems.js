@@ -12,11 +12,13 @@ const navigationItems = (props) => {
             {props.isAuthenticated? 
             <Aux>
                 <NavigationItem link="/myEvents">Moje wydarzenia</NavigationItem>
+                <NavigationItem link="/msg">Wiadomości</NavigationItem>
                 <NavigationItem link="/logout">Wyloguj</NavigationItem>
             </Aux>
                  : 
 
-                <NavigationItem link="/auth">Logowanie</NavigationItem>}
+                <NavigationItem link="/auth">Logowanie</NavigationItem>
+                }
             
         </ul>
     )
