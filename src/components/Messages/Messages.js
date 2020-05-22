@@ -12,8 +12,7 @@ class Messages extends Component{
             .then(response => {
                 console.log(`Response: ${response.data}`)
                 this.setState({ messages: response.data })
-                
-                
+
             })
             .catch(err=>{
                 console.log(err)
