@@ -20,7 +20,7 @@ class PublicEvent extends Component{
         description:"Tylko teraz występy takich zespołów jak: Republika, ABBA, Ich Troje. Nie zabraknie też naszych ulubionych kabareciarzy.\n Zajrzyj na nase media społecznościowe:",
         externalLinks:[{link: 'twitter.com', hovered:false}, {link:'https://www.youtube.com/watch?v=AFSMXLLOTg8', hovered: false}],
         newLink:'',
-        imageSrc:null
+        imageSrc:'D:/ZPI/Files/arrowDown.png'
     }
     componentDidMount(){
         let eventId = this.props.match.params.eventId
@@ -121,8 +121,11 @@ class PublicEvent extends Component{
                         axios.post('/file/upload',form
                         )
                         .then(res=> {
-                            console.log(res)
-                            this.setState({imageSrc:res.data})
+                            let siema = res.data.path.lastIndexOf('/') + 1
+                            let fileName = res.data.path.substring(siema)
+                            import('../../images/' + fileName)
+                            .then(src=> this.setState({imageSrc:src.default})
+                            )
                         })
                         .catch(err=>console.log(err))
                     }}>
@@ -134,7 +137,7 @@ class PublicEvent extends Component{
                             </div>
                         </section>
                     )}
-                </Dropzone> : <img src={this.state.imageSrc!== null? require(this.state.imageSrc): image} className="float-right rounded-sm shadow-sm" width="420"/>}
+                </Dropzone> : <img src={this.state.imageSrc!==null ? this.state.imageSrc : image} className="float-right rounded-sm shadow-sm" width="420"/>}
                     
                     <div id="title_head">    
                         <textarea className={this.state.creatorMode? "eventName1 hover:shadow-md" : "eventName1"} value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
