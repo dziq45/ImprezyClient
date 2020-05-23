@@ -17,8 +17,9 @@ class PublicEvent extends Component{
     state={
         publicSchedule:true,
         publicCounter:true,
-        schedule:[],
+        schedule:[], //not used
         creatorMode:false,
+        creatorId:null,
         name:"XXIII Dzień Papryki w Potworowie",
         description:"Tylko teraz występy takich zespołów jak: Republika, ABBA, Ich Troje. Nie zabraknie też naszych ulubionych kabareciarzy.\n Zajrzyj na nase media społecznościowe:",
         externalLinks:[{link: 'twitter.com', hovered:false}, {link:'https://www.youtube.com/watch?v=AFSMXLLOTg8', hovered: false}],
@@ -26,12 +27,12 @@ class PublicEvent extends Component{
         imageSrc: null
     }
     componentDidMount(){
-        console.log(`All props ${this.props}`)
-        console.log(this.props)
         let eventId = this.props.match.params.eventId
         axios.get('/eventdetail/getbyevent/' + eventId + '/public')
         .then(res=>{
             console.log(res.data)
+            let creatorId = res.data[0].event.creator.personid
+            this.setState({creatorId:creatorId}) 
             if(res.data[0].value == 'true'){
                 axios.get('/schedule/getbyeventid/' + eventId)
                 .then(res=>{
@@ -52,7 +53,7 @@ class PublicEvent extends Component{
         console.log(`EvendID: ${eventId}`)
         console.log(this.props)
         const date = new Date()
-        const newState = 
+        const newState = //not used
             {eachDay:[
                 {date: date,
                     items:[{
@@ -133,10 +134,14 @@ class PublicEvent extends Component{
                 <ExternalLink link={externalLink.link}></ExternalLink>
                 {this.state.creatorMode && externalLink.hovered? <img src={minus} className="absolute right-0" width="32" height="32" onClick={()=>this.deleteLink(linkIndex)}></img>:null}
             </div>
+        
         ))
+        const creatorButton = this.state.creatorId === this.props.userId?
+            <img src={optionsIcon} className="float-right w-10 mr-2 transition duration-500 ease-in-out transform hover:scale-125" onClick={()=>{this.setState({creatorMode:!this.state.creatorMode})}}></img>
+            : null
         return(
             <div>
-                <img src={optionsIcon} className="float-right w-10 mr-2 transition duration-500 ease-in-out transform hover:scale-125" onClick={()=>{this.setState({creatorMode:!this.state.creatorMode})}}></img>
+                {creatorButton}
                 <div className="w-9/12 mx-auto">
                 <div id="header">
                     {this.state.creatorMode? 
