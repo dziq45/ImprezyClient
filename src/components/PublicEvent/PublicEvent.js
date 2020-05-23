@@ -117,6 +117,18 @@ class PublicEvent extends Component{
         console.log(newLinks)
         console.log(`LinkIndex = ${externalLinkIndex}`)
         this.setState({externalLinks:newLinks})
+        
+    }
+    saveEventProperties(){
+        let eventId = this.props.match.params.eventId
+        let idsToDelete = []
+        axios.get('/eventdetail/getbyevent/' + eventId) 
+        .then(res=>{
+            
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
     render(){
         console.log(`state:`)
@@ -203,6 +215,7 @@ class PublicEvent extends Component{
                                 <input type="image" className="inline-block ml-2 hover:shadow-md" src={plus} width="22"></input>
                             </form>
                         </div>
+                        <div className="optionElement hover:border-gray-500" onClick={()=>this.saveEventProperties()}> Odliczanie </div>
 
                     </div> : null}
             </div>
