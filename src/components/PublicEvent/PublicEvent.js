@@ -15,16 +15,19 @@ import ExternalLink from './ExternalLink'
 import Counter from './Counter'
 class PublicEvent extends Component{
     state={
+        isTemporaryImageShown:false,
         publicSchedule:true,
         publicCounter:true,
         schedule:[], //not used
         creatorMode:false,
         creatorId:null,
-        name:"XXIII Dzień Papryki w Potworowie",
-        description:"Tylko teraz występy takich zespołów jak: Republika, ABBA, Ich Troje. Nie zabraknie też naszych ulubionych kabareciarzy.\n Zajrzyj na nase media społecznościowe:",
-        externalLinks:[{link: 'twitter.com', hovered:false}, {link:'https://www.youtube.com/watch?v=AFSMXLLOTg8', hovered: false}],
+        name:"",
+        description:"",
+        externalLinks:[{link: 'twitter.com', hovered:false}],
         newLink:'',
-        imageSrc: null
+        imageName: '',
+        imageURL:null,
+        imageFile:null
     }
     componentDidMount(){
         let eventId = this.props.match.params.eventId
@@ -41,6 +44,46 @@ class PublicEvent extends Component{
                 })
                 .catch(err=>{
                     console.log(err)
+                })
+                axios.get('/eventdetail/getbyevent/' + eventId)
+                .then(res=>{
+                    let details = res.data
+                    details.forEach((item,index)=>{
+                        switch(item.type){
+                            case "publicDescription":
+                                this.setState({description : item.value})
+                                break
+                            case "publicName":
+                                this.setState({name : item.value})
+                                break
+                            case "publicImage":
+                                this.setState({imageSrc : item.value})
+                                console.log(`src do obrazka: ${item.value}`)
+                                let slashIndex = item.value.lastIndexOf('/')
+                                let imageName = item.value.substring(slashIndex+1)
+                                this.setState({imageName:imageName})
+                                console.log(imageName)
+                                axios.get('/file/get/' + imageName)
+                                .then(res=>{
+                                    console.log("ZDJECIE")
+                                    console.log(res)
+                                    let getFile = JSON.stringify(res.data)
+                                    let file = JSON.parse(getFile)
+                                    console.log(file)
+                                    this.setState({imageURL:URL.createObjectURL(file)})
+                                    this.setState({image:res.data})
+                                })
+                                .catch(err=>{
+                                    console.log(err)
+                                })
+                                break
+                            case "publicSchedule":
+                                item.value === 'true'?this.setState({publicSchedule:true}) : this.setState({publicSchedule:false})
+                                break
+                            case "publicCounter":
+                                item.value === 'true'?this.setState({publicCounter:true}) : this.setState({publicCounter:false})
+                        }
+                    })
                 })
             }
             else{
@@ -121,10 +164,70 @@ class PublicEvent extends Component{
     }
     saveEventProperties(){
         let eventId = this.props.match.params.eventId
-        let idsToDelete = []
         axios.get('/eventdetail/getbyevent/' + eventId) 
         .then(res=>{
-            
+            let details = res.data
+            details.forEach(element => {
+                axios.delete('/eventdetail/delete/' + element.eventdetailid)
+            });
+            axios.post('/eventdetail/add',{
+                event:{
+                    eventid:eventId
+                },
+                type:"public",
+                value:"true"
+            }).then(res=>{
+                this.setState({publicDetailID : res.data.eventdetailid})
+            }).catch(err=>{
+                console.log(err)
+            })
+            axios.post('/eventdetail/add',{
+                event:{
+                    eventid:eventId
+                },
+                type:"publicDescription",
+                value:this.state.description
+            })
+            axios.post('/eventdetail/add',{
+                event:{
+                    eventid:eventId
+                },
+                type:"publicName",
+                value:this.state.name
+            })
+            axios.post('/eventdetail/add',{
+                event:{
+                    eventid:eventId
+                },
+                type:"publicSchedule",
+                value:this.state.publicSchedule? "true" : "false"
+            })
+            axios.post('/eventdetail/add',{
+                event:{
+                    eventid:eventId
+                },
+                type:"publicCounter",
+                value:this.state.publicCounter? "true" : "false"
+            })
+            let form = new FormData()
+                form.append("file", this.state.imageFile,  this.state.imageFile.path)
+                axios.post('/file/upload',form
+                )
+                .then(res=> {
+                    console.log('UPLOAD OBRAZKA')
+                    axios.post('/eventdetail/add',{
+                        event:{
+                            eventid:eventId
+                        },
+                        type:"publicImage",
+                        value:res.data.path
+                    })
+                    .then(res=>{
+                        console.log("Dodane zdjecie")
+                    })
+
+                })
+                .catch(err=>console.log(err))
         })
         .catch(err=>{
             console.log(err)
@@ -146,7 +249,6 @@ class PublicEvent extends Component{
                 <ExternalLink link={externalLink.link}></ExternalLink>
                 {this.state.creatorMode && externalLink.hovered? <img src={minus} className="absolute right-0" width="32" height="32" onClick={()=>this.deleteLink(linkIndex)}></img>:null}
             </div>
-        
         ))
         const creatorButton = this.state.creatorId === this.props.userId?
             <img src={optionsIcon} className="float-right w-10 mr-2 transition duration-500 ease-in-out transform hover:scale-125" onClick={()=>{this.setState({creatorMode:!this.state.creatorMode})}}></img>
@@ -159,18 +261,11 @@ class PublicEvent extends Component{
                     {this.state.creatorMode? 
                     <Dropzone  onDrop={acceptedFiles=>{
                         console.log(acceptedFiles[0])
-                        let form = new FormData()
-                        form.append("file", acceptedFiles[0],  acceptedFiles[0].path)
-                        axios.post('/file/upload',form
-                        )
-                        .then(res=> {
-                            let siema = res.data.path.lastIndexOf('/') + 1
-                            let fileName = res.data.path.substring(siema)
-                            import('../../images/' + fileName)
-                            .then(src=> this.setState({imageSrc:src.default})
-                            )
-                        })
-                        .catch(err=>console.log(err))
+                        let siema = URL.createObjectURL(acceptedFiles[0])
+                        console.log("URL ZDJECIE")
+                        console.log(siema)
+                        this.setState({imageURL:URL.createObjectURL(acceptedFiles[0]), isTemporaryImageShown:true})
+                        this.setState({imageFile:acceptedFiles[0]})
                     }}>
                         {({getRootProps, getInputProps}) => (
                         <section className="dropzone1">
@@ -180,7 +275,7 @@ class PublicEvent extends Component{
                             </div>
                         </section>
                     )}
-                </Dropzone> : <img src={this.state.imageSrc!==null ? this.state.imageSrc : image} className="float-right rounded-sm shadow-sm w-5/8 h-full " width="420"/>}
+                </Dropzone> : <img src={this.state.isTemporaryImageShown? this.state.imageURL : "/file/get/" + this.state.imageName} className="float-right rounded-sm shadow-sm w-5/8 h-full " width="420"/>}
                     
                     <div id="title_head">    
                         <textarea className={this.state.creatorMode? "eventName1 hover:shadow-md" : "eventName1"} value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
@@ -215,7 +310,7 @@ class PublicEvent extends Component{
                                 <input type="image" className="inline-block ml-2 hover:shadow-md" src={plus} width="22"></input>
                             </form>
                         </div>
-                        <div className="optionElement hover:border-gray-500" onClick={()=>this.saveEventProperties()}> Odliczanie </div>
+                        <div className="optionElement hover:border-gray-500" onClick={()=>this.saveEventProperties()}> Zapisz </div>
 
                     </div> : null}
             </div>
