@@ -6,5 +6,6 @@ export {
 
 export {
     setActiveEventId,
-    setMyEvents
+    setMyEvents,
+    setSchedule
 } from './event'

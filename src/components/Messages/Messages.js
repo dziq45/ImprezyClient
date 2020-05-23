@@ -38,5 +38,5 @@ const mapStateToProps = state => {
       isAuthenticated: state.auth.token !== null,
       userId: state.auth.userId
     }
-  }
+}
 export default connect(mapStateToProps)(Messages)

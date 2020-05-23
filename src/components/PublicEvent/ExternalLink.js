@@ -13,8 +13,6 @@ const ExternalLink =(props)=>{
         else{
             setLink('https://' + props.link)
         }
-        console.log(`UseEffect ${props.link}`)
-        console.log(props.link.search('facebook'))
         if(props.link.search('facebook') >= 0){
             setLinkType('facebook')
         }

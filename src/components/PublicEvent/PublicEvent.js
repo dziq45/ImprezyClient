@@ -1,30 +1,56 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import * as actions from '../../store/actions/index'
 import './PublicEvent.css'
+import {connect} from 'react-redux'
 import Dropzone from 'react-dropzone'
 import image from './images/image.jpg'
 import image2 from './images/icon_new.png'
 import imagePlaceholder from './images/imagePlaceholder.png'
-import ExternalLink from './ExternalLink'
 import minus from '../../images/minus.png'
 import plus from '../../images/plus.png'
 import okicon from './images/okicon.png'
 import optionsIcon from './images/optionsicon.png'
+import ExternalLink from './ExternalLink'
 import Counter from './Counter'
 class PublicEvent extends Component{
     state={
         publicSchedule:true,
+        publicCounter:true,
         schedule:[],
         creatorMode:false,
         name:"XXIII Dzień Papryki w Potworowie",
         description:"Tylko teraz występy takich zespołów jak: Republika, ABBA, Ich Troje. Nie zabraknie też naszych ulubionych kabareciarzy.\n Zajrzyj na nase media społecznościowe:",
         externalLinks:[{link: 'twitter.com', hovered:false}, {link:'https://www.youtube.com/watch?v=AFSMXLLOTg8', hovered: false}],
         newLink:'',
-        imageSrc:'D:/ZPI/Files/arrowDown.png'
+        imageSrc: null
     }
     componentDidMount(){
+        console.log(`All props ${this.props}`)
+        console.log(this.props)
         let eventId = this.props.match.params.eventId
+        axios.get('/eventdetail/getbyevent/' + eventId + '/public')
+        .then(res=>{
+            console.log(res.data)
+            if(res.data[0].value == 'true'){
+                axios.get('/schedule/getbyeventid/' + eventId)
+                .then(res=>{
+                    let scheduleID = res.data[0].scheduleid
+                    this.props.setSchedule(scheduleID)
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+            }
+            else{
+                console.log('Wydarzenie niepubliczne')
+            }
+        })
+        .catch(err=>{
+            console.log('Nie ma takiego wydarzenia albo jest niepubliczne')
+        })
         console.log(`EvendID: ${eventId}`)
+        console.log(this.props)
         const date = new Date()
         const newState = 
             {eachDay:[
@@ -94,7 +120,7 @@ class PublicEvent extends Component{
     render(){
         console.log(`state:`)
         console.log(this.state.externalLinks)
-        const schedule = this.state.schedule.map((scheduleDay, dayIndex)=>(
+        const schedule = this.props.schedule.map((scheduleDay, dayIndex)=>(
             <div className="ml-12">
                 {scheduleDay.items.map((scheduleItem, itemIndex)=>(
                     <div>
@@ -137,7 +163,7 @@ class PublicEvent extends Component{
                             </div>
                         </section>
                     )}
-                </Dropzone> : <img src={this.state.imageSrc!==null ? this.state.imageSrc : image} className="float-right rounded-sm shadow-sm" width="420"/>}
+                </Dropzone> : <img src={this.state.imageSrc!==null ? this.state.imageSrc : image} className="float-right rounded-sm shadow-sm w-5/8 h-full " width="420"/>}
                     
                     <div id="title_head">    
                         <textarea className={this.state.creatorMode? "eventName1 hover:shadow-md" : "eventName1"} value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
@@ -154,13 +180,16 @@ class PublicEvent extends Component{
                         <h1 className="inline-block font-bold text-2xl ml-2">Harmonogram wydarzenia</h1>
                         {schedule}
                     </div> : null}
-                    <div className="counterContainer">
-                        <Counter eventDate={new Date(2020, 5, 6)}></Counter>
-                    </div>
+                    {this.state.publicCounter? 
+                        <div className="counterContainer">
+                            <Counter eventDate={new Date(2020, 5, 6)}></Counter>
+                        </div> : null}
+                    
                 {this.state.creatorMode?
                     <div className="optionsContainer">
                         <div className="optionElement hover:border-gray-500" > Zmień szablon </div>
                         <div className="optionElement hover:border-gray-500" onClick={()=>this.setState({publicSchedule:!this.state.publicSchedule})}> Harmonogram </div>
+                        <div className="optionElement hover:border-gray-500" onClick={()=>this.setState({publicCounter:!this.state.publicCounter})}> Odliczanie </div>
                         <div className="optionElement hover:border-gray-500"> Sponsorzy </div>
                         <div className="optionElement"> 
                             <p>Dodaj link</p>
@@ -177,4 +206,18 @@ class PublicEvent extends Component{
         )
     }
 }
-export default PublicEvent
+
+const mapStateToProps = state => {
+    
+    return {
+      isAuthenticated: state.auth.token !== null,
+      userId: state.auth.userId,
+      schedule:state.event.schedule
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        setSchedule: (scheduleID) => dispatch(actions.setSchedule(scheduleID)),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(PublicEvent)

@@ -68,7 +68,7 @@ class Publication extends Component{
             <div>
                 <p><b>Publiczne</b></p>
                 <label class="switch"> 
-                    <input type="checkbox" onChange={(e)=>{this.switchPublicPrivateHandler(e)}}></input>
+                    <input type="checkbox" checked={this.state.isPublic} onChange={(e)=>{this.switchPublicPrivateHandler(e)}}></input>
                     <span className="slider round"></span>
                 </label>
 
