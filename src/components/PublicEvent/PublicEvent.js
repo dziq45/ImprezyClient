@@ -11,8 +11,11 @@ import minus from '../../images/minus.png'
 import plus from '../../images/plus.png'
 import okicon from './images/okicon.png'
 import optionsIcon from './images/optionsicon.png'
+import mailicon from '../../images/mailicon.png'
 import ExternalLink from './ExternalLink'
 import Counter from './Counter'
+import MessageForm from '../Messages/MessageForm'
+import {Link} from 'react-router-dom'
 class PublicEvent extends Component{
     state={
         isTemporaryImageShown:false,
@@ -27,8 +30,31 @@ class PublicEvent extends Component{
         newLink:'',
         imageName: '',
         imageURL:null,
-        imageFile:null
+        imageFile:null,
+        showForm:false,
+        loginRedirect:false,
     }
+    constructor(props) {
+        super(props);
+        this.showMessageForm = this.showMessageForm.bind(this);
+        this.hideMessageForm = this.hideMessageForm.bind(this);
+      }
+    showMessageForm() {
+        this.setState({
+            loginRedirect: true,
+          });
+        console.log(this.props.userId)
+        if(this.props.userId != this.state.creatorId)
+        this.setState({
+            showForm: true,
+          });
+ 
+      }
+    hideMessageForm() {
+        this.setState({
+          showForm: false,
+        });
+      }
     componentDidMount(){
         let eventId = this.props.match.params.eventId
         axios.get('/eventdetail/getbyevent/' + eventId + '/public')
@@ -234,6 +260,8 @@ class PublicEvent extends Component{
         })
     }
     render(){
+        
+
         console.log(`state:`)
         console.log(this.state.externalLinks)
         const schedule = this.props.schedule.map((scheduleDay, dayIndex)=>(
@@ -296,7 +324,18 @@ class PublicEvent extends Component{
                         <div className="counterContainer">
                             <Counter eventDate={new Date(2020, 5, 6)}></Counter>
                         </div> : null}
-                    
+                    {!this.state.creatorMode?
+                    <div className="messageContainer">
+                        <div className="mailText displayInlineBlock">Zapytaj organizatora wydarzenia</div>
+                        {this.props.isAuthenticated ?
+                            <img src={mailicon} alt='Wiadomość do organizatora' className="icon displayInlineBlock" onClick={() => this.showMessageForm()}></img> :
+                            <Link to="/auth"><img src= {mailicon} className="icon displayInlineBlock"></img></Link>}
+                        <div className="popupForm">
+                            {this.state.showForm ?
+                            <MessageForm hide = {this.hideMessageForm} receiverid={this.state.creatorId} senderid={this.props.userId}></MessageForm>:
+                            null}  
+                        </div>
+                    </div> : null}
                 {this.state.creatorMode?
                     <div className="optionsContainer">
                         <div className="optionElement hover:border-gray-500" > Zmień szablon </div>

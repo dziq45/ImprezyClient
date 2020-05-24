@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './eventCss/Event.css'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 
 class Publication extends Component{
@@ -71,7 +72,12 @@ class Publication extends Component{
                     <input type="checkbox" checked={this.state.isPublic} onChange={(e)=>{this.switchPublicPrivateHandler(e)}}></input>
                     <span className="slider round"></span>
                 </label>
-
+                {console.log(this.props)}
+                {this.state.isPublic ?
+                        <Link to={"/PublicEvent/" + this.props.eventId}>Przejdź do publicznej strony wydarzenia</Link>:
+                        null
+                    }
+                
             </div>
         )
     }

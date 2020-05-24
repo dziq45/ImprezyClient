@@ -14,21 +14,26 @@ class Message extends Component{
           showForm: false,
         };
         this.showMessageForm = this.showMessageForm.bind(this);
+        this.hideMessageForm = this.hideMessageForm.bind(this);
       }
     showMessageForm() {
         this.setState({
           showForm: true,
         });
       }
-    
+    hideMessageForm() {
+        this.setState({
+          showForm: false,
+        });
+      }
     render() {
         return(
-            <div className="m-auto w-4/5 bg-gray-300 border-b-2 border-gray-600 " onClick={() => this.showMessageForm()} >
+            <div className="m-auto w-4/5 bg-gray-300 border-b-2 border-gray-600">
                 <div className="flex p-2">
                     <div className="w-3/4">
-                        {this.props.senton.substring(0,10) +' '+this.props.senton.substring(11,19)}
-                        {this.props.subject}
-                        {this.props.body}
+                        <p>{this.props.senton.substring(0,10) +' '+this.props.senton.substring(11,19)}</p>
+                        <p className="font-bold">{this.props.subject}</p>
+                        <p className="bold">{this.props.body}</p>
                     </div>
                     
                     <div className="float-right" onClick={() => this.showMessageForm()}>
@@ -39,7 +44,7 @@ class Message extends Component{
                 </div>
                 <div>
                     {this.state.showForm ?
-                        <MessageForm receiverid={this.props.sender} senderid={this.props.receiver}></MessageForm>:
+                        <MessageForm hide = {this.hideMessageForm} receiverid={this.props.sender} senderid={this.props.receiver}></MessageForm>:
                         null
                     }
                 </div>

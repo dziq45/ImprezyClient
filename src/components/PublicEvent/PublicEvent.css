@@ -149,6 +149,14 @@
 	background: #FFF url(./images/bg.png) repeat-x top;
 }
 
+.messageContainer{
+	margin-left: 5px;
+	margin-bottom: 20px;
+	border: 3px solid rgb(51, 45, 45);
+	width: 950px;
+	background: #FFF url(./images/bg.png) repeat-x top;
+}
+
 #solid p {
 	font-size: 13px;
 	font-family: Arial;
@@ -243,4 +251,28 @@
 	justify-content: center;
 	background-color: #cbd5e0;
 
+}
+
+.icon{
+	width:50px;
+	height:50px;
+}
+.icon:hover{
+	cursor:pointer;
+}
+
+.displayInlineBlock{
+	display:inline-block;
+}
+
+.mailText{
+	font-size: 1.5em;
+	padding:10px;
+}
+
+.popupForm{
+	position: absolute;
+	left:400px;
+	top:400px;
+	border: 4px solid black;
 }
