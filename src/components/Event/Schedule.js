@@ -363,7 +363,6 @@ class Schedule extends Component{
                     <input type ="hidden" className="bg-transparent" value={this.state.newDescription} onChange={(e)=>{this.setState({newDescription:e.target.value})}}></input>
                     <input src={plusSign} type="image" alt="Submit" width="18"></input>
                  </form> 
-
                  </div>
                    
             </div>))

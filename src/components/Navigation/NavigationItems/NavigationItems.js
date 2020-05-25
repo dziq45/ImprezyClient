@@ -7,7 +7,6 @@ const navigationItems = (props) => {
     return (
         <ul className="NavigationItems">
             <NavigationItem link="/ads">Wydarzenia</NavigationItem>
-            <NavigationItem link="/myEvents">Moje wydarzenia</NavigationItem> 
             {console.log(props)}
             {props.isAuthenticated? 
             <Aux>

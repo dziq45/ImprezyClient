@@ -330,11 +330,11 @@ class PublicEvent extends Component{
                         {this.props.isAuthenticated ?
                             <img src={mailicon} alt='Wiadomość do organizatora' className="icon displayInlineBlock" onClick={() => this.showMessageForm()}></img> :
                             <Link to="/auth"><img src= {mailicon} className="icon displayInlineBlock"></img></Link>}
-                        <div className="popupForm">
                             {this.state.showForm ?
-                            <MessageForm hide = {this.hideMessageForm} receiverid={this.state.creatorId} senderid={this.props.userId}></MessageForm>:
+                        <div className="popupForm">
+                            <MessageForm hide = {this.hideMessageForm} receiverid={this.state.creatorId} senderid={this.props.userId}></MessageForm>
+                        </div>:
                             null}  
-                        </div>
                     </div> : null}
                 {this.state.creatorMode?
                     <div className="optionsContainer">

@@ -77,7 +77,6 @@ class Publication extends Component{
                         <Link to={"/PublicEvent/" + this.props.eventId}>Przejdź do publicznej strony wydarzenia</Link>:
                         null
                     }
-                
             </div>
         )
     }
