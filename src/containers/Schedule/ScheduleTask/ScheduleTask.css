@@ -1,0 +1,66 @@
+.task-box {
+    margin-left: 10%;
+    width: 80%;
+    background-color: rgba(81, 204, 204, 0.411);
+    padding: 2% 8%;
+    border-radius: 20px;
+    margin-bottom: 1%;
+}
+
+#task-box-task-name {
+    font-size: 200%;
+    height: 60px;
+    width: 80%;
+    background-color: rgba(124, 209, 209, 0.459);
+    border-bottom: 2px solid grey;
+    border-radius: 10px;
+    margin-bottom: 1%;
+}
+
+#task-box-task-name:disabled {
+    font-size: 200%;
+    height: 60px;
+    width: 80%;
+    background-color: rgba(143, 207, 207, 0);
+    border-bottom: 2px solid rgba(81, 204, 204, 0);
+    border-radius: 10px;
+    margin-bottom: 1%;
+}
+
+#task-box-modify-mode {
+    margin-left: 100%;
+    font-size: 160%;
+}
+
+#task-box-modify-mode:hover {
+    margin-left: 100%;
+    font-size: 160%;
+    color: white;
+}
+
+.task-box-time {
+    margin-bottom: 1%;
+}
+
+#task-box-start-date {
+    float: left;
+    margin-left: 1%;
+    background-color: rgba(124, 209, 209, 0.459);
+    border-bottom: 2px solid grey;
+    border-radius: 10px;
+    margin-bottom: 1%;
+}
+
+#task-box-end-date {
+    margin-left: 1%;
+    background-color: rgba(124, 209, 209, 0.459);
+    border-bottom: 2px solid grey;
+    border-radius: 10px;
+    margin-bottom: 1%;
+}
+
+#task-box-start-date:disabled,
+#task-box-end-date:disabled {
+    background-color: rgba(143, 207, 207, 0);
+    border-bottom: 2px solid rgba(81, 204, 204, 0);
+}
