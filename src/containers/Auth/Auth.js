@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { useHistory } from "react-router-dom";
+
 import './Auth.css'
 import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Button/Button'
 import Aux from '../../hoc/Auxiliary/Auxiliary'
 import Error from '../../components/UI/Error/Error'
 import * as actions from '../../store/actions/index'
-import RedirectToPrevious from './RedirectToPrevious'
 
 class Auth extends Component {
     state = {
@@ -18,7 +17,7 @@ class Auth extends Component {
                     type: 'email',
                     placeholder: 'Podaj adres email'
                 },
-                value: 'a@t.pl',
+                value: '',
                 validation: {
                     required: true,
                     isEmail: true
@@ -32,7 +31,7 @@ class Auth extends Component {
                     type: 'password',
                     placeholder: 'Podaj hasło'
                 },
-                value: 'aaa123',
+                value: '',
                 validation: {
                     required: true,
                     minLength: 6
@@ -220,18 +219,17 @@ class Auth extends Component {
             <Aux>
                 {this.props.error ? <Error message={this.props.message}/> : null}
                 <div className='form-style'>
+                    <div className='loginRegisterButton'>
+                        <input type="radio" name="my-input" id="yes" defaultChecked/>
+                        <label for="yes" onClick={e => this.setState({ isSignup: true })} >Logowanie</label>
+                        <input type="radio" name="my-input" id="no"/>
+                        <label for="no" onClick={e => this.setState({ isSignup: false })}>Rejestracja</label>
+                    </div>
                     <form onSubmit={this.submitHandler}> 
                             {this.state.isSignup ? formLogin: formRegister}
-                    <Button>{this.state.isSignup? 'ZALOGUJ' : 'ZAREJESTRUJ'}</Button>
+                        <div className="signinSignupButton"><Button className="signinSignupButton">{this.state.isSignup? 'ZALOGUJ' : 'ZAREJESTRUJ'}</Button></div>
                     </form>
-                    <Button
-                        clicked={this.switchAuthModeHandler}
-                        >{this.state.isSignup ? 'Zarejestruj się' : 'Zaloguj się'}</Button>
                 </div>
-                {this.props.isAuthenticated?
-                <RedirectToPrevious></RedirectToPrevious>
-                :null
-                }
             </Aux>
         )
     }

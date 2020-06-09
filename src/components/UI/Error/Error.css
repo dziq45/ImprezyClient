@@ -1,6 +1,5 @@
 .error-box {
-    margin-left:35%;
-    width: 30%;
+    margin-left:70%;
     height: auto;
     padding: 10px;
     background-color: rgb(255, 255, 255);
@@ -9,4 +8,17 @@
     color: black;
     text-align: center;
     opacity: 0.8;
+    animation: showErrorMessage 0.5s;
+}
+
+@keyframes showErrorMessage {
+    0% {
+        margin-left: 120%;
+    }
+    85% {
+        margin-left: 65%;
+    }
+    100% {
+        margin-left: 70%;
+    }
 }

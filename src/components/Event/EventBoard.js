@@ -35,6 +35,7 @@ class EventBoard extends Component{
         return(
             <div className="flex  mx-6">
                 <div className="flex-2 flex-grow-0">
+                {/* className="flex-2 flex-grow-0" */}
                     <ul className="stickyOptionBar text-2xl">
                         <li><div className={this.state.activeItem == 0? "boardOptionItemSelected": "boardOptionItem"} onClick={()=>{this.setState({activeItem : 0})}}>Ogólne</div></li>
                         <li><div className={this.state.activeItem == 1? "boardOptionItemSelected": "boardOptionItem"} onClick={()=>{this.setState({activeItem : 1})}}>Harmonogram</div></li>
@@ -45,7 +46,7 @@ class EventBoard extends Component{
                         
                     </ul>
                 </div>
-                <div className="flex-1 bg-gray-200">
+                <div className="main-content flex-1">
                     {this.renderProperItem()}
                 </div>
             </div>
