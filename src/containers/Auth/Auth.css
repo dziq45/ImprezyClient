@@ -1,21 +1,61 @@
 .form-style {
-    position: absolute;
-	width:360px;
-	height:320px;
+	position: relative;
+	margin: 10vh auto;
+	width:25%;
+	height:30%;
     height:auto;
 	background-color: #b1a29d;
-	margin:auto;
 	border-radius: 10px;
 	padding:20px;
-	left:50%;
-    top:50%;
-	margin-left:-180px;
-	margin-top:-200px;
 	box-shadow: 0px 10px 50px 0px rgba(255,255,255,1);
+	animation: showAuthForm 0.5s;
 }
+
+@keyframes showAuthForm {
+	0% {
+		margin-top: 10%;
+	}
+	100% {
+		margin-top: 0;
+	}
+}
+
 body {
     background-image: url('https://gfx.antyradio.pl/var/antyradio/storage/images/muzyka/koncerty/secret-concert-w-krakowie-kupujesz-bilet-i-nie-wiesz-kto-zagra-26400/1816698-1-pol-PL/Secret-Concert-w-Krakowie-kupujesz-bilet-i-nie-wiesz-kto-zagra_article.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+input[type="radio"] + label {
+	color: white;
+	padding: 2% 3%;
+	margin: 1%;
+	border-radius: 20px;
+	font-size: 120%;
+}
+
+input[type="radio"]:hover + label {
+	background-color: #918787;
+}
+
+input[type="radio"]:checked + label {
+	color: #ffef14;
+	background-color: #747566;
+}
+
+.loginRegisterButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.signinSignupButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

@@ -219,13 +219,16 @@ class Auth extends Component {
             <Aux>
                 {this.props.error ? <Error message={this.props.message}/> : null}
                 <div className='form-style'>
+                    <div className='loginRegisterButton'>
+                        <input type="radio" name="my-input" id="yes" defaultChecked/>
+                        <label for="yes" onClick={e => this.setState({ isSignup: true })} >Logowanie</label>
+                        <input type="radio" name="my-input" id="no"/>
+                        <label for="no" onClick={e => this.setState({ isSignup: false })}>Rejestracja</label>
+                    </div>
                     <form onSubmit={this.submitHandler}> 
                             {this.state.isSignup ? formLogin: formRegister}
-                    <Button>{this.state.isSignup? 'ZALOGUJ' : 'ZAREJESTRUJ'}</Button>
+                        <div className="signinSignupButton"><Button className="signinSignupButton">{this.state.isSignup? 'ZALOGUJ' : 'ZAREJESTRUJ'}</Button></div>
                     </form>
-                    <Button
-                        clicked={this.switchAuthModeHandler}
-                        >{this.state.isSignup ? 'Zarejestruj się' : 'Zaloguj się'}</Button>
                 </div>
             </Aux>
         )
