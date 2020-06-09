@@ -368,7 +368,7 @@ class Schedule extends Component{
                    
             </div>))
         return(
-            <div>
+            <div className="schedule-container">
                 <p className="optionTitle">Harmonogram wydarzenia {this.state.scheduleId}</p>
                 {days}
                 <div className="font-bold cursor-pointer" onClick={()=>{this.onAddNextDay()}}>

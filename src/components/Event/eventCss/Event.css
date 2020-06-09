@@ -3,13 +3,14 @@
 }
 .boardOptionItem:hover
 {
-    background-color: pink;
+    background-color: #ddbebec2;
     cursor: pointer;;
 }
 
 .boardOptionItemSelected{
     padding:3px;
-    background-color: rgb(204, 123, 137);
+    background-color: #747566;
+    color: #ffef14;
 }
 
 .numberInput{
@@ -65,6 +66,7 @@
 }
 
 .optionTitle{
+    margin: auto;
     font-weight: bolder;
     font-size: xx-large;
 
@@ -85,10 +87,27 @@
 .stickyOptionBar{
     position:sticky;
     top:56px;
-    background-color: #edf2f76b;
+    background-color: #dbd2d29f;
     margin-right: 5px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 5% 5%;
 }
 
+.stickyOptionBar li {
+    display: inline;
+}
+
+.schedule-container {
+    
+}
+
+.main-content {
+    background-color: #dbd2d29f;
+    box-sizing: border-box;
+    padding: 2vh 3%;
+    border-radius: 20px;
+}
 
 .submitBtn{
     font-size: larger;
