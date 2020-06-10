@@ -27,12 +27,12 @@
 
 .dateLine {
     margin-bottom: 3px;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
     background:transparent;
 }
 
 .card {
-    background-color:orange;
+    background-color: orange;
     width: 150px;
     height: 120px;
     border-radius: 20px;
@@ -42,7 +42,7 @@
 
 .textAreaInput {
     font-weight: bold;
-    color:purple;
+    color:#272626;
     resize:none;
     overflow:hidden;
     outline:none;
@@ -109,22 +109,79 @@
     border-radius: 20px;
 }
 
+.one-day-schedule {
+    background-color: #e2e2e2ad;
+    box-sizing: border-box;
+    padding: 1%;
+    border-radius: 20px;
+    margin-bottom: 1%;
+}
+
 .submitBtn{
-    font-size: larger;
-    margin:1rem;
-    padding:3px 6px;
-    border-radius:0.5rem;
-    border: solid 1px white;
-    background-color:#3182ce;
-    color:white;
+    padding: 1% 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 75%;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color:#e2e2e2;
+    color:orange;
+    transition: .5s ease-out;
 }
 
 .submitBtn:hover{
-    border: solid 1px #3182ce;
+    color: #4ea52c;
     background-color:white;
-    color:black;
     cursor:pointer;
 }
+
+.new-day-event {
+    background-color: #e2e2e2;
+    font-size: 300%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 120px;
+    color: orange;
+    border-radius: 20px;
+    padding:10px;
+    margin:5px;
+    transition: .5s ease-out;
+}
+
+.optionTitle {
+    width: 40%;
+    margin: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1%;
+}
+
+.font-bold {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e2e2e2;
+    color: orange;
+    width: 20%;
+    border-radius: 20px;
+    padding: 0.5% 2%;
+    box-sizing: border-box;
+    transition: .5s ease-out;
+}
+
+.font-bold:hover {
+    background-color: white;
+    color: #4ea52c;
+}
+
+.new-day-event:hover {
+    color: #4ea52c;
+}
+
 .createBtn{
     font-size: larger;
     margin:1rem;

@@ -4,6 +4,7 @@ import './eventCss/Event.css'
 import plusSign from '../../images/plus.png'
 import minusSign from '../../images/minus.png'
 import axios from 'axios'
+import { AiOutlineCheck, AiOutlinePlusCircle } from "react-icons/ai";
 import arrowDownSign from '../../images/arrowDown.png'
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -328,7 +329,7 @@ class Schedule extends Component{
     }
     render(){
         const days = this.state.eachDay.map((day,index)=>(
-            <div>
+            <div className="one-day-schedule">
                 <div className="dateLine">
                 <DatePicker
                     selected={day.date}
@@ -358,22 +359,25 @@ class Schedule extends Component{
                  </div>))}
 
                  <form onSubmit={(e)=>this.onAddItem(e,index)}>
-                    <input type="hidden" min="0" max="23" className="numberInput" value={this.state.newHour} onChange={(e)=>{this.setState({newHour:e.target.value})}}></input> 
+                    {/* <input type="hidden" min="0" max="23" className="numberInput" value={this.state.newHour} onChange={(e)=>{this.setState({newHour:e.target.value})}}></input> 
                     <input type="hidden" min="0" max="59" className="numberInput" value={this.state.newMinute} onChange={(e)=>{this.setState({newMinute:e.target.value})}}></input><span className="pl-4"></span>
-                    <input type ="hidden" className="bg-transparent" value={this.state.newDescription} onChange={(e)=>{this.setState({newDescription:e.target.value})}}></input>
-                    <input src={plusSign} type="image" alt="Submit" width="18"></input>
+                    <input type ="hidden" className="bg-transparent" value={this.state.newDescription} onChange={(e)=>{this.setState({newDescription:e.target.value})}}></input> */}
+                    {/* <input src={plusSign} type="image" alt="Submit" width="18"></input> */}
+                    <div className="new-day-event" onClick={e => this.onAddItem(e, index)}><AiOutlinePlusCircle /></div>
                  </form> 
                  </div>
                    
             </div>))
         return(
             <div>
-                <p className="optionTitle">Harmonogram wydarzenia {this.state.scheduleId}</p>
+                <div className="optionTitle">
+                    <p>Harmonogram wydarzenia {this.state.scheduleId}</p>
+                </div>
                 {days}
                 <div className="font-bold cursor-pointer" onClick={()=>{this.onAddNextDay()}}>
-                    <p>> Dodaj kolejny dzień</p>
+                    <p> Dodaj kolejny dzień</p>
                 </div>
-                <div className="submitBtn w-3/12" onClick={(e)=>{this.handleSaveSchedule(e)}}>Zapisz harmonogram</div>
+                <div className="submitBtn w-3/12" onClick={(e)=>{this.handleSaveSchedule(e)}}><span style={{float:'left', marginRight: '2%'}}><b>Potwierdź zmiany</b></span><span><AiOutlineCheck /></span></div>
             </div>
         )
     }
