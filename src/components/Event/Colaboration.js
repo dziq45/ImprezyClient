@@ -9,7 +9,7 @@ class Colaboration extends Component{
     }
     render(){
         return(
-            <div>Colaboration</div>
+            <div></div>
         )
     }
 }
