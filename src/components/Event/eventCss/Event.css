@@ -1,5 +1,6 @@
 .boardOptionItem{
-    padding: 3px;
+    padding: 5px;
+    border-radius: 20px;
 }
 .boardOptionItem:hover
 {
@@ -8,8 +9,9 @@
 }
 
 .boardOptionItemSelected{
-    padding:3px;
+    padding: 5px;
     background-color: #747566;
+    border-radius: 20px;
     color: #ffef14;
 }
 
@@ -48,6 +50,29 @@
     outline:none;
     width:130px;
     background:transparent;
+}
+
+.option-bar {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 20px;
+    margin-bottom: 1%;
+    padding: .5% 2%;
+    background-color: #dbd2d29f;
+}
+
+.option-bar li {
+    float: left;
+}
+
+.option-bar li div {
+    display: block;
+    margin: 0 5px;
+    box-sizing: border-box;
+
 }
 
 .flexCardBoard {
@@ -107,6 +132,16 @@
     box-sizing: border-box;
     padding: 2vh 3%;
     border-radius: 20px;
+    animation: changeMainContent .5s ease-out;
+}
+
+@keyframes changeMainContent {
+    0% {
+        margin-left: -100%;
+    }
+    100% {
+        margin-left: 0%;
+    }
 }
 
 .one-day-schedule {
