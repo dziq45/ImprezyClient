@@ -95,13 +95,17 @@ export const setCollaborators = (eventId)=>{
     let eventPeople=[]
     return dispatch=>{
         axios.get('/eventperson/all')
-        .then(res=>{
+        .then(async res=>{
             console.log(res.data)
             for(let eventPerson of res.data){
                 console.log(eventPerson)
                 if(eventPerson.eventPersonId.eventid === eventId){
+                    let result = await axios.get('/person/get/' + eventPerson.eventPersonId.personid)
+                    console.log('RESULT')
+                    console.log(result)
                     eventPeople.push({
-                        personId : eventPerson.eventPersonId.personId,
+                        personId : eventPerson.eventPersonId.personid,
+                        email : result.data.email,
                         name : eventPerson.role.rolename
                     })
                 }
