@@ -7,5 +7,6 @@ export {
 export {
     setActiveEventId,
     setMyEvents,
-    setSchedule
+    setSchedule,
+    setCollaborators
 } from './event'

@@ -89,3 +89,30 @@ export const setSchedule= (scheduleID)=>{
         })
     }
 }
+
+export const setCollaborators = (eventId)=>{
+    //getting all and then filtering by eventid
+    let eventPeople=[]
+    return dispatch=>{
+        axios.get('/eventperson/all')
+        .then(res=>{
+            console.log(res.data)
+            for(let eventPerson of res.data){
+                console.log(eventPerson)
+                if(eventPerson.eventPersonId.eventid === eventId){
+                    eventPeople.push({
+                        personId : eventPerson.eventPersonId.personId,
+                        name : eventPerson.role.rolename
+                    })
+                }
+            }
+            console.log(eventPeople)
+
+            dispatch({
+                type:'SET_COLLABORATORS',
+                collaborators:eventPeople
+            })
+        })
+    }
+    
+}
