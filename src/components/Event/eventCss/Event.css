@@ -132,16 +132,6 @@
     box-sizing: border-box;
     padding: 2vh 3%;
     border-radius: 20px;
-    animation: changeMainContent .5s ease-out;
-}
-
-@keyframes changeMainContent {
-    0% {
-        margin-left: -100%;
-    }
-    100% {
-        margin-left: 0%;
-    }
 }
 
 .one-day-schedule {
