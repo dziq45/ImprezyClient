@@ -1,5 +1,6 @@
 import axios from 'axios'
 import * as actionTypes from './actionTypes'
+import Planning from '../../components/Event/Planning'
 
 export const setActiveEventId = (eventId)=>{
     console.log('siema')
@@ -119,4 +120,13 @@ export const setCollaborators = (eventId)=>{
         })
     }
     
+}
+export const setToDoListId = (id)=>{
+    console.log(`action id ${id}`)
+    return dispatch=>{
+        dispatch({
+            type:'SET_To_DO_LIST_ID',
+            id:id 
+        })
+    }
 }

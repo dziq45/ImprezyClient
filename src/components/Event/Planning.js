@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import ScheduleTask from '../../containers/Schedule/ScheduleTask/ScheduleTask';
+import {connect} from 'react-redux'
+import * as actions from '../../store/actions/index'
 import { IconContext } from 'react-icons'
 import { GrAdd } from "react-icons/gr";
 import './Planning.css'
@@ -103,6 +105,17 @@ class Planning extends Component{
                 
             </Aux>
         )
+    }
+}
+const mapStateToProps = state => {
+    console.log(state)
+    return {
+        eventId : state.event.activeEventId
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        setCollaborators: (eventId) => dispatch(actions.setCollaborators(eventId))
     }
 }
 export default Planning

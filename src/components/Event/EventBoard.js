@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'  
 import {connect} from 'react-redux'
+import * as actions from '../../store/actions/index'
 import './eventCss/Event.css'
 import Colaboration from './Colaboration'
 import Schedule from './Schedule'
@@ -14,6 +15,36 @@ class EventBoard extends Component{
     }
     componentDidMount(){
         console.log(this.props.eventId)
+        //check if there is todolist
+        //and add new if there isn't
+        this.fetchEventData()
+
+    }
+    fetchEventData(){
+        //toDoList
+        axios.get('/todolist/getbyevent/' + this.props.eventId)
+        .then(res=>{
+            console.log(res.data)
+            if(res.data.length === 0){
+                console.log(`dodaje liste event ${this.props.eventId}`)
+                axios.post('/todolist/add',{
+                    event:{
+                        eventid:this.props.eventId
+                    },
+                    title:"standard"
+                })
+                .then(res2=>{
+                    console.log(res2.data)
+                    console.log('Dodana lista')
+                    this.props.setToDoListId(res2.data.todolistid)
+                })
+            }
+            else{
+                console.log('Dodana lista - juz byla')
+                console.log(res.data)
+                this.props.setToDoListId(res.data[0].todolistid)
+            }
+        })
     }
     renderProperItem(){
         switch(this.state.activeItem){
@@ -35,7 +66,6 @@ class EventBoard extends Component{
         return(
             <div>
                 <div className="option-bar-section">
-                {/* className="flex-2 flex-grow-0" */}
                     <ul className="option-bar">
                         <li><div className={this.state.activeItem == 0? "boardOptionItemSelected": "boardOptionItem"} onClick={()=>{this.setState({activeItem : 0})}}>Ogólne</div></li>
                         <li><div className={this.state.activeItem == 1? "boardOptionItemSelected": "boardOptionItem"} onClick={()=>{this.setState({activeItem : 1})}}>Harmonogram</div></li>
@@ -56,7 +86,13 @@ class EventBoard extends Component{
 const mapStateToProps = state => {
     console.log(state)
     return {
-        eventId : state.event.activeEventId
+        eventId : state.event.activeEventId,
+        toDoListId : state.event.toDoListId
     }
 }
-export default connect(mapStateToProps)(EventBoard)
+const mapDispatchToProps = dispatch => {
+    return {
+        setToDoListId: (id) => dispatch(actions.setToDoListId(id))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(EventBoard)

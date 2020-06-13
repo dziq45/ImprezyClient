@@ -8,5 +8,6 @@ export {
     setActiveEventId,
     setMyEvents,
     setSchedule,
-    setCollaborators
+    setCollaborators,
+    setToDoListId
 } from './event'
