@@ -88,22 +88,22 @@ const EventForm = (props) => {
     return (
         <div className='formContainer'>
     <div className='formName'>
-        <p className="optionTitle">Ogólne informacje o wydarzeniu</p>
+        <p>Ogólne informacje o wydarzeniu</p>
     </div>
         <form noValidate onSubmit={handleSubmit}>
-            <p className="my-1"><label className="ml-4 my-4 font-bold text-base">Rodzaj wydarzenia</label></p>
-            <input className="ml-4 px-2 text-2xl rounded-lg border border-blue-600" type="text" onChange={(e)=>{settypeText(e.target.value)}} placeholder="Wpisz rodzaj wydarzenia" value={typeText}></input><br></br>
-            <p className="my-1"><label className="ml-4 font-bold text-base">Miasto</label></p>
-            <input className="ml-4 px-2 text-2xl rounded-lg border border-blue-600" type="text" onChange={(e)=>{setcityText(e.target.value)}} placeholder="Wpisz miasto" value={cityText}></input><br></br>
-            <p className="my-1"><label className="ml-4 font-bold text-base">Ulica</label></p>
-            <input className="ml-4 px-2 text-2xl rounded-lg border border-blue-600" type="text" onChange={(e)=>{setstreetText(e.target.value)}} placeholder="Wpisz ulicę" value={streetText}></input><br></br>
-            <p className="my-1"><label className="ml-4 font-bold text-base">Numer</label></p>
-            <input className="ml-4 px-2 text-2xl rounded-lg border border-blue-600" type="text" onChange={(e)=>{setnumberText(e.target.value)}} placeholder="Wpisz numer ulicy" value={numberText}></input><br></br>
-            <p className="my-1"><label className="ml-4 font-bold text-base">Drugi numer</label></p>
-            <input className="ml-4 px-2 text-2xl rounded-lg border border-blue-600" type="text" onChange={(e)=>{setsubNumberText(e.target.value)}} placeholder="Wpisz drugi numer ulicy" value={subNumberText}></input><br></br>
-            <p className="my-1"><label className="ml-4 font-bold text-base">Opis</label></p>
-            <textarea className="ml-4 px-2 text-2xl rounded-lg border border-blue-600 w-auto" type="text" cols="40" rows="5" onChange={(e)=>{setdescriptionText(e.target.value)}} placeholder="Opis wydarzenia..." value={descriptionText}></textarea><br></br>
-            <input className='submitBtn' type="submit" value="Zapisz"></input><br></br>
+            <p className="my-1"><label className="eventFormLabel">Rodzaj wydarzenia</label></p>
+            <input className="eventInputField" type="text" onChange={(e)=>{settypeText(e.target.value)}} placeholder="Wpisz rodzaj wydarzenia" value={typeText}></input><br></br>
+            <p className="my-1"><label className="eventFormLabel">Miasto</label></p>
+            <input className="eventInputField" type="text" onChange={(e)=>{setcityText(e.target.value)}} placeholder="Wpisz miasto" value={cityText}></input><br></br>
+            <p className="my-1"><label className="eventFormLabel">Ulica</label></p>
+            <input className="eventInputField" type="text" onChange={(e)=>{setstreetText(e.target.value)}} placeholder="Wpisz ulicę" value={streetText}></input><br></br>
+            <p className="my-1"><label className="eventFormLabel">Numer</label></p>
+            <input className="eventInputField" type="text" onChange={(e)=>{setnumberText(e.target.value)}} placeholder="Wpisz numer ulicy" value={numberText}></input><br></br>
+            <p className="my-1"><label className="eventFormLabel">Drugi numer</label></p>
+            <input className="eventInputField" type="text" onChange={(e)=>{setsubNumberText(e.target.value)}} placeholder="Wpisz drugi numer ulicy" value={subNumberText}></input><br></br>
+            <p className="my-1"><label className="eventFormLabel">Opis</label></p>
+            <textarea className="eventInputField" type="text" cols="40" rows="5" onChange={(e)=>{setdescriptionText(e.target.value)}} placeholder="Opis wydarzenia..." value={descriptionText}></textarea><br></br>
+            <input className='eventFormSubmitBtn' type="submit" value="Zapisz"></input><br></br>
         </form>
      <div>{errorText}</div>
  </div>
