@@ -6,18 +6,42 @@ import './ToDoListItem.css'
 class ToDoListItem extends Component {
     state = {
         showDetailsView: false,
-        isDone: this.props.toDoListItemIsDone,
-        content: this.props.toDoListItemContent,
-        description: this.props.toDoListItemDescription,
-        person: this.props.toDoListItemPerson
+        isDone: this.props.done,
+        content: this.props.name,
+        description: this.props.description,
+        personid: this.props.executorid
     }
-
+    componentDidUpdate(prevProps, prevState, snapshot){
+        console.log('changing props')
+        console.log(prevProps)
+        console.log(this.props)
+        if(this.props.save !== prevProps.save){
+            this.props.saveTask(
+                {parent: {
+                    taskid:this.props.parentid
+                },
+                executor: this.props.executorid === null? null : {
+                    personid:this.props.executorid
+                },
+                description: this.state.description,
+                timestart: new Date(),
+                timeend: new Date(),
+                name:this.state.content,
+                done:this.props.done,
+                priority:this.props.priority
+            })
+        }
+    }
     // showDetailsViewHandler = () => {
     //     this.setState({ showDetailsView: !this.state.showDetailsView })
     // }
-
+    componentDidMount(){
+        console.log(`PROPS CHILD`)
+        console.log(this.props)
+    }
     render() {
         return(
+            this.props.isActive?
             <div className="to-do-list-item-box">
                 <div className="to-do-list-item-is-done" style={{ display: 'inline-flex' }}>
                     {this.state.isDone
@@ -49,7 +73,7 @@ class ToDoListItem extends Component {
                             disabled={this.props.disabled} />
                     :   null
                 } 
-            </div>
+            </div>:<></>
         )
     }
 }

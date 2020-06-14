@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import './eventCss/Event.css'
 
 const ScheduleItem = (props) =>{
+
 
     return(
         <div className="card">
