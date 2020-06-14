@@ -12,13 +12,14 @@ class ScheduleTask extends Component {
         progressPercentage: '0%',
         showDetails: false,
         disabledTaskNameInput: 'disabled',
-        taskName: this.props.taskName,
-        taskStartDate: this.props.taskStartDate,
-        taskEndDate: this.props.taskEndDate,
-        toDoList: this.props.toDoList
+        taskName: this.props.name,
+        taskStartDate: this.props.timestart,
+        taskEndDate: this.props.timeend,
+        tasks: []
     }
 
     componentDidMount() {
+        console.log(this.props)
         this.calculatePercentage()
     }
 
@@ -32,12 +33,12 @@ class ScheduleTask extends Component {
 
     calculatePercentage = () => {
         let counter = 0
-        for(let i = 0; i < this.state.toDoList.length; i++) {
-            if(this.state.toDoList[i].isDone) {
+        for(let i = 0; i < this.state.tasks.length; i++) {
+            if(this.state.tasks[i].isDone) {
                 counter++
             }
         }
-        this.setState({ progressPercentage: (counter / this.state.toDoList.length) * 100 + '%' })
+        this.setState({ progressPercentage: (counter / this.state.tasks.length) * 100 + '%' })
         
     }
 
@@ -76,14 +77,8 @@ class ScheduleTask extends Component {
                     ?   <Aux>
                             <p style={{ marginTop: '1%' }}><b>Lista zadań:</b></p>
                             {
-                                this.state.toDoList.map(toDoListItem => (
-                                    <ToDoListItem
-                                        toDoListItemContent={toDoListItem.content}
-                                        toDoListItemIsDone={toDoListItem.isDone}
-                                        toDoListItemDescription={toDoListItem.description}
-                                        toDoListItemPerson={toDoListItem.person}
-                                        disabled={this.state.disabledTaskNameInput}
-                                    />
+                                this.state.tasks.map(task => (
+                                    <ScheduleTask {...task}></ScheduleTask>
                                 ))
                             }
                         </Aux>
