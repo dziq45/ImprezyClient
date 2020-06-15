@@ -10,7 +10,7 @@ class Colaboration extends Component{
         colabName:''
     }
     componentDidMount(){
-        this.props.setCollaborators(this.props.eventId)
+        //this.props.setCollaborators(this.props.eventId)
     }
     addCollaborator(){
         console.log(`Adding new collaborator: ${this.state.newCollaboratorText} ${this.state.colabName}`)

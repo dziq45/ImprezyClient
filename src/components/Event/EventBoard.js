@@ -18,6 +18,7 @@ class EventBoard extends Component{
         //check if there is todolist
         //and add new if there isn't
         this.fetchEventData()
+        this.props.setCollaborators(this.props.eventId)
 
     }
     fetchEventData(){
@@ -92,7 +93,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        setToDoListId: (id) => dispatch(actions.setToDoListId(id))
+        setToDoListId: (id) => dispatch(actions.setToDoListId(id)),
+        setCollaborators: (eventId) => dispatch(actions.setCollaborators(eventId))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EventBoard)
