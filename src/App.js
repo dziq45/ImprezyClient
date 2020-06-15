@@ -11,6 +11,7 @@ import Ads from './containers/Ads/Ads'
 import MyEvents from './components/Event/MyEvents'
 import PublicEvent from './components/PublicEvent/PublicEvent'
 import Messages from './components/Messages/Messages';
+import ChangePassword from './containers/Auth/ChangePassword/ChangePassword';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
         <Route path="/Event/:id" component={EventBoard}></Route>
         <Route path="/PublicEvent/:eventId" component={PublicEvent}/>
         <Route path="/msg" component={Messages}/>
+        <Route path="/changePassword" component = {ChangePassword}/>
       </Switch>
     )
     return (

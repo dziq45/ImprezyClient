@@ -12,6 +12,7 @@ const navigationItems = (props) => {
             <Aux>
                 <NavigationItem link="/myEvents">Moje wydarzenia</NavigationItem>
                 <NavigationItem link="/msg">Wiadomości</NavigationItem>
+                <NavigationItem link="/changePassword">Zmień hasło</NavigationItem>
                 <NavigationItem link="/logout">Wyloguj</NavigationItem>
             </Aux>
                  : 

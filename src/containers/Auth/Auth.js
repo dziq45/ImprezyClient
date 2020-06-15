@@ -17,7 +17,7 @@ class Auth extends Component {
                     type: 'email',
                     placeholder: 'Podaj adres email'
                 },
-                value: 'piotr.idzikowski@gmail.com',
+                value: 'a@t.pl',
                 validation: {
                     required: true,
                     isEmail: true
@@ -31,7 +31,7 @@ class Auth extends Component {
                     type: 'password',
                     placeholder: 'Podaj hasło'
                 },
-                value: 'HasloMaslo123',
+                value: 'aaa123',
                 validation: {
                     required: true,
                     minLength: 6
