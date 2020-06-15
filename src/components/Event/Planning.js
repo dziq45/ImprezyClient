@@ -12,7 +12,8 @@ let listId = null
 class Planning extends Component{
     state={
         tasks: [],
-        save:false
+        save:false,
+        savingEnabled:true
     }
     componentDidMount(){
         listId = this.props.toDoListId
@@ -27,7 +28,7 @@ class Planning extends Component{
                     let newMainTask = {
                         taskid:task.taskid,
                         name:task.name,
-                        executorid:task.executor === null? null : task.executor.personid,
+                        executorid:task.executor === null? null : task.executor.eventPersonId.personid,
                         description:task.description,
                         priority:task.priority,
                         showDetailsView:false,
@@ -53,12 +54,13 @@ class Planning extends Component{
                 let newTask = {
                     taskid:task.taskid,
                     name:task.name,
-                    executorid:task.executor === null? null : task.executor.personid,
+                    executorid:task.executor === null? null : task.executor.eventPersonId.personid,
                     description:task.description,
                     priority:task.priority,
                     done:task.done,
                     timestart:new Date(task.timestart),
                     timeend: new Date(task.timeend),
+                    selectedOption:null,
                     tasks:[]
                 }
                 parentTask.tasks.push(newTask)
@@ -104,26 +106,67 @@ class Planning extends Component{
         })
     }
     handleSaving(){
-        this.deleteTasksStart()
-        this.save()
+        console.log('saving')
+        this.setState({savingEnabled:false})
+        setTimeout(()=>{
+            this.setState({savingEnabled:true})
+            this.componentDidMount()
+        },4000)
+        this.deleteTasks()
     }
-    deleteTasksStart(){
-        for(let task of this.state.tasks){
-            this.deleteTasks(task)
+    deleteTask(index, chIndex){
+        if(chIndex === null){
+            console.log('Usuwanie ')
+            let tasks = this.state.tasks.filter((task, ind)=>index !== ind)
+            console.log(tasks)
+            this.setState({tasks : tasks})
         }
-    }
-    deleteTasks(task){
-        for(let temp of task.tasks){
-            this.deleteTasks(temp)
-        }
-        if(task.taskid !== null){
-            axios.delete('/todolisttask/delete/' + task.taskid)
-            .then(res=>{
-                console.log(res)
-            }).catch(err=>{
-                console.log(err.reponse)
+        else{
+            let tasks = this.state.tasks.map((task, ind)=>{
+                if(index === ind){
+                    task.tasks = task.tasks.filter((child, childIndex)=>childIndex !== chIndex)
+                }
+                return task
             })
+            this.setState({tasks : tasks})
         }
+    }
+    updateComponent(index,childIndex, task){
+        if(childIndex == null){
+            let newTasks = this.state.tasks.map((item,itemIndex)=>{
+                if(index === itemIndex){
+                    let newTask = Object.assign(item, task)
+                    console.log('newTask')
+                    console.log(newTask)
+                    return newTask
+                }
+                else{
+                    return item
+                }
+            })
+            this.setState({tasks:newTasks})
+        }
+        else{
+            let newTasks = this.state.tasks.map((item,itemIndex)=>{
+                if(index === itemIndex){
+                    item.tasks = item.tasks.map((child, childin)=>{
+                        if(childIndex == childin){
+                            let newTask = Object.assign(child, task)
+                            return newTask
+                        }
+                        return child
+                    })
+                }
+                return item
+            })
+            this.setState({tasks:newTasks})
+        }
+    }
+    deleteTasks(){
+        axios.delete('/todolist/deletetasks/' + this.props.toDoListId)
+        .then(res=>{
+            this.save()
+        })
     }
     newTask = () => {
         this.setState({
@@ -145,21 +188,17 @@ class Planning extends Component{
         setTimeout(()=>{
             this.setState({save:false})
         }, 200)
-    }
+    }   
     render(){
         return(
             <Aux>
                 {this.state.tasks.map((task, index) => (
-                    <ScheduleTask key={index} {...task} addNewTask={this.addNewTask.bind(this)} index={index} parentid={null} save={this.state.save} saveTask={this.saveTask}/>
+                    <ScheduleTask updateComponent={this.updateComponent.bind(this)} key={index} deleteTask={this.deleteTask.bind(this)} {...task} addNewTask={this.addNewTask.bind(this)} index={index} parentid={null} save={this.state.save} saveTask={this.saveTask}/>
                 ))}
                 <div id="new-task-button-box" onClick={e => this.newTask()}>
                         <GrAdd id="new-task-button"/>
                 </div>
-                <div onClick={()=>{this.handleSaving()}}>Zapisz</div>
-                {/* <IconContext.Provider value={{ className: 'new-task-button' }}>
-
-                </IconContext.Provider> */}
-                
+                <div className="saveButton p-2 w-1/6 ml-32 hover:bg-gray-600" onClick={()=>{this.state.savingEnabled && this.handleSaving()}}>Zapisz</div>                
             </Aux>
         )
     }

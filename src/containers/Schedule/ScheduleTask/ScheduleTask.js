@@ -14,7 +14,7 @@ class ScheduleTask extends Component {
         taskName: this.props.name,
         taskStartDate: this.props.timestart,
         taskEndDate: this.props.timeend,
-        tasks:this.props.tasks,
+        tasks: this.props.tasks,
         save:false,
         taskid:this.props.taskid
     }
@@ -26,16 +26,18 @@ class ScheduleTask extends Component {
     }
     componentDidUpdate(prevProps, prevState, snapshot){
         //this.setState({tasks:this.props.tasks})
+        console.log(this.props)
         if(this.props.save){
+            
             this.props.saveTask({
                 parent: null,
                 executor: this.props.executorid === null? null : {
                     personid:this.props.executorid
                 },
                 description: this.props.description,
-                timestart: this.state.taskStartDate,
-                timeend: this.state.taskEndDate,
-                name:this.state.taskName,
+                timestart: this.props.timestart,
+                timeend: this.props.timeend,
+                name:this.props.name,
                 done:this.props.done,
                 priority:this.props.priority
             })
@@ -46,6 +48,18 @@ class ScheduleTask extends Component {
                 console.log(err)
             })
         }
+        if(this.props.name !== prevProps.name){
+            this.calculatePercentage()
+        }
+    }
+    doneHandler(index ,isDone){
+        let tasks = this.props.tasks.map((task, ind)=>{
+            if(ind === index){
+                task.done = isDone
+            }
+            return task
+        })
+        this.setState({tasks:tasks}, ()=>{this.calculatePercentage()})
     }
     changeModeHandler = () => {
         if(this.state.disabledTaskNameInput === 'disabled') {
@@ -57,8 +71,8 @@ class ScheduleTask extends Component {
 
     calculatePercentage = () => {
         let counter = 0
-        for(let i = 0; i < this.state.tasks.length; i++) {
-            if(this.state.tasks[i].isDone) {
+        for(let i = 0; i < this.props.tasks.length; i++) {
+            if(this.props.tasks[i].done) {
                 counter++
             }
         }
@@ -72,28 +86,29 @@ class ScheduleTask extends Component {
     render() {
         return(
             <div className="task-box">
+                <div className="float-right mr-2" onClick={()=>this.props.deleteTask(this.props.index, null)}>Usuń</div>
                 <AiOutlineEdit id="task-box-modify-mode" onClick={this.changeModeHandler}/>
                 <input type="text" 
                     id="task-box-task-name" 
                     placeholder="Nazwa zadania" 
-                    value={this.state.taskName} 
+                    value={this.props.name} 
                     disabled={this.state.disabledTaskNameInput} 
-                    onChange={e => this.setState({ taskName: e.target.value})} 
+                    onChange={e => this.props.updateComponent(this.props.index,null, { name: e.target.value})} 
                 />
                 <div className="task-box-time">
                     <p style={{ float: 'left' }}><b>Początek:</b></p>
                     <input id="task-box-start-date" 
                         type="date"
-                        value={this.state.taskStartDate.toISOString().substr(0,10)} 
+                        value={this.props.timestart.toISOString().substr(0,10)} 
                         disabled={this.state.disabledTaskNameInput} 
-                        onChange={e => this.setState({taskStartDate: new Date(e.target.value)})} 
+                        onChange={e => this.props.updateComponent(this.props.index, null,{timestart: new Date(e.target.value)})} 
                     />
                     <p style={{ marginLeft: '20px', float: 'left' }}><b>Koniec:</b></p>
                     <input type="date" 
                         id="task-box-end-date"
-                        value={this.state.taskEndDate.toISOString().substr(0,10)} 
+                        value={this.props.timeend.toISOString().substr(0,10)} 
                         disabled={this.state.disabledTaskNameInput} 
-                        onChange={e => this.setState({taskEndDate: new Date(e.target.value)})} 
+                        onChange={e => this.props.updateComponent(this.props.index, null,{timeend: new Date(e.target.value)})} 
                     />
                 </div>
                 <p><b>Stopień wykonania:</b></p>
@@ -105,7 +120,14 @@ class ScheduleTask extends Component {
                     }
                     {
                         this.props.tasks.map((task, ind) => (
-                            <ToDoListItem key={ind} {...task} parentid={this.state.taskid} saveTask={this.props.saveTask} save={this.state.save} isActive={this.state.showDetails}></ToDoListItem>
+                            <ToDoListItem key={ind}
+                                updateComponent={this.props.updateComponent} 
+                                parentIndex={this.props.index} 
+                                deleteTask={this.props.deleteTask} 
+                                onDone={this.doneHandler.bind(this)} 
+                                index={ind} {...task} parentid={this.state.taskid} 
+                                saveTask={this.props.saveTask} save={this.state.save} 
+                                isActive={this.state.showDetails}></ToDoListItem>
                         ))
                     }
                     {

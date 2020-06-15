@@ -22,3 +22,15 @@
 #new-task-button:hover {
     color: green;
 }
+
+.saveButton{
+    background-color: rgba(81, 204, 204, 0.411);
+    font-weight: 600;
+    border-radius: 20px;
+    text-align: center;
+    font-size: large;
+}
+
+.saveButton:hover {
+    background-color: rgba(168, 223, 223, 0.411);
+}
