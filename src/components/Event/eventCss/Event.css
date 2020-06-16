@@ -27,6 +27,7 @@
 }
 
 
+
 .dateLine {
     margin-bottom: 3px;
     border-bottom: 2px solid black;
@@ -50,6 +51,33 @@
     outline:none;
     width:130px;
     background:transparent;
+}
+
+.formContainer {
+}
+
+.formName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 2%;
+    font-size: 200%;
+}
+
+.eventFormLabel {
+    font-size: 150%;
+    font-weight: 600;
+    margin-left: 20%;
+}
+
+.eventInputField {
+    width: 50%;
+    min-height: 50px;
+    font-size: 130%;
+    padding: 1% 2%;
+    margin-left: 25%;
+    border-radius: 20px;
 }
 
 .option-bar {
@@ -95,6 +123,11 @@
     font-weight: bolder;
     font-size: xx-large;
 
+}
+
+.title {
+    margin: 10%;
+    font-weight: bolder;
 }
 
 .react-datepicker-ignore-onclickoutside{
@@ -165,7 +198,27 @@
     transition: .5s ease-out;
 }
 
+.eventFormSubmitBtn {
+    width: 10%;
+    padding: 1% 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2% 70% 0;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color:#4ea52c;
+    color:white;
+    transition: .5s ease-out;
+}
+
 .submitBtn:hover{
+    color: #4ea52c;
+    background-color:white;
+    cursor:pointer;
+}
+
+.eventFormSubmitBtn:hover{
     color: #4ea52c;
     background-color:white;
     cursor:pointer;
