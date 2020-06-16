@@ -1,6 +1,8 @@
 import axios from 'axios'
 import * as actionTypes from './actionTypes'
 import Planning from '../../components/Event/Planning'
+import {apiCaller} from '../../apiCaller' 
+
 
 export const setActiveEventId = (eventId)=>{
     console.log('siema')
@@ -30,7 +32,7 @@ export const setMyEvents = (events)=>{
 }
 export const setSchedule= (scheduleID)=>{
     return dispatch=>{
-        axios.get('/scheduledetail/getbyscheduleid/' + scheduleID)
+        apiCaller().get('/scheduledetail/getbyscheduleid/' + scheduleID)
         .then(res=>{
             console.log(res.data)
             let items = res.data
@@ -95,13 +97,13 @@ export const setCollaborators = (eventId)=>{
     //getting all and then filtering by eventid
     let eventPeople=[]
     return dispatch=>{
-        axios.get('/eventperson/all')
+        apiCaller().get('/eventperson/all')
         .then(async res=>{
             console.log(res.data)
             for(let eventPerson of res.data){
                 console.log(eventPerson)
                 if(eventPerson.eventPersonId.eventid === eventId){
-                    let result = await axios.get('/person/get/' + eventPerson.eventPersonId.personid)
+                    let result = await apiCaller().get('/person/get/' + eventPerson.eventPersonId.personid)
                     console.log('RESULT')
                     console.log(result)
                     eventPeople.push({

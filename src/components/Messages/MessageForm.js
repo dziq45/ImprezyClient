@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import {apiCaller} from '../../apiCaller'
 
 
 const MessageForm = (props) => {
@@ -20,7 +21,7 @@ const MessageForm = (props) => {
             body:body,
             senton:new Date()
         }
-        const response = await axios.post('/message/send/',message)
+        const response = await apiCaller().post('/message/send/',message)
         hideForm()
         alert("Wysłano wiadomość.");
     }

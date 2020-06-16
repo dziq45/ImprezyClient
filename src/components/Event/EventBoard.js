@@ -9,6 +9,7 @@ import CostOrganizer from './CostOrganizer'
 import Planning from './Planning'
 import Publication from './Publication'
 import EventForm from './EventForm'
+import {apiCaller} from '../../apiCaller'
 class EventBoard extends Component{
     state={
         activeItem : 1
@@ -23,12 +24,12 @@ class EventBoard extends Component{
     }
     fetchEventData(){
         //toDoList
-        axios.get('/todolist/getbyevent/' + this.props.eventId)
+        apiCaller().get('/todolist/getbyevent/' + this.props.eventId)
         .then(res=>{
             console.log(res.data)
             if(res.data.length === 0){
                 console.log(`dodaje liste event ${this.props.eventId}`)
-                axios.post('/todolist/add',{
+                apiCaller().post('/todolist/add',{
                     event:{
                         eventid:this.props.eventId
                     },

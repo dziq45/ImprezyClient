@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './eventCss/Event.css'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import {apiCaller} from '../../apiCaller'
 
 
 class Publication extends Component{
@@ -10,7 +11,7 @@ class Publication extends Component{
         publicDetailID:null
     }
     setNewDetailisPublic=async()=>{
-        axios.post('/eventdetail/add',{
+        apiCaller().post('/eventdetail/add',{
             event:{
                 eventid:this.props.eventId
             },
@@ -24,7 +25,8 @@ class Publication extends Component{
         this.setState({isPublic:false})
     }
     componentDidMount(){
-        axios.get('/eventdetail/getbyevent/' + this.props.eventId)
+        console.log(process.env.NODE_ENV)
+        apiCaller().get('/eventdetail/getbyevent/' + this.props.eventId)
         .then(res=>{
             console.log(res.data)
             if(res.data.length == 0){
@@ -51,7 +53,7 @@ class Publication extends Component{
     switchPublicPrivateHandler = (e)=>{
         const newValue = !this.state.isPublic
         this.setState({isPublic:newValue})
-        axios.put('/eventdetail/update/' + this.state.publicDetailID,{
+        apiCaller().put('/eventdetail/update/' + this.state.publicDetailID,{
             event:{
                 eventid:this.props.eventId
             },

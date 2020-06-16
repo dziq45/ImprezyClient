@@ -7,6 +7,7 @@ import axios from 'axios'
 import { AiOutlineCheck, AiOutlinePlusCircle } from "react-icons/ai";
 import arrowDownSign from '../../images/arrowDown.png'
 import "react-datepicker/dist/react-datepicker.css";
+import {apiCaller} from '../../apiCaller'
 
 const isTheSameDay = (date1, date2)=>{
     return date1.getFullYear() === date2.getFullYear() &&
@@ -22,7 +23,7 @@ class Schedule extends Component{
         scheduleId:null
     }
     fetchItemsAndParseToState = async(scheduleID)=>{
-        axios.get('/scheduledetail/getbyscheduleid/' + scheduleID)
+        apiCaller().get('/scheduledetail/getbyscheduleid/' + scheduleID)
         .then(res=>{
             console.log(res.data)
             let items = res.data
@@ -101,7 +102,7 @@ class Schedule extends Component{
             ]}
         this.setState(newState)
         let scheduleID = null
-        axios.get('/schedule/getbyeventid/' + this.props.eventId)
+        apiCaller().get('/schedule/getbyeventid/' + this.props.eventId)
         .then(res=>{
             console.log('Był już harmonogram:')
             console.log(res.data)
@@ -111,7 +112,7 @@ class Schedule extends Component{
         })
         .catch(err=>{
             console.log('Zaczynam dodawanie domyślnego Harmonogramu')
-            axios.post('/schedule/add', {
+            apiCaller().post('/schedule/add', {
                 event:{
                     eventid: this.props.eventId
                 },
@@ -279,7 +280,7 @@ class Schedule extends Component{
                     description:item.description
                 }
                 console.log(newDate.getFullYear()+'-'+newDate.getMonth()+'-'+newDate.getDate()+'T'+newDate.getHours()+':'+newDate.getMinutes())
-                axios.post('/scheduledetail/add', {
+                apiCaller().post('/scheduledetail/add', {
                     schedule:{
                         scheduleid: this.state.scheduleId
                     },
@@ -299,7 +300,7 @@ class Schedule extends Component{
     }
     handleSaveSchedule=(e)=>{
         e.preventDefault()
-        axios.put('/schedule/removescheduleitems/' + this.state.scheduleId)
+        apiCaller().put('/schedule/removescheduleitems/' + this.state.scheduleId)
         .then(res=>{
             console.log(res)
            this.saveItems()

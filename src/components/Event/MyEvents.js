@@ -4,7 +4,7 @@ import MyEvent from './MyEvent'
 import Ad from '../../components/Ads/Ad/Ad'
 import * as actions from '../../store/actions/index'
 import axios from 'axios'
-
+import {apiCaller} from '../../apiCaller'
 
 class MyEvents extends Component {
     state = {
@@ -12,7 +12,7 @@ class MyEvents extends Component {
     }
     
     componentDidMount() {
-        axios.get('event/getbycreator/' + this.props.userId)
+        apiCaller().get('event/getbycreator/' + this.props.userId)
             .then(response => {
                 console.log(`Response: ${response.data}`)
                 this.setState({ events: response.data })
@@ -24,7 +24,7 @@ class MyEvents extends Component {
             console.log(this.state)
     }
     addEvent(){
-        axios.post("/event/add",{
+        apiCaller().post("/event/add",{
             description:'Brak opisu',
             eventtype: null,
             address: null,

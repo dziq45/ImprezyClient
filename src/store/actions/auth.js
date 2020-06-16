@@ -1,6 +1,6 @@
 import axios from 'axios'
 import * as actionTypes from './actionTypes'
-
+import {apiCaller} from '../../apiCaller' 
 export const authStart = () => {
     return {
         type: actionTypes.AUTH_START
@@ -43,7 +43,7 @@ export const authLogin = (email, password) => {
         dispatch(authStart())
         let url = '/person/get/' + email + '/' + password;
         console.log(url)
-        axios.get(url)
+        apiCaller().get(url)
             .then(response => {
                 console.log(response.data)
                 dispatch(authSuccess(response.data.personid, response.data.personid, response.data.userType))

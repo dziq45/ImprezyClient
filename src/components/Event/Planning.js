@@ -7,6 +7,7 @@ import { GrAdd } from "react-icons/gr";
 import './Planning.css'
 import Aux from '../../hoc/Auxiliary/Auxiliary'
 import axios from 'axios';
+import {apiCaller} from '../../apiCaller'
 
 let listId = null
 class Planning extends Component{
@@ -19,7 +20,7 @@ class Planning extends Component{
         listId = this.props.toDoListId
         console.log(`this.listId = ${this.listId}`)
         console.log(this.props.toDoListId)
-        axios.get('/todolisttask/getbytodolist/' + this.props.toDoListId)
+        apiCaller().get('/todolisttask/getbytodolist/' + this.props.toDoListId)
         .then(res=>{
             console.log('siema')
             let mainTasks = []
@@ -77,7 +78,7 @@ class Planning extends Component{
         console.log(tt)
         //console.log(`dodaje do ${this.props.toDoListId}`)
         return new Promise((resolve, reject)=>{
-            axios.post('/todolisttask/add',tt)
+            apiCaller().post('/todolisttask/add',tt)
             .then(res=>{
                 resolve(res)
             })
@@ -163,7 +164,7 @@ class Planning extends Component{
         }
     }
     deleteTasks(){
-        axios.delete('/todolist/deletetasks/' + this.props.toDoListId)
+        apiCaller().delete('/todolist/deletetasks/' + this.props.toDoListId)
         .then(res=>{
             this.save()
         })

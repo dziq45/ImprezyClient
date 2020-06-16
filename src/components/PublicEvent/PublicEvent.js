@@ -15,6 +15,7 @@ import mailicon from '../../images/mailicon.png'
 import ExternalLink from './ExternalLink'
 import Counter from './Counter'
 import MessageForm from '../Messages/MessageForm'
+import {apiCaller} from '../../apiCaller'
 import {Link} from 'react-router-dom'
 class PublicEvent extends Component{
     state={
@@ -57,13 +58,14 @@ class PublicEvent extends Component{
       }
     componentDidMount(){
         let eventId = this.props.match.params.eventId
-        axios.get('/eventdetail/getbyevent/' + eventId + '/public')
+        
+        apiCaller().get('/eventdetail/getbyevent/' + eventId + '/public')
         .then(res=>{
             console.log(res.data)
             let creatorId = res.data[0].event.creator.personid
             this.setState({creatorId:creatorId}) 
             if(res.data[0].value == 'true'){
-                axios.get('/schedule/getbyeventid/' + eventId)
+                apiCaller().get('/schedule/getbyeventid/' + eventId)
                 .then(res=>{
                     let scheduleID = res.data[0].scheduleid
                     this.props.setSchedule(scheduleID)
@@ -71,7 +73,7 @@ class PublicEvent extends Component{
                 .catch(err=>{
                     console.log(err)
                 })
-                axios.get('/eventdetail/getbyevent/' + eventId)
+                apiCaller().get('/eventdetail/getbyevent/' + eventId)
                 .then(res=>{
                     let details = res.data
                     details.forEach((item,index)=>{
@@ -89,7 +91,7 @@ class PublicEvent extends Component{
                                 let imageName = item.value.substring(slashIndex+1)
                                 this.setState({imageName:imageName})
                                 console.log(imageName)
-                                axios.get('/file/get/' + imageName)
+                                apiCaller().get('/file/get/' + imageName)
                                 .then(res=>{
                                     console.log("ZDJECIE")
                                     console.log(res)
@@ -190,13 +192,13 @@ class PublicEvent extends Component{
     }
     saveEventProperties(){
         let eventId = this.props.match.params.eventId
-        axios.get('/eventdetail/getbyevent/' + eventId) 
+        apiCaller().get('/eventdetail/getbyevent/' + eventId) 
         .then(res=>{
             let details = res.data
             details.forEach(element => {
-                axios.delete('/eventdetail/delete/' + element.eventdetailid)
+                apiCaller().delete('/eventdetail/delete/' + element.eventdetailid)
             });
-            axios.post('/eventdetail/add',{
+            apiCaller().post('/eventdetail/add',{
                 event:{
                     eventid:eventId
                 },
@@ -207,28 +209,28 @@ class PublicEvent extends Component{
             }).catch(err=>{
                 console.log(err)
             })
-            axios.post('/eventdetail/add',{
+            apiCaller().post('/eventdetail/add',{
                 event:{
                     eventid:eventId
                 },
                 type:"publicDescription",
                 value:this.state.description
             })
-            axios.post('/eventdetail/add',{
+            apiCaller().post('/eventdetail/add',{
                 event:{
                     eventid:eventId
                 },
                 type:"publicName",
                 value:this.state.name
             })
-            axios.post('/eventdetail/add',{
+            apiCaller().post('/eventdetail/add',{
                 event:{
                     eventid:eventId
                 },
                 type:"publicSchedule",
                 value:this.state.publicSchedule? "true" : "false"
             })
-            axios.post('/eventdetail/add',{
+            apiCaller().post('/eventdetail/add',{
                 event:{
                     eventid:eventId
                 },
@@ -237,11 +239,11 @@ class PublicEvent extends Component{
             })
             let form = new FormData()
                 form.append("file", this.state.imageFile,  this.state.imageFile.path)
-                axios.post('/file/upload',form
+                apiCaller().post('/file/upload',form
                 )
                 .then(res=> {
                     console.log('UPLOAD OBRAZKA')
-                    axios.post('/eventdetail/add',{
+                    apiCaller().post('/eventdetail/add',{
                         event:{
                             eventid:eventId
                         },

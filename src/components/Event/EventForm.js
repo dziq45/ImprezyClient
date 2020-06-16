@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import './eventCss/Event.css'
+import {apiCaller} from '../../apiCaller'
 
     
 const EventForm = (props) => {
@@ -17,7 +18,7 @@ const EventForm = (props) => {
         console.log("Entered")
         const fetchData = async()=>{
             try{
-                const response = await axios.get('/event/get/' + props.eventId)
+                const response = await apiCaller().get('/event/get/' + props.eventId)
                 console.log(response.data)
                 setdescriptionText(response.data.description)
                 settypeText(response.data.eventtype)
@@ -41,7 +42,7 @@ const EventForm = (props) => {
         console.log(`Subnumber ${subNumberText}`)
         if(streetText != '' && numberText !=0){
             try{
-                const addressResponse = await axios.post('/address/add',{
+                const addressResponse = await apiCaller().post('/address/add',{
                     city: cityText,
                     street : streetText,
                     number : numberText,
@@ -74,11 +75,11 @@ const EventForm = (props) => {
             }
         }
         if(isOK){
-            const response = await axios.put('/event/update/' + props.eventId,bodyWithAddress)
+            const response = await apiCaller().put('/event/update/' + props.eventId,bodyWithAddress)
             console.log(response);
         }
         else{
-            const response = await axios.put('/event/update/' + props.eventId,bodyWithoutAddress)
+            const response = await apiCaller().put('/event/update/' + props.eventId,bodyWithoutAddress)
             console.log(response);
         }
         

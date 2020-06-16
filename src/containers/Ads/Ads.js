@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import {apiCaller} from '../../apiCaller'
 import Ad from '../../components/Ads/Ad/Ad'
 import axios from 'axios'
 
@@ -10,7 +10,7 @@ class Ads extends Component {
     }
     
     componentDidMount() {
-        axios.get('eventdetail/all')
+        apiCaller().get('eventdetail/all')
         .then(res => {
             let publicIDs =[]
             for(let i = 0; i < res.data.length; i++){
@@ -20,7 +20,8 @@ class Ads extends Component {
             }
             console.log(`ID: ${publicIDs}`)
             publicIDs.forEach((item)=>{
-                axios.get('/event/get/' + item)
+                
+                apiCaller().get('/event/get/' + item)
                 .then(res=>{
                     console.log(res.data)
                     const newAds = [...this.state.ads, res.data]

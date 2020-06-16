@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import {apiCaller} from '../../../apiCaller'
 import {connect} from 'react-redux'
 import '../Auth.css'
 
@@ -21,7 +22,7 @@ class ChangePassword extends Component{
     }
 
     componentDidMount() {
-        axios.get('person/get/' + this.props.userId)
+        apiCaller().get('person/get/' + this.props.userId)
             .then(response => {
                 console.log(`Response: ${response.data}`)
                 this.setState({dbPassword: response.data.password })
@@ -44,7 +45,7 @@ class ChangePassword extends Component{
                 
                 this.state.userData.password = this.state.newPassword;
                 console.log(this.state.userData.password)
-                const response = await axios.put('/person/update/' + this.props.userId,this.state.userData)
+                const response = await apiCaller().put('/person/update/' + this.props.userId,this.state.userData)
                 alert("Zmiana hasła udana.");
              }
              else{

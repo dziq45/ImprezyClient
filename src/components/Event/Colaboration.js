@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import * as actions from '../../store/actions/index'
 import { AiFillCodeSandboxCircle } from 'react-icons/ai';
 import axios from 'axios';
+import {apiCaller} from '../../apiCaller'
 
 class Colaboration extends Component{
     state={
@@ -14,17 +15,17 @@ class Colaboration extends Component{
     }
     addCollaborator(){
         console.log(`Adding new collaborator: ${this.state.newCollaboratorText} ${this.state.colabName}`)
-        axios.get('/person/getbyemail/' + this.state.newCollaboratorText)
+        apiCaller().get('/person/getbyemail/' + this.state.newCollaboratorText)
         .then(res=>{
             console.log(res.data)
             const personId = res.data.personid
-            axios.post('/role/add',{
+            apiCaller().post('/role/add',{
                 rolename:this.state.colabName
             })
             .then(res2=>{
                 const roleId = res2.data.roleid
                 console.log(`Dodano nazwę o id ${roleId}`)
-                axios.post('/eventperson/add',{
+                apiCaller().post('/eventperson/add',{
                     eventPersonId: {
                         eventid: this.props.eventId,
                         personid: personId
