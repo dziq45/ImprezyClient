@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import * as actions from '../../store/actions/index'
 import { AiFillCodeSandboxCircle } from 'react-icons/ai';
+import './Colaboration.css'
 import axios from 'axios';
 import {apiCaller} from '../../apiCaller'
 
@@ -55,23 +56,30 @@ class Colaboration extends Component{
         return(
             <div>
                 <div>
+                    <div className="addNewUserTitle">
+                        <p>Dodaj nowego kolaboranta</p>
+                    </div>
+                    <div className="addNewUserInputBox">
+                        <input 
+                        onChange={(e)=>this.setState({newCollaboratorText:e.target.value})} 
+                        value={this.state.newCollaboratorText}
+                        placeholder="Email"></input>
+                        <input 
+                        onChange={(e)=>{this.setState({colabName:e.target.value})}}
+                        value={this.state.colabName}
+                        placeholder="ColabName">
+                        </input>
+                        <button 
+                        className="eventFormSubmitBtn"
+                        onClick={()=>this.addCollaborator()}>Dodaj</button>
+                    </div>
+                </div>
+                <div className="usersList">
                     <p>Lista kolaborantów</p>
                     <ul>
                         {this.props.collaborators.map(element=>
                         <li key={element.personId}>{element.email} - {element.name}</li>)}
                     </ul>
-                </div>
-                <div>
-                    <p>Dodaj nowego kolaboranta</p>
-                    <input 
-                    onChange={(e)=>this.setState({newCollaboratorText:e.target.value})} 
-                    value={this.state.newCollaboratorText}
-                    placeholder="Email"></input>
-                    <input 
-                    onChange={(e)=>{this.setState({colabName:e.target.value})}}
-                    value={this.state.colabName}></input>
-                    <button 
-                    onClick={()=>this.addCollaborator()}>Dodaj</button>
                 </div>
             </div>
         )
