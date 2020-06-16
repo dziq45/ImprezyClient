@@ -27,7 +27,7 @@ class ScheduleTask extends Component {
     componentDidUpdate(prevProps, prevState, snapshot){
         //this.setState({tasks:this.props.tasks})
         console.log(this.props)
-        if(this.props.save){
+        if(this.props.save && !prevProps.save){
             
             this.props.saveTask({
                 parent: null,
@@ -126,7 +126,8 @@ class ScheduleTask extends Component {
                                 deleteTask={this.props.deleteTask} 
                                 onDone={this.doneHandler.bind(this)} 
                                 index={ind} {...task} parentid={this.state.taskid} 
-                                saveTask={this.props.saveTask} save={this.state.save} 
+                                saveTask={this.props.saveTask} 
+                                save={this.state.save} 
                                 isActive={this.state.showDetails}></ToDoListItem>
                         ))
                     }

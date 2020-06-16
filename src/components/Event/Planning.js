@@ -125,9 +125,8 @@ class Planning extends Component{
         console.log('saving')
         this.setState({savingEnabled:false})
         setTimeout(()=>{
-            this.setState({savingEnabled:true})
-            this.componentDidMount()
-        },4000)
+            this.setState({savingEnabled:true, tasks:[]}, ()=>this.componentDidMount())
+        },2000)
         this.deleteTasks()
     }
     deleteTask(index, chIndex){
