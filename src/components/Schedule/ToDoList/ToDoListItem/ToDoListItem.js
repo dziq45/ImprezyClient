@@ -23,8 +23,7 @@ class ToDoListItem extends Component {
                 executor: this.props.selectedOption === null? null : {
                     eventPersonId: {
                         eventid: this.props.eventId,
-                        personid: this.props.selectedOption.value
-                    }
+                        personid: this.props.selectedOption.value                    }
                 },
                 description: this.props.description,
                 timestart: new Date(),
@@ -33,12 +32,29 @@ class ToDoListItem extends Component {
                 done:this.props.done,
                 priority:this.props.priority
             })
+            .then(res=>{
+                
+            })
+        }
+        if(this.props.selectedOption.label !== prevProps.selectedOption.label){
+            if(this.props.selectedOption.value !== null){
+                for(let option of this.state.options){
+                    if(this.props.selectedOption.value === option.value){
+                        let selected = {
+                            value: option.value,
+                            label: option.label
+                        }
+                        this.props.updateComponent(this.props.parentIndex, this.props.index, {selectedOption: selected})
+                    }
+                }
+            }
         }
     }
 
     componentDidMount(){
         console.log(`PROPS CHILD`)
         console.log(this.props)
+        console.log('KONIEC PROPS')
         let arr = []
         for(let i = 0; i < this.props.collaborators.length; i++){
             arr.push({value:this.props.collaborators[i].personId, label:this.props.collaborators[i].name})
@@ -52,6 +68,7 @@ class ToDoListItem extends Component {
         this.setState({options:[...arr]})
     }
     handleSelect(selectedOption){
+        console.log('selectedOption')
         console.log(selectedOption)
         //this.setState({ selectedOption })
         this.props.updateComponent(this.props.parentIndex, this.props.index, {selectedOption})

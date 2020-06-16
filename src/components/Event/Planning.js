@@ -34,6 +34,10 @@ class Planning extends Component{
                         priority:task.priority,
                         showDetailsView:false,
                         done:task.done,
+                        selectedOption:{
+                            value:null,
+                            label:null
+                        },
                         timestart:new Date(task.timestart),
                         timeend: new Date(task.timeend),
                         tasks:[]
@@ -61,9 +65,14 @@ class Planning extends Component{
                     done:task.done,
                     timestart:new Date(task.timestart),
                     timeend: new Date(task.timeend),
-                    selectedOption:null,
+                    selectedOption:{
+                        value:task.executor === null? null : task.executor.eventPersonId.personid,
+                        label:null
+                    },
                     tasks:[]
                 }
+                console.log('Nowy task wczytuję')
+                console.log(newTask)
                 parentTask.tasks.push(newTask)
                 this.parseTasksToState(newTask, rest)
             }
@@ -81,6 +90,8 @@ class Planning extends Component{
             apiCaller().post('/todolisttask/add',tt)
             .then(res=>{
                 resolve(res)
+                console.log('Task z bazy zapisany')
+                console.log(res.data)
             })
             .catch(err=>{
                 reject(err)
@@ -99,6 +110,10 @@ class Planning extends Component{
                     executorid:null,
                     priority:null,
                     done:false,
+                    selectedOption:{
+                        value:null,
+                        label:null
+                    },
                     timestart: new Date(),
                     timeend: new Date(),
                     tasks: []
@@ -167,7 +182,11 @@ class Planning extends Component{
         apiCaller().delete('/todolist/deletetasks/' + this.props.toDoListId)
         .then(res=>{
             this.save()
+            //for()
         })
+    }
+    async saveTask2(){
+
     }
     newTask = () => {
         this.setState({
