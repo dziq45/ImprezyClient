@@ -61,16 +61,17 @@ export const authRegister = (email, password, telephoneNumber) => {
         const authData = {
             email: email,
             password: password,
-            phoneNumber: telephoneNumber,
+            phonenumber: telephoneNumber,
         }
         console.log(authData)
         //let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCwErEdHkTEGc1TM9KmlwqTMmdovQB70TU'
         // if(!isSignup) {
         //     url = ''
         // }
-        axios.post('/person/add', authData)
+        apiCaller().post('/person/add', authData)
             .then(response => {
-                console.log(response)
+                console.log('response result')
+                console.log(response.data)
                 //dispatch(authSuccess(response.data.idToken, response.data.localId))
                 //dispatch(checkAuthTimeout(response.data.expiresIn))
             })
