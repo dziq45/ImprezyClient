@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
+import {apiCaller} from '../../apiCaller'
 import Message from './Message'
 
 class Messages extends Component{
@@ -8,7 +9,7 @@ class Messages extends Component{
         messages : [],
     }
     componentDidMount() {
-        axios.get('message/getreceived/' + this.props.userId)
+        apiCaller().get('message/getreceived/' + this.props.userId)
             .then(response => {
                 console.log(`Response: ${response.data}`)
                 this.setState({ messages: response.data })

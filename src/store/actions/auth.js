@@ -68,7 +68,11 @@ export const authRegister = (email, password, telephoneNumber) => {
         // if(!isSignup) {
         //     url = ''
         // }
-        apiCaller().post('/person/add', authData)
+        apiCaller().post('/person/add', {
+            email: email,
+            password: password,
+            phonenumber: telephoneNumber,
+        })
             .then(response => {
                 console.log('response result')
                 console.log(response.data)
