@@ -89,7 +89,9 @@ class PublicEvent extends Component{
                                 console.log(`src do obrazka: ${item.value}`)
                                 let slashIndex = item.value.lastIndexOf('/')
                                 let imageName = item.value.substring(slashIndex+1)
-                                this.setState({imageName:imageName}, ()=>{console.log(this.state)})
+                                this.setState({imageName:imageName}, ()=>{
+                                    console.log('state')
+                                    console.log(this.state)})
                                 console.log(imageName)
                                 apiCaller().get('/file/get/' + imageName)
                                 .then(res=>{
@@ -305,7 +307,7 @@ class PublicEvent extends Component{
                             </div>
                         </section>
                     )}
-                </Dropzone> : <img src={this.state.isTemporaryImageShown? this.state.imageURL : "/file/get/" + this.state.imageName} className="float-right rounded-sm shadow-sm w-5/8 h-full " width="420"/>}
+                </Dropzone> : <img src={this.state.isTemporaryImageShown? this.state.imageURL : "https://46.41.143.64:8080/file/get/" + this.state.imageName} className="float-right rounded-sm shadow-sm w-5/8 h-full " width="420"/>}
                     
                     <div id="title_head">    
                         <textarea className={this.state.creatorMode? "eventName1 hover:shadow-md" : "eventName1"} value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} spellCheck="false" disabled={!this.state.creatorMode}></textarea>
