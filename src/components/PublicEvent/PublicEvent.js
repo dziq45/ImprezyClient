@@ -89,7 +89,7 @@ class PublicEvent extends Component{
                                 console.log(`src do obrazka: ${item.value}`)
                                 let slashIndex = item.value.lastIndexOf('/')
                                 let imageName = item.value.substring(slashIndex+1)
-                                this.setState({imageName:imageName})
+                                this.setState({imageName:imageName}, ()=>{console.log(this.state)})
                                 console.log(imageName)
                                 apiCaller().get('/file/get/' + imageName)
                                 .then(res=>{
