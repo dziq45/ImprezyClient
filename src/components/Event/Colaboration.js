@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import * as actions from '../../store/actions/index'
-import { AiFillCodeSandboxCircle } from 'react-icons/ai';
+import { AiOutlineDelete } from 'react-icons/ai';
 import './Colaboration.css'
 import axios from 'axios';
+import { TiDeleteOutline } from "react-icons/ti";
+
 import {apiCaller} from '../../apiCaller'
 
 class Colaboration extends Component{
@@ -52,6 +54,12 @@ class Colaboration extends Component{
             console.log(err.response.data)
         })
     }
+    deleteCollaborator(personId){
+        apiCaller().delete('/eventperson/delete/' + this.props.eventId + '/' + personId)
+        .then(res=>{
+            this.props.setCollaborators(this.props.eventId)
+        })
+    }
     render(){
         return(
             <div>
@@ -77,8 +85,16 @@ class Colaboration extends Component{
                 <div className="usersList">
                     <p>Lista kolaborantów</p>
                     <ul>
-                        {this.props.collaborators.map(element=>
-                        <li key={element.personId}>{element.email} - {element.name}</li>)}
+                        {this.props.collaborators.map((element, index)=>
+                        
+                        <li key={element.personId}>
+                            <span className="inline-block text-lg w-1/2">{element.email} - {element.name}</span>
+                            <div className="w-1/2 inline-block " >
+                                <AiOutlineDelete onClick={()=>{this.deleteCollaborator(this.props.collaborators[index].personId)}}
+                                    className="hover:text-red-600" 
+                                    style={{fontSize:'170%', marginLeft:'90%'}}></AiOutlineDelete>
+                            </div>    
+                        </li>)}
                     </ul>
                 </div>
             </div>
