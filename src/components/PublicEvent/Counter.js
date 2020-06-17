@@ -9,6 +9,7 @@ class Counter extends Component{
     }
     componentDidMount(){
         setInterval(()=>{
+            //console.log(this.state)
             let currentDate = new Date()
             let distance = this.props.eventDate.getTime() - currentDate.getTime()
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));

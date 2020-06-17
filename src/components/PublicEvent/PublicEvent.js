@@ -26,6 +26,7 @@ class PublicEvent extends Component{
         creatorMode:false,
         creatorId:null,
         name:"",
+        timestart:new Date(),
         description:"",
         externalLinks:[{link: 'twitter.com', hovered:false}],
         newLink:'',
@@ -119,9 +120,22 @@ class PublicEvent extends Component{
             else{
                 console.log('Wydarzenie niepubliczne')
             }
+            
         })
         .catch(err=>{
             console.log('Nie ma takiego wydarzenia albo jest niepubliczne')
+        })
+
+
+        apiCaller().get('/schedule/getbyeventid/' + eventId)
+        .then(res=>{
+            apiCaller().get('/scheduledetail/getbyscheduleid/' + res.data[0].scheduleid)
+            .then(res2=>{
+                console.log(res2.data)
+                if(res2.data.length > 0){
+                    this.setState({timestart:new Date(res2.data[0].timestart)})
+                }
+            })
         })
         console.log(`EvendID: ${eventId}`)
         console.log(this.props)
@@ -321,12 +335,12 @@ class PublicEvent extends Component{
                 {this.state.publicSchedule?  
                     <div className="scheduleContainer">
                         <img src={image2} className="inline-block" />
-                        <h1 className="inline-block font-bold text-2xl ml-2">Harmonogram wydarzenia</h1>
+                        <span className="inline-block font-bold text-2xl ml-2">Harmonogram wydarzenia</span>
                         {schedule}
                     </div> : null}
                     {this.state.publicCounter? 
                         <div className="counterContainer">
-                            <Counter eventDate={new Date(2020, 5, 6)}></Counter>
+                            <Counter eventDate={this.state.timestart}></Counter>
                         </div> : null}
                     {!this.state.creatorMode?
                     <div className="messageContainer">

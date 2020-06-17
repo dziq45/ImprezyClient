@@ -34,7 +34,7 @@ class Schedule extends Component{
                 return dateA - dateB
             })
             let newEachDay=[]
-            let lastDate = new Date(items[0].timestart)
+            let lastDate = new Date(items[0].timestart) 
             let lastDay=0
             newEachDay.push({
                 date:lastDate,
