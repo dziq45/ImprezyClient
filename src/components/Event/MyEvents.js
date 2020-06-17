@@ -40,9 +40,16 @@ class MyEvents extends Component {
             console.log(err)
         })
     }
+    deleteEventHandler(eventId){
+        apiCaller().delete('/event/delete/' + eventId)
+        .then(res=>{
+            console.log(res)
+            this.componentDidMount()
+        })
+    }
     render() {
         const events = this.state.events.map(event => 
-        <MyEvent id={event.eventid} description={event.description} address={event.address} eventType={event.eventtype}></MyEvent>)
+        <MyEvent id={event.eventid} onDelete={this.deleteEventHandler.bind(this)} description={event.description} address={event.address} eventType={event.eventtype}></MyEvent>)
             return (
                 <div className="ads">
                     <div className="createBtn" onClick={()=>this.addEvent()}>Utwórz wydarzenie</div>

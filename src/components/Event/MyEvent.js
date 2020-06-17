@@ -3,10 +3,12 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as actions from '../../store/actions/index'
 import './eventCss/Event.css'
-
+import {apiCaller} from '../../apiCaller'
+import { TiDeleteOutline } from "react-icons/ti";
 
 
 const MyEvent = (props) => {
+
     return (
         <div className="eventBox">
             {console.log(`Eventy: ${props.myEvents}`)}

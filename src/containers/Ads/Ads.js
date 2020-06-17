@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {apiCaller} from '../../apiCaller'
 import Ad from '../../components/Ads/Ad/Ad'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 class Ads extends Component {
     state = {
@@ -23,6 +24,7 @@ class Ads extends Component {
                 
                 apiCaller().get('/event/get/' + item)
                 .then(res=>{
+                    console.log('data')
                     console.log(res.data)
                     const newAds = [...this.state.ads, res.data]
                     this.setState({ads:newAds})
@@ -34,28 +36,12 @@ class Ads extends Component {
     }
     
     render() {
-        let ads = this.state.ads.map((ad, adIndex)=>
-        <Ad eventType={ad.eventtype} address={ad.address} description={ad.description}></Ad>)
-        /*
-        const ads = []
-        for(let key in this.state.ads) {
-            ads.push({
-                id: key,
-                config: this.state.ads[key]
-            })
-        }
-
-        const adElements = ads.map(ad => (
-            <Ad
-                address={ad.addressID}
-                eventType={ad.eventType}
-                />
-        ))
-                        
-                { this.state.ads.map(ad => 
-                    <p>ZIEMNIAKI</p>
-                )}
-        */
+        let ads = this.state.ads.map((ad, adIndex)=>{
+            return(
+                <Link to={"/PublicEvent/" + ad.eventid}>
+                    <Ad eventType={ad.eventtype} address={ad.address} description={ad.description}></Ad>
+                </Link>)
+        })
         return (
             <div className="ads">
                 {ads}
