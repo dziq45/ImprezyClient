@@ -217,7 +217,7 @@ class Planning extends Component{
                 <div id="new-task-button-box" onClick={e => this.newTask()}>
                         <GrAdd id="new-task-button"/>
                 </div>
-                <div className="saveButton p-2 w-1/6 ml-32 hover:bg-gray-600" onClick={()=>{this.state.savingEnabled && this.handleSaving()}}>Zapisz</div>                
+                <div className="saveButton" onClick={()=>{this.state.savingEnabled && this.handleSaving()}}>Zapisz</div>                
             </Aux>
         )
     }

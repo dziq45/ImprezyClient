@@ -69,16 +69,19 @@ class Publication extends Component{
         return(
             //<div onClick={()=>{this.setState({isPublic:!this.state.isPublic})}} className={this.state.isPublic? "bg-green-700":"bg-red-700"}>Publication</div>
             <div>
-                <p><b>Publiczne</b></p>
+                <span style={{ float:'left' }}><b>Publiczne</b></span>
+                <div style={{ marginLeft: '8%' }}>
                 <label class="switch"> 
                     <input type="checkbox" checked={this.state.isPublic} onChange={(e)=>{this.switchPublicPrivateHandler(e)}}></input>
                     <span className="slider round"></span>
                 </label>
                 {console.log(this.props)}
                 {this.state.isPublic ?
-                        <Link to={"/PublicEvent/" + this.props.eventId}>Przejdź do publicznej strony wydarzenia</Link>:
+                        <div className="to-event-btn"><Link to={"/PublicEvent/" + this.props.eventId}>Przejdź do publicznej strony wydarzenia</Link></div>:
                         null
                     }
+                </div>
+                
             </div>
         )
     }

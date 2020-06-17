@@ -24,13 +24,22 @@
 }
 
 .saveButton{
-    background-color: rgba(81, 204, 204, 0.411);
     font-weight: 600;
     border-radius: 20px;
     text-align: center;
     font-size: large;
+    width: 20%;
+    padding: 1% 1%;
+    margin-left: 80%;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color:#4ea52c;
+    color:white;
+    transition: .5s ease-out;
 }
 
 .saveButton:hover {
-    background-color: rgba(168, 223, 223, 0.411);
+    color: #4ea52c;
+    background-color:white;
+    cursor:pointer;
 }

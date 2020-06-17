@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AiOutlineEdit, AiOutlineDown } from "react-icons/ai"
+import { AiOutlineEdit, AiOutlineDown, AiOutlineDelete } from "react-icons/ai"
 import { GrAdd } from "react-icons/gr";
 import './ScheduleTask.css'
 import ProgressBar from '../../../components/Schedule/ProgressBar/ProgressBar'
@@ -86,7 +86,7 @@ class ScheduleTask extends Component {
     render() {
         return(
             <div className="task-box">
-                <div className="float-right mr-2" onClick={()=>this.props.deleteTask(this.props.index, null)}>Usuń</div>
+                <AiOutlineDelete className="task-box-delete" onClick={()=>this.props.deleteTask(this.props.index, null)}></AiOutlineDelete>
                 <AiOutlineEdit id="task-box-modify-mode" onClick={this.changeModeHandler}/>
                 <input type="text" 
                     id="task-box-task-name" 

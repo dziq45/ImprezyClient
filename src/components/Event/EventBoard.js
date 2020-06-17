@@ -73,7 +73,7 @@ class EventBoard extends Component{
                         <li><div className={this.state.activeItem == 1? "boardOptionItemSelected": "boardOptionItem"} onClick={()=>{this.setState({activeItem : 1})}}>Harmonogram</div></li>
                         <li><div className={this.state.activeItem == 2? "boardOptionItemSelected": "boardOptionItem"} onClick={()=>{this.setState({activeItem : 2})}}>Planowanie</div></li>
                         <li><div className={this.state.activeItem == 3? "boardOptionItemSelected": "boardOptionItem"} onClick={()=>{this.setState({activeItem : 3})}}>Kolaboranci</div></li>
-                        <li><div className={this.state.activeItem == 4? "boardOptionItemSelected": "boardOptionItem"} onClick={()=>{this.setState({activeItem : 4})}}>Kosztorys</div></li>
+                        {/* <li><div className={this.state.activeItem == 4? "boardOptionItemSelected": "boardOptionItem"} onClick={()=>{this.setState({activeItem : 4})}}>Kosztorys</div></li> */}
                         <li><div className={this.state.activeItem == 5? "boardOptionItemSelected": "boardOptionItem"} onClick={()=>{this.setState({activeItem : 5})}}>Publikacja</div></li>
                         
                     </ul>

@@ -7,6 +7,16 @@
     margin-bottom: 1%;
 }
 
+.task-box-delete {
+    margin-left: 90%;
+    font-size: 160%;
+    float: left;
+}
+
+.task-box-delete:hover {
+    color: red;
+}
+
 #task-box-task-name {
     font-size: 200%;
     height: 60px;
@@ -28,13 +38,11 @@
 }
 
 #task-box-modify-mode {
-    margin-left: 100%;
+    margin-left: 2%;
     font-size: 160%;
 }
 
 #task-box-modify-mode:hover {
-    margin-left: 100%;
-    font-size: 160%;
     color: white;
 }
 

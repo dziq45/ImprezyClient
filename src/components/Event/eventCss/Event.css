@@ -177,6 +177,27 @@
     }
 }
 
+.to-event-btn {
+    font-weight: 600;
+    border-radius: 20px;
+    text-align: center;
+    font-size: large;
+    width: 40%;
+    padding: 1% 1%;
+    margin-left: 10%;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color:#4ea52c;
+    color:white;
+    transition: .5s ease-out;
+}
+
+.to-event-btn:hover {
+    color: #4ea52c;
+    background-color:white;
+    cursor:pointer;
+}
+
 .one-day-schedule {
     background-color: #e2e2e2ad;
     box-sizing: border-box;
